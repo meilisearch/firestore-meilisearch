@@ -7,8 +7,8 @@ firebase login
 
 firebase --open-sesame extdev
 
-firebase ext:dev:init
+npm run install
 
-firebase emulators init
+npm run build
 
 firebase emulators:start
