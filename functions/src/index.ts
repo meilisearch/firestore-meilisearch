@@ -26,4 +26,3 @@ exports.testFunction = functions.firestore
     console.log(change)
     console.log(context)
   })
-
