@@ -11,4 +11,4 @@ firebase ext:dev:init
 
 firebase emulators init
 
-firebase ext:dev:emulators:start
+firebase emulators:start
