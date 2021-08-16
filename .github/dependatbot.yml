@@ -13,7 +13,7 @@ updates:
   - dependency-name: 'prettier*'
   rebase-strategy: disabled
 - package-ecosystem: github-actions
-  directory: '/'
+  directory: '/functions'
   schedule:
     interval: daily
   labels:
