@@ -11,17 +11,14 @@ on:
 
 jobs:
   linter:
-    name: linter on node ${{ matrix.node }}
+    name: linter
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [ '12', '14' ]
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 14
       - name: Install dependencies
         run: npm install
       - name: Run style check

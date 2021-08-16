@@ -1,6 +1,6 @@
 {
     "name": "firestore-meilisearch",
-    "version": "0.1.1",
+    "version": "0.1.0",
     "description": "Search in Firestore with MeiliSearch",
     "repository": "",
     "author": "Meilisearch (https://meilisearch.com/)",
