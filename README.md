@@ -6,14 +6,23 @@
 
 ## Fulltext Search on Firebase with Meilisearch
 
-npm install -g firebase-tools
+### To run this project in local
 
-firebase login
+`npm install -g firebase-tools`
 
-firebase --open-sesame extdev
+`firebase login`
 
-npm run install
+`firebase --open-sesame extdev`
 
-npm run build
+You maybe need to install typescript in global to run this project<br>
+`npm install typescript -g`
 
-firebase emulators:start
+`npm run install`
+
+`npm run build`
+
+`firebase emulators:start`
+
+Launch emulator with dataset and param<br>
+You should create test-params.env file<br>
+`firebase ext:dev:emulators:start --test-params=test-params.env --import=dataset --project=name-of-the-project`

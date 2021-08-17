@@ -1,0 +1,174 @@
+# Copyright 2021 Meilisearch
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Identifier for your extension
+name: firestore-meilisearch-search
+
+# Follow semver versioning
+version: 0.1.1
+
+# Version of the Firebase Extensions specification
+specVersion: v1beta
+
+# Friendly display name for your extension (~3-5 words)
+displayName: Search in Firestore with MeiliSearch
+
+# Brief description of the task your extension performs (~1 sentence)
+description: >-
+  Fulltext Search on Firebase with Meilisearch
+
+license: Apache-2.0  # https://spdx.org/licenses/
+
+# Public URL for the source code of your extension
+sourceUrl: https://github.com/meilisearch/firestore-meilisearch
+
+releaseNotesUrl: https://github.com/meilisearch/firestore-meilisearch/releases
+
+author:
+  authorName: MeiliSearch
+  email: bonjour@meilisearch.com
+  url: https://meilisearch.com
+
+# Specify whether a paid-tier billing plan is required to use your extension.
+# Learn more in the docs: https://firebase.google.com/docs/extensions/alpha/ref-extension-yaml#billing-required-field
+billingRequired: false
+
+# In an `apis` field, list any Google APIs (like Cloud Translation, BigQuery, etc.)
+# required for your extension to operate.
+# Learn more in the docs: https://firebase.google.com/docs/extensions/alpha/ref-extension-yaml#apis-field
+
+# In a `roles` field, list any IAM access roles required for your extension to operate.
+# Learn more in the docs: https://firebase.google.com/docs/extensions/alpha/ref-extension-yaml#roles-field
+
+# In the `resources` field, list each of your extension's functions, including the trigger for each function.
+# Learn more in the docs: https://firebase.google.com/docs/extensions/alpha/ref-extension-yaml#resources-field
+resources:
+  - name: indexingWorker
+    type: firebaseextensions.v1beta.function
+    description: >-
+      Cloud function triggered by document modification in Firestore to import changes into Meilisearch.
+    properties:
+      # LOCATION is a user-configured parameter value specified by the user
+      # during installation.
+      location: ${LOCATION}
+      runtime: nodejs14
+      eventTrigger:
+        eventType: providers/cloud.firestore/eventTypes/document.write
+        resource: projects/${PROJECT_ID}/databases/(default)/documents/${COLLECTION_PATH}/{documentID}
+
+# In the `params` field, set up your extension's user-configured parameters.
+# Learn more in the docs: https://firebase.google.com/docs/extensions/alpha/ref-extension-yaml#params-field
+params:
+  - param: LOCATION
+    label: Cloud Functions location
+    description: >-
+      Where do you want to deploy the functions created for this extension?
+      For help selecting a location, refer to the [location selection
+      guide](https://firebase.google.com/docs/functions/locations).
+    type: select
+    options:
+      - label: Iowa (us-central1)
+        value: us-central1
+      - label: South Carolina (us-east1)
+        value: us-east1
+      - label: Northern Virginia (us-east4)
+        value: us-east4
+      - label: Los Angeles (us-west2)
+        value: us-west2
+      - label: Salt Lake City (us-west3)
+        value: us-west3
+      - label: Las Vegas (us-west4)
+        value: us-west4
+      - label: Warsaw (europe-central2)
+        value: europe-central2
+      - label: Belgium (europe-west1)
+        value: europe-west1
+      - label: London (europe-west2)
+        value: europe-west2
+      - label: Frankfurt (europe-west3)
+        value: europe-west3
+      - label: Zurich (europe-west6)
+        value: europe-west6
+      - label: Hong Kong (asia-east2)
+        value: asia-east2
+      - label: Tokyo (asia-northeast1)
+        value: asia-northeast1
+      - label: Osaka (asia-northeast2)
+        value: asia-northeast2
+      - label: Seoul (asia-northeast3)
+        value: asia-northeast3
+      - label: Mumbai (asia-south1)
+        value: asia-south1
+      - label: Jakarta (asia-southeast2)
+        value: asia-southeast2
+      - label: Montreal (northamerica-northeast1)
+        value: northamerica-northeast1
+      - label: Sao Paulo (southamerica-east1)
+        value: southamerica-east1
+      - label: Sydney (australia-southeast1)
+        value: australia-southeast1
+    default: europe-west1
+    required: true
+    immutable: true
+
+  - param: COLLECTION_PATH
+    label: Collection path
+    description: >-
+      What is the path of the collection you would like to export into Meilisearch?
+      What is the path of the collection where do you want to watch for changes?
+    example: movies
+    type: string
+    validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
+    validationErrorMessage: Must be a valid Cloud Firestore Collection.
+    required: true
+
+  - param: INPUT_FIELD_NAME
+    label: Input field name
+    description: >-
+      What are the names of the fields you want to make searchable?
+      Create a comma-separated list or leave blank to take all fields.
+    example: title,overview,release_date
+    validationRegex: "^[a-zA-Z,-]*[a-zA-Z-]{2,}$"
+    validationErrorMessage:
+      Input field name must be a comma-separated list.
+    default: ''
+    required: false
+
+  - param: MEILISEARCH_INDEX_NAME
+    label: Meilisearch Index Name
+    description: >-
+      What is the name of the Meilisearch index you want to create?
+    type: string
+    example: movies
+    validationRegex: "^[0-9A-Za-z_-]*$"
+    validationErrorMessage: Must be a valid Index format - Index must have a valid uid
+      Index uid can be of type integer or string only composed of alphanumeric characters, hyphens (-) and underscores (_).
+      Check out our guide on [index creation](https://docs.meilisearch.com/learn/core_concepts/indexes.html#index-creation).
+    required: true
+
+  - param: MEILISEARCH_HOST
+    label: Meilisearch host
+    description: >-
+      What is the url of the host of your Meilisearch database?
+    example: 'http://127.0.0.1:7700'
+    required: true
+
+  - param: MEILISEARCH_API_KEY
+    label: Meilisearch API key
+    description: >-
+      What is your Meilisearch API Key that has modification permission to the index?
+      Check out our guide on [authentification](https://dev.docs.meilisearch.com/reference/features/authentication.html#key-types).
+    type: string
+    example: 37778d5a6f5c39660c66c0f882dabedd55840f3a
+    required: false
