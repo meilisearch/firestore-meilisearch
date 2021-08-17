@@ -126,7 +126,6 @@ params:
     label: Collection path
     description: >-
       What is the path of the collection you would like to export into Meilisearch?
-      What is the path of the collection where do you want to watch for changes?
     example: movies
     type: string
     validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
@@ -152,7 +151,7 @@ params:
     type: string
     example: movies
     validationRegex: "^[0-9A-Za-z_-]*$"
-    validationErrorMessage: Must be a valid Index format - Index must have a valid uid
+    validationErrorMessage: Must be a valid Index format
       Index uid can be of type integer or string only composed of alphanumeric characters, hyphens (-) and underscores (_).
       Check out our guide on [index creation](https://docs.meilisearch.com/learn/core_concepts/indexes.html#index-creation).
     required: true
