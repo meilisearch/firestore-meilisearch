@@ -1,0 +1,21 @@
+version: 2
+updates:
+- package-ecosystem: 'npm'
+  directory: '/'
+  schedule:
+    interval: 'daily'
+  open-pull-requests-limit: 10
+  labels:
+  - skip-changelog
+  - dependencies
+  ignore:
+  - dependency-name: 'eslint*'
+  - dependency-name: 'prettier*'
+  rebase-strategy: disabled
+- package-ecosystem: github-actions
+  directory: '/functions'
+  schedule:
+    interval: daily
+  labels:
+    - skip-changelog
+    - dependencies
