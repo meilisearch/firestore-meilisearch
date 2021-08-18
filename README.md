@@ -14,7 +14,7 @@
 
 `firebase --open-sesame extdev`
 
-You maybe need to install typescript in global to run this project<br>
+You may need to install typescript in global to run this project<br>
 `npm install typescript -g`
 
 `npm run install`
