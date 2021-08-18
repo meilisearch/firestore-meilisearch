@@ -18,9 +18,9 @@
 import * as functions from 'firebase-functions'
 
 /**
- * testFunction
+ * indexingWorker
  */
-exports.testFunction = functions.firestore
+exports.indexingWorker = functions.firestore
   .document('path/to/{collectionID}/{documentID}')
   .onWrite((change, context) => {
     console.log(change)
