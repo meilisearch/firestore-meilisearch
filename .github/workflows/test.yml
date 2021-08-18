@@ -20,6 +20,6 @@ jobs:
         with:
           node-version: 14
       - name: Install dependencies
-        run: npm install
+        run: npm install:functions
       - name: Run style check
         run: npm run lint
