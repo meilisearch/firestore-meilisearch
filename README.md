@@ -17,7 +17,7 @@
 You may need to install typescript in global to run this project<br>
 `npm install typescript -g`
 
-`npm run install`
+`npm run install:functions`
 
 `npm run build`
 
