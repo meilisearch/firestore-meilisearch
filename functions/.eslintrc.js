@@ -19,15 +19,12 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['tsconfig.json'],
+    project: ['tsconfig.eslint.json'],
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
   ignorePatterns: [
-    '/lib/**/*', // Ignore built files.
-    'jest.config.js',
-    '.eslintrc.js',
-    '__tests__/functions.test.ts'
+    '/lib/**/*' // Ignore built files.
   ],
   plugins: ['@typescript-eslint', 'import', 'prettier'],
   rules: {
