@@ -10,15 +10,10 @@
     "target": "es2018",
     "types": [
       "node",
-      "jest"
     ]
   },
   "compileOnSave": true,
   "include": [
     "src",
-  ],
-  "exclude": [
-    "node_modules",
-    "__tests__/**/*.ts"
   ]
 }
