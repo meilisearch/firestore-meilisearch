@@ -25,6 +25,9 @@ module.exports = {
   },
   ignorePatterns: [
     '/lib/**/*', // Ignore built files.
+    'jest.config.js',
+    '.eslintrc.js',
+    '__tests__/functions.test.ts'
   ],
   plugins: ['@typescript-eslint', 'import', 'prettier'],
   rules: {
