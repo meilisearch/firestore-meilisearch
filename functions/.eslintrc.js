@@ -2,9 +2,10 @@ module.exports = {
   root: true,
   env: {
     'jest/globals': true,
+    'jest': true,
     'browser': true,
     'commonjs': true,
-    'es2021': true,
+    // 'es2021': true,
     'es6': true,
     'node': true,
   },
@@ -21,13 +22,13 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['tsconfig.eslint.json'],
-    tsconfigRootDir: __dirname,
     sourceType: 'module',
+    tsconfigRootDir: __dirname,
   },
   ignorePatterns: [
     '/lib/**/*', // Ignore built files.
   ],
-  plugins: ['@typescript-eslint', 'import', 'prettier'],
+  plugins: ['@typescript-eslint', 'import', 'prettier', 'jest'],
   rules: {
     'no-unused-vars': ['error', { varsIgnorePattern: '^omit.*$' }],
     'array-callback-return': 'off',
