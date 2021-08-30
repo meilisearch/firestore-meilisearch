@@ -2,13 +2,13 @@
   // extend your base config so you don't have to redefine your compilerOptions
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "allowJs": false,
-    "types": ["jest"],
+    "allowJs": true,
   },
   "include": [
-    "src/**/*.ts",
-    "__tests__/**/*.ts",
+    "./src/**/*.ts",
+    "./__tests__/**/*.ts",
     "./**/*.js",
-    ".eslintrc.js"
-  ]
+    ".eslintrc.js",
+  ],
+  "exclude": []
 }
