@@ -2,7 +2,6 @@ module.exports = {
   root: true,
   env: {
     'jest/globals': true,
-    'jest': true,
     'browser': true,
     'commonjs': true,
     // 'es2021': true,
@@ -28,7 +27,7 @@ module.exports = {
   ignorePatterns: [
     '/lib/**/*', // Ignore built files.
   ],
-  plugins: ['@typescript-eslint', 'import', 'prettier', 'jest'],
+  plugins: ['@typescript-eslint', 'import', 'jest'],
   rules: {
     'no-unused-vars': ['error', { varsIgnorePattern: '^omit.*$' }],
     'array-callback-return': 'off',
