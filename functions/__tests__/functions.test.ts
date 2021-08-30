@@ -23,8 +23,6 @@ export const mockExport = (document, data) => {
   return wrapped(document, data)
 }
 
-export const mockedMeilisearch = () => {}
-
 let restoreEnv
 const functionsTest = functionsTestInit()
 
