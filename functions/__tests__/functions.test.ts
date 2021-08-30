@@ -37,11 +37,11 @@ describe('extension', () => {
   const mockedIndex = jest.fn(() => ({
     addDocuments: mockedAddDocuments,
     updateDocuments: mockedUpdateDocuments,
-    deleteDocument: mockedDeleteDocument
+    deleteDocument: mockedDeleteDocument,
   }))
   mockedMeilisearch.mockReturnValue({
     // @ts-ignore
-    index:  mockedIndex
+    index: mockedIndex,
   })
 
   beforeEach(() => {
@@ -56,8 +56,8 @@ describe('extension', () => {
   test('meilisearch client initialized', () => {
     expect(mockedMeilisearch).toHaveBeenCalled()
     expect(mockedMeilisearch).toHaveBeenCalledWith({
-      'apiKey': defaultEnvironment.MEILISEARCH_API_KEY,
-      'host': defaultEnvironment.MEILISEARCH_HOST
+      apiKey: defaultEnvironment.MEILISEARCH_API_KEY,
+      host: defaultEnvironment.MEILISEARCH_HOST,
     })
   })
 
@@ -69,8 +69,14 @@ describe('extension', () => {
   })
 
   test('function runs with created data', async () => {
-    const beforeSnapshot = functionsTest.firestore.makeDocumentSnapshot({}, 'collection/doc')
-    const afterSnapshot = functionsTest.firestore.makeDocumentSnapshot({ foo: 'bar' }, 'collection/doc')
+    const beforeSnapshot = functionsTest.firestore.makeDocumentSnapshot(
+      {},
+      'collection/doc'
+    )
+    const afterSnapshot = functionsTest.firestore.makeDocumentSnapshot(
+      { foo: 'bar' },
+      'collection/doc'
+    )
 
     const documentChange = functionsTest.makeChange(
       beforeSnapshot,
@@ -87,8 +93,14 @@ describe('extension', () => {
   })
 
   test('function runs with updated data', async () => {
-    const beforeSnapshot = functionsTest.firestore.makeDocumentSnapshot({ foo: 'bar' }, 'collection/doc')
-    const afterSnapshot = functionsTest.firestore.makeDocumentSnapshot({ foo: 'bars' }, 'collection/doc')
+    const beforeSnapshot = functionsTest.firestore.makeDocumentSnapshot(
+      { foo: 'bar' },
+      'collection/doc'
+    )
+    const afterSnapshot = functionsTest.firestore.makeDocumentSnapshot(
+      { foo: 'bars' },
+      'collection/doc'
+    )
 
     const documentChange = functionsTest.makeChange(
       beforeSnapshot,

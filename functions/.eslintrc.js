@@ -1,11 +1,12 @@
 module.exports = {
   root: true,
   env: {
-    browser: true,
-    commonjs: true,
-    es2021: true,
-    es6: true,
-    node: true,
+    'jest/globals': true,
+    'browser': true,
+    'commonjs': true,
+    'es2021': true,
+    'es6': true,
+    'node': true,
   },
   extends: [
     'eslint:recommended',
@@ -24,7 +25,7 @@ module.exports = {
     sourceType: 'module',
   },
   ignorePatterns: [
-    '/lib/**/*' // Ignore built files.
+    '/lib/**/*', // Ignore built files.
   ],
   plugins: ['@typescript-eslint', 'import', 'prettier'],
   rules: {

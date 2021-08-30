@@ -3,10 +3,12 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "allowJs": false,
+    "types": ["jest"],
   },
   "include": [
     "src/**/*.ts",
     "__tests__/**/*.ts",
-    "./**/*.js"
+    "./**/*.js",
+    ".eslintrc.js"
   ]
 }
