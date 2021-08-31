@@ -35,32 +35,31 @@ First of all, thank you for contributing to MeiliSearch! The goal of this docume
 To run this project, you will need:
 
 - Node >= 12
-- Npm
+- Npm >= v7
 - A google account
-
-- Latest version of `firebase-tools` the Firebase CLI: 
+- Latest version of `firebase-tools` the Firebase CLI:
 ``` bash
 npm install -g firebase-tools
 ```
-Sign in with your Google Account:
+- Sign in with your Google Account:
 ``` bash
 firebase login
 ```
-Enable the extension developer commands:
+- Enable the extension developer commands:
 ``` bash
 firebase --open-sesame extdev
 ```
-You may need to install typescript in global to run this project:
+- You may need to install typescript in global to run this project:
 ``` bash
 npm install typescript -g
-```
-Install dependencies:
-``` bash
-npm run install:functions
 ```
 
 ### Setup
 
+Install dependencies:
+``` bash
+npm run install:functions
+```
 Build the project:
 ``` bash
 npm run build
@@ -72,11 +71,11 @@ docker run -p 7700:7700 getmeili/meilisearch:latest ./meilisearch --master-key=m
 ```
 Launch emulator with param:
 ``` bash
-firebase ext:dev:emulators:start --test-params=test-params-example.env
+firebase ext:dev:emulators:start --test-params=test-params-example.env --project=name-of-the-project
 ```
 Launch emulator with dataset:
 ``` bash
-firebase ext:dev:emulators:start --test-params=test-params-example.env--import=dataset
+firebase ext:dev:emulators:start --test-params=test-params-example.env--import=dataset --project=name-of-the-project
 ```
 
 NB: If you don't want to launch the MeiliSearch instance in local, you need to edit the `test-params-example.env` file if you don't want to run MeiliSearch in local or create your own `test-params.env`
