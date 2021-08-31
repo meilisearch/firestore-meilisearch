@@ -39,22 +39,22 @@ export const indexingWorker = functions.handler.firestore.document.onWrite(
     change: Change<DocumentSnapshot>,
     context: EventContext
   ): Promise<void> => {
-      const changeType = getChangeType(change)
-      const documentId = getDocumentId(change)
+    const changeType = getChangeType(change)
+    const documentId = getDocumentId(change)
 
-      console.log(context.eventId)
-      console.log(context.resource.name)
+    console.log(context.eventId)
+    console.log(context.resource.name)
 
-      switch (changeType) {
-        case ChangeType.CREATE:
-          await handleAddDocument(documentId, change.after)
-          break
-        case ChangeType.DELETE:
-          await handleDeleteDocument(documentId)
-          break
-        case ChangeType.UPDATE:
-          await handleUpdateDocument(documentId, change.before, change.after)
-          break
+    switch (changeType) {
+      case ChangeType.CREATE:
+        await handleAddDocument(documentId, change.after)
+        break
+      case ChangeType.DELETE:
+        await handleDeleteDocument(documentId)
+        break
+      case ChangeType.UPDATE:
+        await handleUpdateDocument(documentId, change.before, change.after)
+        break
     }
   }
 )
