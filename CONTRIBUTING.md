@@ -139,17 +139,7 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 ### How to Publish the Release
 
-⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration](https://github.com/meilisearch/integration-guides/blob/main/guides/integration-release.md).
-
-Make a PR modifying the file [`package.json`](/package.json) with the right version.
-
-```javascript
-"version": "X.X.X",
-```
-
-Once the changes are merged on `main`, you can publish the current draft release via the [GitHub interface](https://github.com/meilisearch/meilisearch-js/releases).
-
-GitHub Actions will be triggered and push the package to [npm](https://www.npmjs.com/package/meilisearch).
+WIP
 
 <hr>
 
