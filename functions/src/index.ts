@@ -39,7 +39,6 @@ export const indexingWorker = functions.handler.firestore.document.onWrite(
     change: Change<DocumentSnapshot>,
     context: EventContext
   ): Promise<void> => {
-    try {
       const changeType = getChangeType(change)
       const documentId = getDocumentId(change)
 
@@ -56,12 +55,6 @@ export const indexingWorker = functions.handler.firestore.document.onWrite(
         case ChangeType.UPDATE:
           await handleUpdateDocument(documentId, change.before, change.after)
           break
-        default: {
-          console.log('Invalid change type: ', changeType)
-        }
-      }
-    } catch (err) {
-      console.log('ERROR: ', err)
     }
   }
 )
