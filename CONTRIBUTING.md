@@ -38,7 +38,7 @@ To run this project, you will need:
 - Npm
 - A google account
 
-Install or update to the latest version of the Firebase CLI:
+- Latest version of `firebase-tools` the Firebase CLI: 
 ``` bash
 npm install -g firebase-tools
 ```
