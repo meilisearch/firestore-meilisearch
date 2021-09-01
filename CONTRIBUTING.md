@@ -41,21 +41,17 @@ To run this project, you will need:
 ``` bash
 npm install -g firebase-tools
 ```
-- Sign in with your Google Account:
-``` bash
-firebase login
-```
-- Enable the extension developer commands:
-``` bash
-firebase --open-sesame extdev
-```
-- You may need to install typescript in global to run this project:
-``` bash
-npm install typescript -g
-```
 
 ### Setup
 
+Sign in with your Google Account:
+``` bash
+firebase login
+```
+Enable the extension developer commands:
+``` bash
+firebase --open-sesame extdev
+```
 Install dependencies:
 ``` bash
 npm run install:functions
