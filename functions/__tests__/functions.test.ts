@@ -15,6 +15,16 @@ const defaultEnvironment = {
   MEILISEARCH_API_KEY: 'masterKey',
 }
 
+const defaultDocument = {
+  id: '0jKUH3XUNXFyujm3rZAa',
+  title: 'The Lord of the Rings: The Fellowship of the Ring',
+  genre: ['Adventure', 'Fantasy', 'Action'],
+  overview:
+    'Young hobbit Frodo Baggins, after inheriting a mysterious ring from his uncle Bilbo, must leave his home in order to keep it from falling into the hands of its evil creator. Along the way, a fellowship is formed to protect the ringbearer and make sure that the ring arrives at its final destination: Mt. Doom, the only place where it can be destroyed.',
+  poster: 'https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg',
+  release_date: 1008633600,
+}
+
 describe('extension', () => {
   const fireBaseMock = fireBasefunctionsTestInit()
   const mockedMeilisearch = mocked(MeiliSearch, true)
@@ -65,7 +75,7 @@ describe('extension', () => {
       'collection/doc'
     )
     const afterSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
-      { foo: 'bar' },
+      defaultDocument,
       'collection/doc'
     )
 
@@ -81,7 +91,7 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
-    expect(mockedAddDocuments).toHaveBeenCalled()
+    expect(mockedAddDocuments).toHaveBeenCalledWith([defaultDocument])
   })
 
   test('function runs with updated data', async () => {
@@ -90,7 +100,7 @@ describe('extension', () => {
       'collection/doc'
     )
     const afterSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
-      { foo: 'bars' },
+      defaultDocument,
       'collection/doc'
     )
 
@@ -106,12 +116,12 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
-    expect(mockedUpdateDocuments).toHaveBeenCalled()
+    expect(mockedUpdateDocuments).toHaveBeenCalledWith([defaultDocument])
   })
 
   test('functions runs with deleted data', async () => {
-    const beforeSnapshot = { foo: 'bar' }
-    const afterSnapshot = { foo: 'bars', exists: false }
+    const beforeSnapshot = { ...defaultDocument }
+    const afterSnapshot = { ...defaultDocument, exists: false }
 
     const documentChange = fireBaseMock.makeChange(
       beforeSnapshot,
@@ -125,6 +135,6 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
-    expect(mockedDeleteDocument).toHaveBeenCalled()
+    expect(mockedDeleteDocument).toHaveBeenCalledWith(defaultDocument.id)
   })
 })
