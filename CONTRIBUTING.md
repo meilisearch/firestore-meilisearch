@@ -30,7 +30,7 @@ First of all, thank you for contributing to MeiliSearch! The goal of this docume
 
 ## Development Workflow
 
-### Requirements
+### Requirements <!-- omit in toc -->
 
 To run this project, you will need:
 
