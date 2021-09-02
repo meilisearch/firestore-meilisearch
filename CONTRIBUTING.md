@@ -73,7 +73,7 @@ The emulator runs with environment parameters found in `test-params-example.env`
 
 Once it is running, open the emulator in a browser at the following address: http://localhost:4000
 
-NB: If you don't want to launch the MeiliSearch instance in local, you need to edit the `test-params-example.env` file if you don't want to run MeiliSearch in local or create your own `test-params.env`
+NB: If you want to change your MeiliSearch credentials or the plugins options you need to edit the `test-params-example.env` file.
 
 ### Tests and Linter <!-- omit in toc -->
 
