@@ -97,7 +97,7 @@ npm run build
 All changes must be made in a branch and submitted as PR.
 We do not enforce any branch naming style, but please use something descriptive of your changes.
 
-### Git Commits
+### Git Commits <!-- omit in toc -->
 
 As minimal requirements, your commit message should:
 - be capitalized
