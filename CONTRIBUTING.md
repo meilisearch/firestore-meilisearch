@@ -107,7 +107,7 @@ As minimal requirements, your commit message should:
 
 We don't follow any other convention, but if you want to use one, we recommend [this one](https://chris.beams.io/posts/git-commit/).
 
-### GitHub Pull Requests
+### GitHub Pull Requests <!-- omit in toc -->
 
 Some notes on GitHub PRs:
 
