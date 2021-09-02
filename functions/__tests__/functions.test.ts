@@ -16,13 +16,13 @@ const defaultEnvironment = {
 }
 
 let restoreEnv
-  const functionsTest = functionsTestInit()
+const functionsTest = functionsTestInit()
 
 describe('extension', () => {
   const mockExport = (document: any, data: any) => {
     const ref = require('../src/index').indexingWorker
     return functionsTestInit().wrap(ref)(document, data)
-}
+  }
 
   const mockedMeilisearch = mocked(MeiliSearch, true)
 
