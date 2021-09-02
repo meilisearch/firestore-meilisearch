@@ -26,14 +26,11 @@ const defaultDocument = {
 }
 
 describe('extension', () => {
+  // Mocking of Firebase functions
   const fireBaseMock = fireBasefunctionsTestInit()
+  
+  // Mocking of MeiliSearch package
   const mockedMeilisearch = mocked(MeiliSearch, true)
-
-  const mockExport = (document: any, data: any) => {
-    const ref = require('../src/index').indexingWorker
-    return fireBasefunctionsTestInit().wrap(ref)(document, data)
-  }
-
   const mockedAddDocuments = jest.fn()
   const mockedUpdateDocuments = jest.fn()
   const mockedDeleteDocument = jest.fn()
@@ -46,6 +43,12 @@ describe('extension', () => {
     // @ts-ignore
     index: mockedIndex,
   })
+   
+  // Mocking of firestore-meilisearch
+  const mockExport = (document: any, data: any) => {
+    const ref = require('../src/index').indexingWorker
+    return fireBasefunctionsTestInit().wrap(ref)(document, data)
+  }
 
   beforeEach(() => {
     mockedEnv(defaultEnvironment)
