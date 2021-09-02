@@ -69,7 +69,7 @@ Launch emulator:
 ``` bash
 firebase ext:dev:emulators:start --test-params=test-params-example.env --import=dataset --project=name-of-the-project
 ```
-The emulator runs with environment parameters found in `test-params-example.env` and with a provided dataset found in `/dataset`. 
+The emulator runs with environment parameters found in `test-params-example.env` and with a provided dataset found in `/dataset`.
 
 Once it is running, open the emulator in a browser at the following address: http://localhost:4000
 
@@ -84,8 +84,6 @@ Each PR should pass the tests and the linter to be accepted.
 npm run test
 # Linter
 npm run lint
-# Linter with fixing
-npm run lint:fix
 # Build the project
 npm run build
 ```
