@@ -124,7 +124,7 @@ MeiliSearch tools follow the [Semantic Versioning Convention](https://semver.org
 This project integrates a bot that helps us manage pull requests merging.<br>
 _[Read more about this](https://github.com/meilisearch/integration-guides/blob/main/guides/bors.md)._
 
-### Automated Changelogs
+### Automated Changelogs <!-- omit in toc -->
 
 This project integrates a tool to create automated changelogs.<br>
 _[Read more about this](https://github.com/meilisearch/integration-guides/blob/main/guides/release-drafter.md)._
