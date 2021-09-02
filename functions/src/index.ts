@@ -35,15 +35,9 @@ const index = client.index(process.env.MEILISEARCH_INDEX_NAME as string)
  * It is controlled by a Firestore handler
  */
 export const indexingWorker = functions.handler.firestore.document.onWrite(
-  async (
-    change: Change<DocumentSnapshot>,
-    context: EventContext
-  ): Promise<void> => {
+  async (change: Change<DocumentSnapshot>): Promise<void> => {
     const changeType = getChangeType(change)
     const documentId = getDocumentId(change)
-
-    console.log(context.eventId)
-    console.log(context.resource.name)
 
     switch (changeType) {
       case ChangeType.CREATE:
@@ -53,14 +47,14 @@ export const indexingWorker = functions.handler.firestore.document.onWrite(
         await handleDeleteDocument(documentId)
         break
       case ChangeType.UPDATE:
-        await handleUpdateDocument(documentId, change.before, change.after)
+        await handleUpdateDocument(documentId, change.after)
         break
     }
   }
 )
 
 /**
- *
+ * Handle addition of a document in the MeiliSearch index
  * @param {string} documentId
  * @param {Change} snapshot
  */
@@ -77,7 +71,7 @@ async function handleAddDocument(
 }
 
 /**
- *
+ * Handle deletion of a document in the MeiliSearch index
  * @param {string} documentId
  */
 async function handleDeleteDocument(documentId: string): Promise<void> {
@@ -89,17 +83,14 @@ async function handleDeleteDocument(documentId: string): Promise<void> {
 }
 
 /**
- *
+ * Handle update of a document in the MeiliSearch index
  * @param {string} documentId
- * @param {Change} before
  * @param {Change} after
  */
 async function handleUpdateDocument(
   documentId: string,
-  before: DocumentSnapshot,
   after: DocumentSnapshot
 ): Promise<void> {
-  console.log(before)
   try {
     const document = Object.assign({ id: documentId }, after.data())
     await index.updateDocuments([document])

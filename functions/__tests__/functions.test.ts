@@ -28,7 +28,7 @@ const defaultDocument = {
 describe('extension', () => {
   // Mocking of Firebase functions
   const fireBaseMock = fireBasefunctionsTestInit()
-  
+
   // Mocking of MeiliSearch package
   const mockedMeilisearch = mocked(MeiliSearch, true)
   const mockedAddDocuments = jest.fn()
@@ -43,7 +43,7 @@ describe('extension', () => {
     // @ts-ignore
     index: mockedIndex,
   })
-   
+
   // Mocking of firestore-meilisearch
   const mockExport = (document: any, data: any) => {
     const ref = require('../src/index').indexingWorker
