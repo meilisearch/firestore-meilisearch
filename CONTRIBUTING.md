@@ -119,7 +119,7 @@ Some notes on GitHub PRs:
 
 MeiliSearch tools follow the [Semantic Versioning Convention](https://semver.org/).
 
-### Automation to Rebase and Merge the PRs
+### Automation to Rebase and Merge the PRs <!-- omit in toc -->
 
 This project integrates a bot that helps us manage pull requests merging.<br>
 _[Read more about this](https://github.com/meilisearch/integration-guides/blob/main/guides/bors.md)._
