@@ -1,4 +1,4 @@
-import * as fireBasefunctionsTestInit from 'firebase-functions-test'
+import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
 import { mocked } from 'ts-jest/utils'
 import { MeiliSearch } from 'meilisearch'
@@ -27,7 +27,7 @@ const defaultDocument = {
 
 describe('extension', () => {
   // Mocking of Firebase functions
-  const fireBaseMock = fireBasefunctionsTestInit()
+  const firebaseMock = firebaseFunctionsTestInit()
 
   // Mocking of MeiliSearch package
   const mockedMeilisearch = mocked(MeiliSearch, true)
@@ -47,7 +47,7 @@ describe('extension', () => {
   // Mocking of firestore-meilisearch
   const mockExport = (document: any, data: any) => {
     const ref = require('../src/index').indexingWorker
-    return fireBasefunctionsTestInit().wrap(ref)(document, data)
+    return firebaseFunctionsTestInit().wrap(ref)(document, data)
   }
 
   beforeEach(() => {
@@ -73,16 +73,16 @@ describe('extension', () => {
   })
 
   test('function runs with created data', async () => {
-    const beforeSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
+    const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
       {},
       'collection/doc'
     )
-    const afterSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
+    const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
       defaultDocument,
       'collection/doc'
     )
 
-    const documentChange = fireBaseMock.makeChange(
+    const documentChange = firebaseMock.makeChange(
       beforeSnapshot,
       afterSnapshot
     )
@@ -98,16 +98,16 @@ describe('extension', () => {
   })
 
   test('function runs with updated data', async () => {
-    const beforeSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
+    const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
       { foo: 'bar' },
       'collection/doc'
     )
-    const afterSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
+    const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
       defaultDocument,
       'collection/doc'
     )
 
-    const documentChange = fireBaseMock.makeChange(
+    const documentChange = firebaseMock.makeChange(
       beforeSnapshot,
       afterSnapshot
     )
@@ -126,7 +126,7 @@ describe('extension', () => {
     const beforeSnapshot = { ...defaultDocument }
     const afterSnapshot = { ...defaultDocument, exists: false }
 
-    const documentChange = fireBaseMock.makeChange(
+    const documentChange = firebaseMock.makeChange(
       beforeSnapshot,
       afterSnapshot
     )
