@@ -16,7 +16,7 @@ const defaultEnvironment = {
 }
 
 describe('extension', () => {
-  const functionsTest = fireBasefunctionsTestInit()
+  const fireBaseMock = fireBasefunctionsTestInit()
   const mockedMeilisearch = mocked(MeiliSearch, true)
 
   const mockExport = (document: any, data: any) => {
@@ -60,16 +60,16 @@ describe('extension', () => {
   })
 
   test('function runs with created data', async () => {
-    const beforeSnapshot = functionsTest.firestore.makeDocumentSnapshot(
+    const beforeSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
       {},
       'collection/doc'
     )
-    const afterSnapshot = functionsTest.firestore.makeDocumentSnapshot(
+    const afterSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
       { foo: 'bar' },
       'collection/doc'
     )
 
-    const documentChange = functionsTest.makeChange(
+    const documentChange = fireBaseMock.makeChange(
       beforeSnapshot,
       afterSnapshot
     )
@@ -85,16 +85,16 @@ describe('extension', () => {
   })
 
   test('function runs with updated data', async () => {
-    const beforeSnapshot = functionsTest.firestore.makeDocumentSnapshot(
+    const beforeSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
       { foo: 'bar' },
       'collection/doc'
     )
-    const afterSnapshot = functionsTest.firestore.makeDocumentSnapshot(
+    const afterSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
       { foo: 'bars' },
       'collection/doc'
     )
 
-    const documentChange = functionsTest.makeChange(
+    const documentChange = fireBaseMock.makeChange(
       beforeSnapshot,
       afterSnapshot
     )
@@ -113,7 +113,7 @@ describe('extension', () => {
     const beforeSnapshot = { foo: 'bar' }
     const afterSnapshot = { foo: 'bars', exists: false }
 
-    const documentChange = functionsTest.makeChange(
+    const documentChange = fireBaseMock.makeChange(
       beforeSnapshot,
       afterSnapshot
     )
