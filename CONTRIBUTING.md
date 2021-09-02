@@ -131,7 +131,7 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 This project integrates a tool to create automated changelogs.<br>
 _[Read more about this](https://github.com/meilisearch/integration-guides/blob/main/guides/release-drafter.md)._
 
-### How to Publish the Release
+### How to Publish the Release <!-- omit in toc -->
 
 WIP
 
