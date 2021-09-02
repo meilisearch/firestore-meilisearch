@@ -15,18 +15,15 @@ const defaultEnvironment = {
   MEILISEARCH_API_KEY: 'masterKey',
 }
 
-export const mockExport = (document, data) => {
-  const ref = require('../src/index').indexingWorker
+let restoreEnv
   const functionsTest = functionsTestInit()
 
-  const wrapped = functionsTest.wrap(ref)
-  return wrapped(document, data)
+describe('extension', () => {
+  const mockExport = (document: any, data: any) => {
+    const ref = require('../src/index').indexingWorker
+    return functionsTestInit().wrap(ref)(document, data)
 }
 
-let restoreEnv
-const functionsTest = functionsTestInit()
-
-describe('extension', () => {
   const mockedMeilisearch = mocked(MeiliSearch, true)
 
   const mockedAddDocuments = jest.fn()
@@ -52,7 +49,6 @@ describe('extension', () => {
   })
 
   test('meilisearch client initialized', () => {
-    expect(mockedMeilisearch).toHaveBeenCalled()
     expect(mockedMeilisearch).toHaveBeenCalledWith({
       apiKey: defaultEnvironment.MEILISEARCH_API_KEY,
       host: defaultEnvironment.MEILISEARCH_HOST,
@@ -60,7 +56,6 @@ describe('extension', () => {
   })
 
   test('meilisearch index initialized', () => {
-    expect(mockedIndex).toHaveBeenCalled()
     expect(mockedIndex).toHaveBeenCalledWith(
       defaultEnvironment.MEILISEARCH_INDEX_NAME
     )
@@ -88,6 +83,7 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockedAddDocuments).toHaveBeenCalled()
   })
 
   test('function runs with updated data', async () => {
@@ -112,6 +108,7 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockedUpdateDocuments).toHaveBeenCalled()
   })
 
   test('functions runs with deleted data', async () => {
@@ -130,5 +127,6 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockedDeleteDocument).toHaveBeenCalled()
   })
 })

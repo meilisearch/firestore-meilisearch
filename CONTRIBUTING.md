@@ -71,8 +71,9 @@ firebase ext:dev:emulators:start --test-params=test-params-example.env --project
 ```
 Launch emulator with dataset:
 ``` bash
-firebase ext:dev:emulators:start --test-params=test-params-example.env--import=dataset --project=name-of-the-project
+firebase ext:dev:emulators:start --test-params=test-params-example.env --import=dataset --project=name-of-the-project
 ```
+You can check the emulator run at localhost:4000
 
 NB: If you don't want to launch the MeiliSearch instance in local, you need to edit the `test-params-example.env` file if you don't want to run MeiliSearch in local or create your own `test-params.env`
 
