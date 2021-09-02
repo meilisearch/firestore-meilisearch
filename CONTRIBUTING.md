@@ -92,7 +92,7 @@ npm run build
 
 ## Git Guidelines
 
-### Git Branches
+### Git Branches <!-- omit in toc -->
 
 All changes must be made in a branch and submitted as PR.
 We do not enforce any branch naming style, but please use something descriptive of your changes.
