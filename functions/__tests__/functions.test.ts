@@ -15,10 +15,8 @@ const defaultEnvironment = {
   MEILISEARCH_API_KEY: 'masterKey',
 }
 
-let restoreEnv
-const functionsTest = functionsTestInit()
-
 describe('extension', () => {
+const functionsTest = functionsTestInit()
   const mockExport = (document: any, data: any) => {
     const ref = require('../src/index').indexingWorker
     return functionsTestInit().wrap(ref)(document, data)
@@ -40,7 +38,7 @@ describe('extension', () => {
   })
 
   beforeEach(() => {
-    restoreEnv = mockedEnv(defaultEnvironment)
+    mockedEnv(defaultEnvironment)
   })
 
   test('functions are exported', () => {
