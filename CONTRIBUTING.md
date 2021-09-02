@@ -42,7 +42,7 @@ To run this project, you will need:
 npm install -g firebase-tools
 ```
 
-### Setup
+### Setup <!-- omit in toc -->
 
 Sign in with your Google Account:
 ``` bash
