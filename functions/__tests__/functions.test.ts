@@ -1,4 +1,4 @@
-import * as functionsTestInit from 'firebase-functions-test'
+import * as fireBasefunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
 import { mocked } from 'ts-jest/utils'
 import { MeiliSearch } from 'meilisearch'
@@ -16,13 +16,13 @@ const defaultEnvironment = {
 }
 
 describe('extension', () => {
-const functionsTest = functionsTestInit()
+  const functionsTest = fireBasefunctionsTestInit()
+  const mockedMeilisearch = mocked(MeiliSearch, true)
+
   const mockExport = (document: any, data: any) => {
     const ref = require('../src/index').indexingWorker
-    return functionsTestInit().wrap(ref)(document, data)
+    return fireBasefunctionsTestInit().wrap(ref)(document, data)
   }
-
-  const mockedMeilisearch = mocked(MeiliSearch, true)
 
   const mockedAddDocuments = jest.fn()
   const mockedUpdateDocuments = jest.fn()
