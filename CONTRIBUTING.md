@@ -75,7 +75,7 @@ Once it is running, open the emulator in a browser at the following address: htt
 
 NB: If you don't want to launch the MeiliSearch instance in local, you need to edit the `test-params-example.env` file if you don't want to run MeiliSearch in local or create your own `test-params.env`
 
-### Tests and Linter
+### Tests and Linter <!-- omit in toc -->
 
 Each PR should pass the tests and the linter to be accepted.
 
