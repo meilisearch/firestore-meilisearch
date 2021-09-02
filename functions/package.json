@@ -1,39 +1,46 @@
 {
   "name": "functions",
   "scripts": {
-    "lint": "eslint --ext .js,.ts .",
-    "lint:fix": "eslint --ext .js . --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "build": "tsc",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test-coverage": "jest --coverage"
   },
   "engines": {
-    "node": "14"
+    "node": ">=14.0.0"
   },
   "main": "lib/index.js",
   "dependencies": {
     "firebase-admin": "^9.8.0",
     "firebase-functions": "^3.14.1",
+    "firebase-functions-test": "^0.3.2",
     "meilisearch": "0.19.0"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
     "@types/jest": "^27.0.1",
-    "@typescript-eslint/eslint-plugin": "^3.9.1",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.8.0",
     "eslint": "^7.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^24.4.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "firebase-functions-test": "^0.2.3",
     "jest": "^27.0.6",
+    "jest-mock": "^27.0.6",
+    "mocked-env": "^1.3.5",
     "prettier": "^2.3.2",
-    "typescript": "^3.8.0"
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^3.9.10"
   },
   "private": true
 }

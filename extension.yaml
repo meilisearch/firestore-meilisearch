@@ -160,6 +160,7 @@ params:
     label: Meilisearch host
     description: >-
       What is the url of the host of your Meilisearch database?
+    type: string
     example: 'http://127.0.0.1:7700'
     required: true
 
