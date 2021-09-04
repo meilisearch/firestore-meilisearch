@@ -38,7 +38,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    ' @typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/ban-types': 'off',
     'no-unused-vars': 'off',
     'array-callback-return': 'off',
     'arrow-parens': ['error', 'as-needed'],
