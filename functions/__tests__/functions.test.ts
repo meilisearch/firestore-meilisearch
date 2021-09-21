@@ -1,6 +1,7 @@
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
 import { mocked } from 'ts-jest/utils'
+import { mockConsoleLog, mockConsoleInfo } from './__mocks__/console'
 import { MeiliSearch } from 'meilisearch'
 
 jest.mock('meilisearch')
@@ -94,6 +95,14 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockConsoleLog).toBeCalledWith(
+      'Started execution of extension with configuration'
+    )
+    expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
+    expect(mockConsoleInfo).toBeCalledWith(
+      `Creating new document ${afterSnapshot.id} in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
+      { ...afterSnapshot.data() }
+    )
     expect(mockedAddDocuments).toHaveBeenCalledWith([defaultDocument])
   })
 
@@ -119,6 +128,14 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockConsoleLog).toBeCalledWith(
+      'Started execution of extension with configuration'
+    )
+    expect(mockConsoleInfo).toBeCalledWith(
+      `Updating document ${afterSnapshot.id} in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
+      { ...afterSnapshot.data() }
+    )
+    expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
     expect(mockedUpdateDocuments).toHaveBeenCalledWith([defaultDocument])
   })
 
@@ -138,6 +155,13 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockConsoleLog).toBeCalledWith(
+      'Started execution of extension with configuration'
+    )
+    expect(mockConsoleInfo).toBeCalledWith(
+      `Deleting document ${defaultDocument.id} in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
+    )
+    expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
     expect(mockedDeleteDocument).toHaveBeenCalledWith(defaultDocument.id)
   })
 })
