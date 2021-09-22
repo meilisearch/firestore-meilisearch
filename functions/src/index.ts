@@ -1,3 +1,4 @@
+'use strict'
 /*
  * Copyright 2021 MeiliSearch
  *
@@ -21,14 +22,15 @@ import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { MeiliSearch } from 'meilisearch'
 
 import { getChangeType, getDocumentId, ChangeType } from './util'
+import config from './config'
 import * as logs from './logs'
 
-const client = new MeiliSearch({
-  host: process.env.MEILISEARCH_HOST as string,
-  apiKey: process.env.MEILISEARCH_API_KEY,
+export const client = new MeiliSearch({
+  host: config.meilisearchHost,
+  apiKey: config.meilisearchApiKey,
 })
 
-const index = client.index(process.env.MEILISEARCH_INDEX_NAME as string)
+const index = client.index(config.meilisearchIndex)
 
 logs.init()
 

@@ -16,6 +16,8 @@
 
 import { logger } from 'firebase-functions'
 
+import config from './config'
+
 /**
  * Initialization logger.
  */
@@ -50,9 +52,9 @@ export function complete() {
  * @param {string} id
  * @param {object} data
  */
-export function addDocument(id: string, data: object) {
+export function addDocument(id: string, data: Record<string, any>) {
   logger.info(
-    `Creating new document ${id} in MeiliSearch index ${process.env.MEILISEARCH_INDEX_NAME}`,
+    `Creating new document ${id} in MeiliSearch index ${config.meilisearchIndex}`,
     data
   )
 }
@@ -62,9 +64,9 @@ export function addDocument(id: string, data: object) {
  * @param {string} id
  * @param {object} data
  */
-export function updateDocument(id: string, data: object) {
+export function updateDocument(id: string, data: Record<string, any>) {
   logger.info(
-    `Updating document ${id} in MeiliSearch index ${process.env.MEILISEARCH_INDEX_NAME}`,
+    `Updating document ${id} in MeiliSearch index ${config.meilisearchIndex}`,
     data
   )
 }
@@ -75,6 +77,6 @@ export function updateDocument(id: string, data: object) {
  */
 export function deleteDocument(id: string) {
   logger.info(
-    `Deleting document ${id} in MeiliSearch index ${process.env.MEILISEARCH_INDEX_NAME}`
+    `Deleting document ${id} in MeiliSearch index ${config.meilisearchIndex}`
   )
 }

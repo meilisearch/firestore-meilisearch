@@ -17,6 +17,7 @@
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { Change } from 'firebase-functions'
 
+import config from './config'
 export enum ChangeType {
   CREATE,
   DELETE,
