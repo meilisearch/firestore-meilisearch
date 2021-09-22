@@ -1,17 +1,26 @@
 {
+  "files": ["./__tests__/test.types.d.ts"],
   "compilerOptions": {
+    "skipLibCheck": true,
+    "lib": ["esnext.asynciterable"],
     "module": "commonjs",
     "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
     "outDir": "lib",
     "sourceMap": false,
     "strict": true,
     "target": "es2018",
     "types": [
+      "jest",
       "node",
     ]
   },
   "compileOnSave": true,
   "include": [
     "src",
+  ],
+  "exclude": [
+    "node_modules",
   ]
 }

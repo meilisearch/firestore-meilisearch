@@ -1,3 +1,4 @@
+'use strict'
 /*
  * Copyright 2021 MeiliSearch
  *
@@ -23,6 +24,7 @@ export enum ChangeType {
   DELETE,
   UPDATE,
 }
+
 /**
  * getChangeType get type of the modification perform on a document
  * @param {Change} change The Functions interface for events that change state

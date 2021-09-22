@@ -8,4 +8,5 @@ module.exports = {
   },
   testEnvironment: 'node',
   testMatch: ['**/__tests__/*.test.ts'],
+  setupFiles: ['<rootDir>/__tests__/jest.setup.ts'],
 }

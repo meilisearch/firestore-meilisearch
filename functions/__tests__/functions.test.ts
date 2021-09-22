@@ -96,11 +96,16 @@ describe('extension', () => {
 
     expect(callResult).toBeUndefined()
     expect(mockConsoleLog).toBeCalledWith(
+      'Initializing extension with configuration'
+    )
+    expect(mockConsoleLog).toBeCalledWith(
       'Started execution of extension with configuration'
     )
     expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
     expect(mockConsoleInfo).toBeCalledWith(
-      `Creating new document ${afterSnapshot.id} in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
+      `Creating new document ${
+        afterSnapshot.id as string
+      } in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
       { ...afterSnapshot.data() }
     )
     expect(mockedAddDocuments).toHaveBeenCalledWith([defaultDocument])
@@ -129,10 +134,15 @@ describe('extension', () => {
 
     expect(callResult).toBeUndefined()
     expect(mockConsoleLog).toBeCalledWith(
+      'Initializing extension with configuration'
+    )
+    expect(mockConsoleLog).toBeCalledWith(
       'Started execution of extension with configuration'
     )
     expect(mockConsoleInfo).toBeCalledWith(
-      `Updating document ${afterSnapshot.id} in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
+      `Updating document ${afterSnapshot.id as string} in MeiliSearch index ${
+        defaultEnvironment.MEILISEARCH_INDEX_NAME
+      }`,
       { ...afterSnapshot.data() }
     )
     expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
@@ -155,6 +165,9 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockConsoleLog).toBeCalledWith(
+      'Initializing extension with configuration'
+    )
     expect(mockConsoleLog).toBeCalledWith(
       'Started execution of extension with configuration'
     )
