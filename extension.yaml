@@ -141,7 +141,7 @@ params:
     example: title,overview,release_date
     validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
     validationErrorMessage:
-      Input field name must be a comma-separated list.
+      Fields must be given through a comma-separated list.
     default: ''
     required: false
 
