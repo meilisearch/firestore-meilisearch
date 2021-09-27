@@ -136,7 +136,7 @@ params:
     label: Fields to index in MeiliSearch
     description: >-
       What are the names of the fields you want index in MeiliSearch?
-      The id field will be indexed anyway.
+      The id field is always indexed even when omitted in the list.
       Create a comma-separated list or leave blank to take all fields.
     example: title,overview,release_date
     validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
