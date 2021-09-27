@@ -152,7 +152,7 @@ params:
     type: string
     example: movies
     validationRegex: "^[0-9A-Za-z_-]+$"
-    validationErrorMessage: Must be a valid Index format
+    validationErrorMessage: Must be a valid Index format.
       Index uid can be of type integer or string only composed of alphanumeric characters, hyphens (-) and underscores (_).
       Check out our guide on [index creation](https://docs.meilisearch.com/learn/core_concepts/indexes.html#index-creation).
     required: true
