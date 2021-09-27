@@ -135,7 +135,7 @@ params:
   - param: FIELDS_TO_INDEX
     label: Fields to index in MeiliSearch
     description: >-
-      What are the names of the fields you want index in MeiliSearch?
+      What are the names of the fields you want to be indexed in MeiliSearch?
       The id field is always indexed even when omitted in the list.
       Create a comma-separated list or leave blank to take all fields.
     example: title,overview,release_date
@@ -148,7 +148,7 @@ params:
   - param: MEILISEARCH_INDEX_NAME
     label: Meilisearch Index Name
     description: >-
-      What is the name of the Meilisearch index you want to create?
+      What is the name of the index you want your data to be indexed in?
     type: string
     example: movies
     validationRegex: "^[0-9A-Za-z_-]+$"
@@ -168,8 +168,8 @@ params:
   - param: MEILISEARCH_API_KEY
     label: Meilisearch API key
     description: >-
-      What is your Meilisearch API Key that has modification permission to the index?
-      It is recommended to use the private key and to avoid using the master key.
+      What is your MeiliSearch API key with permission to perform actions on indexes?
+      Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.
       Check out our guide on [authentification](https://dev.docs.meilisearch.com/reference/features/authentication.html#key-types).
     type: string
     example: 37778d5a6f5c39660c66c0f882dabedd55840f3a

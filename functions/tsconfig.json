@@ -1,8 +1,6 @@
 {
-  "files": ["./__tests__/test.types.d.ts"],
   "compilerOptions": {
     "skipLibCheck": true,
-    "lib": ["esnext.asynciterable"],
     "module": "commonjs",
     "noImplicitReturns": true,
     "noImplicitAny": false,
