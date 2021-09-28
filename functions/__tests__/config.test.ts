@@ -5,7 +5,6 @@ import { resolve as pathResolve } from 'path'
 import * as yaml from 'js-yaml'
 import mockedEnv from 'mocked-env'
 
-
 const EXTENSION_YAML = yaml.load(
   readFileSync(pathResolve(__dirname, '../../extension.yaml'), 'utf8')
 )
