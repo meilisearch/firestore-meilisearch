@@ -19,6 +19,7 @@ import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { Change } from 'firebase-functions'
 
 import config from './config'
+
 export enum ChangeType {
   CREATE,
   DELETE,
@@ -50,4 +51,12 @@ export function getDocumentId(change: Change<DocumentSnapshot>): string {
     return change.after.id
   }
   return change.before.id
+}
+
+/**
+ * getSearchableFields
+ * @return {string[]} Fields
+ */
+export function getSearchableFields(): string[] {
+  return config.searchableFields ? config.searchableFields.split(/[ ,]+/) : []
 }

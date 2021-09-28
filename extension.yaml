@@ -145,6 +145,20 @@ params:
     default: ''
     required: false
 
+  - param: SEARCHABLE_FIELDS
+    label: Searchable field add in Searcheable Attributes - Optional
+    description: >-
+      What are the names of the fields you want to make searchable in MeiliSearch?
+      This features is optional. See [your documentation about it](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
+      for more information.
+      Create a comma-separated list or leave blank to not activate it.
+    example: title,overview,release_date
+    validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
+    validationErrorMessage:
+      Input field name must be a comma-separated list.
+    default: ''
+    required: false
+
   - param: MEILISEARCH_INDEX_NAME
     label: Meilisearch Index Name
     description: >-
