@@ -4,7 +4,6 @@ import { resolve as pathResolve } from 'path'
 
 import * as yaml from 'js-yaml'
 import mockedEnv from 'mocked-env'
-// import { describe, test, expect, beforeEach, afterEach } from '@jest/globals'
 
 let restoreEnv
 let extensionYaml
@@ -27,10 +26,12 @@ const environment = {
 
 describe('extensions config', () => {
   beforeAll(() => {
+    // Load the yaml documentation who contain all the environment parameters
     extensionYaml = yaml.load(
       readFileSync(pathResolve(__dirname, '../../extension.yaml'), 'utf8')
     )
 
+    // Get all environment parameters in an object
     extensionParams = extensionYaml.params.reduce((obj, param) => {
       obj[param.param] = param
       return obj
