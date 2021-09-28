@@ -6,7 +6,7 @@
   "author": "MeiliSearch (https://meilisearch.com/)",
   "license": "Apache-2.0",
   "scripts": {
-    "emulator": "firebase ext:dev:emulators:start --test-params=test-params.env --import=dataset --project=firebase-extension-test",
+    "emulator": "firebase ext:dev:emulators:start --test-params=test-params.env --import=dataset --project=firebase-extension-test --config=./firebase.json",
     "lint": "npm run lint --prefix functions",
     "build": "npm run build --prefix functions",
     "watch": "npm run watch --prefix functions",
