@@ -29,6 +29,8 @@ const defaultDocument = {
 describe('extension', () => {
   // Mocking of Firebase functions
   const firebaseMock = firebaseFunctionsTestInit()
+  let config
+  let restoreEnv
 
   // Mocking of MeiliSearch package
   const mockedMeilisearch = mocked(MeiliSearch, true)
@@ -52,8 +54,10 @@ describe('extension', () => {
   }
 
   beforeEach(() => {
-    mockedEnv(defaultEnvironment)
+    restoreEnv = mockedEnv(defaultEnvironment)
+    config = global.config()
   })
+  afterEach(() => restoreEnv())
 
   test('functions are exported', () => {
     const exportedFunctions = jest.requireActual('../src')
@@ -96,10 +100,12 @@ describe('extension', () => {
 
     expect(callResult).toBeUndefined()
     expect(mockConsoleLog).toBeCalledWith(
-      'Initializing extension with configuration'
+      'Initializing extension with configuration',
+      config
     )
     expect(mockConsoleLog).toBeCalledWith(
-      'Started execution of extension with configuration'
+      'Started execution of extension with configuration',
+      config
     )
     expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
     expect(mockConsoleInfo).toBeCalledWith(
@@ -134,10 +140,12 @@ describe('extension', () => {
 
     expect(callResult).toBeUndefined()
     expect(mockConsoleLog).toBeCalledWith(
-      'Initializing extension with configuration'
+      'Initializing extension with configuration',
+      config
     )
     expect(mockConsoleLog).toBeCalledWith(
-      'Started execution of extension with configuration'
+      'Started execution of extension with configuration',
+      config
     )
     expect(mockConsoleInfo).toBeCalledWith(
       `Updating document ${afterSnapshot.id as string} in MeiliSearch index ${
@@ -166,10 +174,12 @@ describe('extension', () => {
 
     expect(callResult).toBeUndefined()
     expect(mockConsoleLog).toBeCalledWith(
-      'Initializing extension with configuration'
+      'Initializing extension with configuration',
+      config
     )
     expect(mockConsoleLog).toBeCalledWith(
-      'Started execution of extension with configuration'
+      'Started execution of extension with configuration',
+      config
     )
     expect(mockConsoleInfo).toBeCalledWith(
       `Deleting document ${defaultDocument.id} in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`

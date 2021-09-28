@@ -73,7 +73,7 @@ async function handleAddDocument(
     await index.addDocuments([document])
     logs.addDocument(documentId, document)
   } catch (e) {
-    logs.error(e)
+    logs.error(e as Error)
   }
 }
 
@@ -86,7 +86,7 @@ async function handleDeleteDocument(documentId: string): Promise<void> {
     await index.deleteDocument(documentId)
     logs.deleteDocument(documentId)
   } catch (e) {
-    logs.error(e)
+    logs.error(e as Error)
   }
 }
 
@@ -104,6 +104,6 @@ async function handleUpdateDocument(
     await index.updateDocuments([document])
     logs.updateDocument(documentId, document)
   } catch (e) {
-    logs.error(e)
+    logs.error(e as Error)
   }
 }

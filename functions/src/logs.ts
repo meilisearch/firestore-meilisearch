@@ -23,14 +23,14 @@ import config from './config'
  * Initialization logger.
  */
 export function init() {
-  logger.log('Initializing extension with configuration')
+  logger.log('Initializing extension with configuration', config)
 }
 
 /**
  * Start logger.
  */
 export function start() {
-  logger.log('Started execution of extension with configuration')
+  logger.log('Started execution of extension with configuration', config)
 }
 
 /**
@@ -38,7 +38,7 @@ export function start() {
  * @param {Error} err
  */
 export function error(err: Error) {
-  logger.log('Unhandled error occurred during processing:', err)
+  logger.error('Unhandled error occurred during processing:', err)
 }
 
 /**
