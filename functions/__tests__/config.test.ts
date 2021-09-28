@@ -55,7 +55,7 @@ describe('extensions config', () => {
   })
 
   // FIELDS_TO_INDEX
-  describe('config.fieldsToIndex', () => {
+  describe('Test fieldsToIndex configuration', () => {
     test('param exists', () => {
       const extensionParam = extensionParams['FIELDS_TO_INDEX']
       expect(extensionParam).toMatchSnapshot()
