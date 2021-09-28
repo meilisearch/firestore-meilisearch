@@ -132,26 +132,27 @@ params:
     validationErrorMessage: Must be a valid Cloud Firestore Collection.
     required: true
 
-  - param: INPUT_FIELD_NAME
-    label: Input field name
+  - param: FIELDS_TO_INDEX
+    label: Fields to index in MeiliSearch
     description: >-
-      What are the names of the fields you want to make searchable?
-      Create a comma-separated list or leave blank to take all fields.
+      What are the names of the fields you want to be indexed in MeiliSearch?
+      Create a comma-separated list of the fields name, or leave blank to take all fields.
+      The id field is always indexed even when omitted in the list.
     example: title,overview,release_date
-    validationRegex: "^[a-zA-Z,-]*[a-zA-Z-]{2,}$"
+    validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
     validationErrorMessage:
-      Input field name must be a comma-separated list.
+      Fields must be given through a comma-separated list.
     default: ''
     required: false
 
   - param: MEILISEARCH_INDEX_NAME
     label: Meilisearch Index Name
     description: >-
-      What is the name of the Meilisearch index you want to create?
+      What is the name of the index you want your data to be indexed in?
     type: string
     example: movies
-    validationRegex: "^[0-9A-Za-z_-]*$"
-    validationErrorMessage: Must be a valid Index format
+    validationRegex: "^[0-9A-Za-z_-]+$"
+    validationErrorMessage: Must be a valid Index format.
       Index uid can be of type integer or string only composed of alphanumeric characters, hyphens (-) and underscores (_).
       Check out our guide on [index creation](https://docs.meilisearch.com/learn/core_concepts/indexes.html#index-creation).
     required: true
@@ -167,7 +168,8 @@ params:
   - param: MEILISEARCH_API_KEY
     label: Meilisearch API key
     description: >-
-      What is your Meilisearch API Key that has modification permission to the index?
+      What is your MeiliSearch API key with permission to perform actions on indexes?
+      Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.
       Check out our guide on [authentification](https://dev.docs.meilisearch.com/reference/features/authentication.html#key-types).
     type: string
     example: 37778d5a6f5c39660c66c0f882dabedd55840f3a

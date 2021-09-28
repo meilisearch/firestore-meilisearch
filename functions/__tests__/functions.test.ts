@@ -1,6 +1,7 @@
-import * as fireBasefunctionsTestInit from 'firebase-functions-test'
+import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
 import { mocked } from 'ts-jest/utils'
+import { mockConsoleLog, mockConsoleInfo } from './__mocks__/console'
 import { MeiliSearch } from 'meilisearch'
 
 jest.mock('meilisearch')
@@ -8,8 +9,8 @@ jest.mock('meilisearch')
 const defaultEnvironment = {
   LOCATION: 'us-central1',
   PROJECT_ID: 'fake-project',
-  COLLECTION_PATH: 'example',
-  INPUT_FIELD_NAME: '',
+  COLLECTION_PATH: 'collection',
+  FIELDS_TO_INDEX: '',
   MEILISEARCH_INDEX_NAME: 'example',
   MEILISEARCH_HOST: 'http://127.0.0.1:7700',
   MEILISEARCH_API_KEY: 'masterKey',
@@ -27,7 +28,7 @@ const defaultDocument = {
 
 describe('extension', () => {
   // Mocking of Firebase functions
-  const fireBaseMock = fireBasefunctionsTestInit()
+  const firebaseMock = firebaseFunctionsTestInit()
 
   // Mocking of MeiliSearch package
   const mockedMeilisearch = mocked(MeiliSearch, true)
@@ -47,7 +48,7 @@ describe('extension', () => {
   // Mocking of firestore-meilisearch
   const mockExport = (document: any, data: any) => {
     const ref = require('../src/index').indexingWorker
-    return fireBasefunctionsTestInit().wrap(ref)(document, data)
+    return firebaseFunctionsTestInit().wrap(ref)(document, data)
   }
 
   beforeEach(() => {
@@ -73,16 +74,16 @@ describe('extension', () => {
   })
 
   test('function runs with created data', async () => {
-    const beforeSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
+    const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
       {},
       'collection/doc'
     )
-    const afterSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
+    const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
       defaultDocument,
       'collection/doc'
     )
 
-    const documentChange = fireBaseMock.makeChange(
+    const documentChange = firebaseMock.makeChange(
       beforeSnapshot,
       afterSnapshot
     )
@@ -94,20 +95,33 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockConsoleLog).toBeCalledWith(
+      'Initializing extension with configuration'
+    )
+    expect(mockConsoleLog).toBeCalledWith(
+      'Started execution of extension with configuration'
+    )
+    expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
+    expect(mockConsoleInfo).toBeCalledWith(
+      `Creating new document ${
+        afterSnapshot.id as string
+      } in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
+      { ...afterSnapshot.data() }
+    )
     expect(mockedAddDocuments).toHaveBeenCalledWith([defaultDocument])
   })
 
   test('function runs with updated data', async () => {
-    const beforeSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
+    const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
       { foo: 'bar' },
       'collection/doc'
     )
-    const afterSnapshot = fireBaseMock.firestore.makeDocumentSnapshot(
+    const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
       defaultDocument,
       'collection/doc'
     )
 
-    const documentChange = fireBaseMock.makeChange(
+    const documentChange = firebaseMock.makeChange(
       beforeSnapshot,
       afterSnapshot
     )
@@ -119,6 +133,19 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockConsoleLog).toBeCalledWith(
+      'Initializing extension with configuration'
+    )
+    expect(mockConsoleLog).toBeCalledWith(
+      'Started execution of extension with configuration'
+    )
+    expect(mockConsoleInfo).toBeCalledWith(
+      `Updating document ${afterSnapshot.id as string} in MeiliSearch index ${
+        defaultEnvironment.MEILISEARCH_INDEX_NAME
+      }`,
+      { ...afterSnapshot.data() }
+    )
+    expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
     expect(mockedUpdateDocuments).toHaveBeenCalledWith([defaultDocument])
   })
 
@@ -126,7 +153,7 @@ describe('extension', () => {
     const beforeSnapshot = { ...defaultDocument }
     const afterSnapshot = { ...defaultDocument, exists: false }
 
-    const documentChange = fireBaseMock.makeChange(
+    const documentChange = firebaseMock.makeChange(
       beforeSnapshot,
       afterSnapshot
     )
@@ -138,6 +165,16 @@ describe('extension', () => {
     })
 
     expect(callResult).toBeUndefined()
+    expect(mockConsoleLog).toBeCalledWith(
+      'Initializing extension with configuration'
+    )
+    expect(mockConsoleLog).toBeCalledWith(
+      'Started execution of extension with configuration'
+    )
+    expect(mockConsoleInfo).toBeCalledWith(
+      `Deleting document ${defaultDocument.id} in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
+    )
+    expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
     expect(mockedDeleteDocument).toHaveBeenCalledWith(defaultDocument.id)
   })
 })

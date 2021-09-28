@@ -1,17 +1,23 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,
     "module": "commonjs",
     "noImplicitReturns": true,
+    "noImplicitAny": false,
     "outDir": "lib",
     "sourceMap": false,
     "strict": true,
     "target": "es2018",
     "types": [
+      "jest",
       "node",
     ]
   },
   "compileOnSave": true,
   "include": [
     "src",
+  ],
+  "exclude": [
+    "node_modules",
   ]
 }

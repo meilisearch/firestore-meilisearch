@@ -22,20 +22,25 @@ import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { MeiliSearch } from 'meilisearch'
 
 import { getChangeType, getDocumentId, ChangeType } from './util'
+import config from './config'
+import * as logs from './logs'
 
-const client = new MeiliSearch({
-  host: process.env.MEILISEARCH_HOST as string,
-  apiKey: process.env.MEILISEARCH_API_KEY,
+export const client = new MeiliSearch({
+  host: config.meilisearchHost,
+  apiKey: config.meilisearchApiKey,
 })
 
-const index = client.index(process.env.MEILISEARCH_INDEX_NAME as string)
+const index = client.index(config.meilisearchIndex)
+
+logs.init()
 
 /**
- * indexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
+ * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
  * It is controlled by a Firestore handler
  */
 export const indexingWorker = functions.handler.firestore.document.onWrite(
   async (change: Change<DocumentSnapshot>): Promise<void> => {
+    logs.start()
     const changeType = getChangeType(change)
     const documentId = getDocumentId(change)
 
@@ -50,6 +55,7 @@ export const indexingWorker = functions.handler.firestore.document.onWrite(
         await handleUpdateDocument(documentId, change.after)
         break
     }
+    logs.complete()
   }
 )
 
@@ -65,8 +71,9 @@ async function handleAddDocument(
   try {
     const document = Object.assign({ id: documentId }, snapshot.data())
     await index.addDocuments([document])
+    logs.addDocument(documentId, document)
   } catch (e) {
-    console.log(e)
+    logs.error(e)
   }
 }
 
@@ -77,8 +84,9 @@ async function handleAddDocument(
 async function handleDeleteDocument(documentId: string): Promise<void> {
   try {
     await index.deleteDocument(documentId)
+    logs.deleteDocument(documentId)
   } catch (e) {
-    console.log(e)
+    logs.error(e)
   }
 }
 
@@ -94,7 +102,8 @@ async function handleUpdateDocument(
   try {
     const document = Object.assign({ id: documentId }, after.data())
     await index.updateDocuments([document])
+    logs.updateDocument(documentId, document)
   } catch (e) {
-    console.log(e)
+    logs.error(e)
   }
 }
