@@ -82,8 +82,16 @@ Each PR should pass the tests and the linter to be accepted.
 ```bash
 # Tests
 npm run test
+
+# Tests in watch mode
+npm run test:watch
+
 # Linter
 npm run lint
+
+# Linter with fixing
+npm run lint:fix
+
 # Build the project
 npm run build
 ```

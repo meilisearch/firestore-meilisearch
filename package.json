@@ -8,10 +8,12 @@
   "scripts": {
     "emulator": "firebase ext:dev:emulators:start --test-params=test-params.env --import=dataset --project=firebase-extension-test --config=./firebase.json",
     "lint": "npm run lint --prefix functions",
+    "lint:fix": "npm run lint:fix --prefix functions",
     "build": "npm run build --prefix functions",
     "watch": "npm run watch --prefix functions",
     "install:functions": "npm install --prefix functions",
     "test": "npm run test --prefix functions",
+    "test:watch": "npm run test:watch --prefix functions",
     "test-coverage": "npm run test-coverage --prefix functions"
   }
 }
