@@ -5,13 +5,15 @@ import { resolve as pathResolve } from 'path'
 import * as yaml from 'js-yaml'
 import mockedEnv from 'mocked-env'
 
-let restoreEnv
-let extensionYaml
-let extensionParams
-let functionsConfig
 
-// Mocking of Firebase functions
-firebaseFunctionsTestInit()
+const EXTENSION_YAML = yaml.load(
+  readFileSync(pathResolve(__dirname, '../../extension.yaml'), 'utf8')
+)
+
+const extensionParams = EXTENSION_YAML.params.reduce((obj, parameter) => {
+  obj[parameter.param] = parameter
+  return obj
+}, {})
 
 const environment = {
   LOCATION: 'us-central1',
@@ -24,19 +26,12 @@ const environment = {
   MEILISEARCH_API_KEY: 'masterKey',
 }
 
-describe('extensions config', () => {
-  beforeAll(() => {
-    // Load the yaml documentation who contain all the environment parameters
-    extensionYaml = yaml.load(
-      readFileSync(pathResolve(__dirname, '../../extension.yaml'), 'utf8')
-    )
+// Mocking of Firebase functions
+firebaseFunctionsTestInit()
 
-    // Get all environment parameters in an object
-    extensionParams = extensionYaml.params.reduce((obj, param) => {
-      obj[param.param] = param
-      return obj
-    }, {})
-  })
+describe('extensions config', () => {
+  let restoreEnv
+  let functionsConfig
 
   beforeEach(() => {
     jest.resetModules()
