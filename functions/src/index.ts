@@ -37,6 +37,8 @@ export const client = new MeiliSearch({
 
 const index = client.index(config.meilisearchIndex)
 
+void addSearchableFields()
+
 logs.init()
 
 /**
