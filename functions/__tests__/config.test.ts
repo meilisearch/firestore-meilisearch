@@ -35,7 +35,7 @@ describe('extensions config', () => {
   beforeEach(() => {
     jest.resetModules()
     restoreEnv = mockedEnv(environment)
-    config = require('../src/config').default
+    config = global.config()
   })
   afterEach(() => restoreEnv())
 

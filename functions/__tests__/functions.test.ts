@@ -63,7 +63,7 @@ describe('extension', () => {
 
   beforeEach(() => {
     restoreEnv = mockedEnv(defaultEnvironment)
-    config = require('../src/config').default
+    config = global.config()
   })
   afterEach(() => restoreEnv())
 
