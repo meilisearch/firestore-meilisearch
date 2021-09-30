@@ -151,7 +151,7 @@ params:
       What are the names of the fields you want to make searchable in MeiliSearch?
       This features is optional. See [the documentation about it](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
       for more information.
-      Create a comma-separated list or leave blank to not activate it.
+      Create a comma-separated list of fields, or leave blank to include all fields.
     example: title,overview,release_date
     validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
     validationErrorMessage:
