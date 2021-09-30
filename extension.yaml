@@ -149,7 +149,7 @@ params:
     label: Searchable field add in Searcheable Attributes - Optional
     description: >-
       What are the names of the fields you want to make searchable in MeiliSearch?
-      This features is optional. See [your documentation about it](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
+      This features is optional. See [the documentation about it](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
       for more information.
       Create a comma-separated list or leave blank to not activate it.
     example: title,overview,release_date
