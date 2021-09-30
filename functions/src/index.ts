@@ -121,6 +121,7 @@ async function handleUpdateDocument(
 export async function addSearchableFields(): Promise<void> {
   if (config.searchableFields?.length != 0) {
     const index = await client.getOrCreateIndex(config.meilisearchIndex)
-    await index.updateSearchableAttributes(getSearchableFields())
+    const searchableFields = getSearchableFields()
+    await index.updateSearchableAttributes(searchableFields)
   }
 }
