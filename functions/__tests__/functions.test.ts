@@ -36,10 +36,10 @@ describe('extension', () => {
 
   // Mocking of MeiliSearch package
   const mockedMeilisearch = mocked(MeiliSearch, true)
+  const mockedUpdateSearchableAttributes = jest.fn()
   const mockedGetOrCreateIndex = jest.fn(() => ({
     updateSearchableAttributes: mockedUpdateSearchableAttributes,
   }))
-  const mockedUpdateSearchableAttributes = jest.fn()
   const mockedAddDocuments = jest.fn()
   const mockedUpdateDocuments = jest.fn()
   const mockedDeleteDocument = jest.fn()
