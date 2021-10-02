@@ -148,7 +148,7 @@ describe('extensions config', () => {
         const { validationRegex } = extensionParams['SEARCHABLE_FIELDS']
         const text = 'field1,field2,field3'
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeTruthy()
+        expect(search.exec(text)).toBeNull()
       })
 
       test('allows a alphanumeric underscore list of field', () => {
