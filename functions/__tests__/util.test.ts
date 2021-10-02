@@ -34,7 +34,7 @@ describe('getChangeType', () => {
 
     const changeType: ChangeType = getChangeType(documentChange)
 
-    expect(changeType === ChangeType.CREATE).toBeTruthy()
+    expect(changeType).toEqual(ChangeType.CREATE)
   })
 
   test('return a update change type', () => {
@@ -54,7 +54,7 @@ describe('getChangeType', () => {
 
     const changeType: ChangeType = getChangeType(documentChange)
 
-    expect(changeType === ChangeType.UPDATE).toBeTruthy()
+    expect(changeType).toEqual(ChangeType.UPDATE)
   })
 
   test('return a delete change type', () => {
@@ -74,7 +74,7 @@ describe('getChangeType', () => {
 
     const changeType: ChangeType = getChangeType(documentChange)
 
-    expect(changeType === ChangeType.DELETE).toBeTruthy()
+    expect(changeType).toEqual(ChangeType.DELETE)
   })
 })
 
@@ -98,7 +98,7 @@ describe('getDocumentId', () => {
 
     const id: string = getDocumentId(documentChange)
 
-    expect(id === '2').toBeTruthy()
+    expect(id).toEqual('2')
   })
 
   test('return id after update document', () => {

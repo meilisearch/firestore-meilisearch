@@ -114,13 +114,11 @@ describe('extension', () => {
   })
 
   describe('functions.indexingWorker', () => {
-    let functionsConfig
+    firebaseMock = firebaseFunctionsTestInit()
 
     // eslint-disable-next-line @typescript-eslint/require-await
     beforeEach(async () => {
       jest.clearAllMocks()
-      firebaseMock = firebaseFunctionsTestInit()
-      functionsConfig = config
     })
 
     test('function runs with created data', async () => {
@@ -183,7 +181,7 @@ describe('extension', () => {
       expect(callResult).toBeUndefined()
       expect(mockConsoleLog).toBeCalledWith(
         'Started execution of extension with configuration',
-        functionsConfig
+        config
       )
       expect(mockConsoleInfo).toBeCalledWith(
         `Updating document ${afterSnapshot.id as string} in MeiliSearch index ${
@@ -213,7 +211,7 @@ describe('extension', () => {
       expect(callResult).toBeUndefined()
       expect(mockConsoleLog).toBeCalledWith(
         'Started execution of extension with configuration',
-        functionsConfig
+        config
       )
       expect(mockConsoleInfo).toBeCalledWith(
         `Deleting document ${defaultDocument.id} in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
