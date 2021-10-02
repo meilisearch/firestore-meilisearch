@@ -138,7 +138,7 @@ describe('getDocumentId', () => {
 
     const id: string = getDocumentId(documentChange)
 
-    expect(id === '1').toBeTruthy()
+    expect(id).toEqual('1')
   })
 })
 
