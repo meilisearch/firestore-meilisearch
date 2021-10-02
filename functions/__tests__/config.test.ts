@@ -141,7 +141,7 @@ describe('extensions config', () => {
         const { validationRegex } = extensionParams['SEARCHABLE_FIELDS']
         const text = 'foo bar'
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeFalsy()
+        expect(search.exec(text)).toBeNull()
       })
 
       test('allow comma-separated list', () => {
