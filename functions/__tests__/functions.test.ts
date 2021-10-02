@@ -196,7 +196,7 @@ describe('extension', () => {
     })
 
     test('functions runs with deleted data', async () => {
-      const beforeSnapshot = { ...defaultDocument }
+      const beforeSnapshot = defaultDocument
       const afterSnapshot = { ...defaultDocument, exists: false }
 
       const documentChange = firebaseMock.makeChange(
