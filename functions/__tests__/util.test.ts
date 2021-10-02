@@ -118,7 +118,7 @@ describe('getDocumentId', () => {
 
     const id: string = getDocumentId(documentChange)
 
-    expect(id === '2').toBeTruthy()
+    expect(id).toEqual('2')
   })
 
   test('return id after delete document', () => {
