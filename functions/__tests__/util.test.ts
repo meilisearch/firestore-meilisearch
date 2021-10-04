@@ -173,7 +173,7 @@ describe('getSearchableFields', () => {
     expect(mockGetSearchableFields).toMatchObject(['field'])
   })
 
-  test('return list with multiple field', () => {
+  test('return list with multiple fields', () => {
     restoreEnv = mockedEnv({
       ...environment,
       SEARCHABLE_FIELDS: 'field1,field2,field3',
