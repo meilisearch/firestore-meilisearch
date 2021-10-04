@@ -130,7 +130,7 @@ describe('extensions config', () => {
   })
 
   // SEARCHABLE_FIELDS
-  describe('Test searchableFields parameter', () => {
+  describe('Test searchableFields parameters', () => {
     test('param exists', () => {
       const extensionParam = extensionParams['SEARCHABLE_FIELDS']
       expect(extensionParam).toMatchSnapshot()
