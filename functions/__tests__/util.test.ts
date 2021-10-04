@@ -144,14 +144,13 @@ describe('getDocumentId', () => {
 
 describe('getSearchableFields', () => {
   let util
-  let config
   let restoreEnv
   let mockGetSearchableFields
+  const config = global.config
 
   beforeEach(() => {
     jest.resetModules()
     restoreEnv = mockedEnv(environment)
-    config = global.config
   })
   afterEach(() => restoreEnv())
 

@@ -63,7 +63,7 @@ describe('extension', () => {
 
   beforeEach(() => {
     restoreEnv = mockedEnv(defaultEnvironment)
-    config = global.config()
+    config = require('../src/config').default
   })
   afterEach(() => restoreEnv())
 
@@ -116,8 +116,7 @@ describe('extension', () => {
   describe('functions.indexingWorker', () => {
     firebaseMock = firebaseFunctionsTestInit()
 
-    // eslint-disable-next-line @typescript-eslint/require-await
-    beforeEach(async () => {
+    beforeEach(() => {
       jest.clearAllMocks()
     })
 

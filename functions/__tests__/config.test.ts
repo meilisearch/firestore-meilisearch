@@ -29,13 +29,13 @@ const environment = {
 firebaseFunctionsTestInit()
 
 describe('extensions config', () => {
-  let restoreEnv
   let config
+  let restoreEnv
 
   beforeEach(() => {
     jest.resetModules()
     restoreEnv = mockedEnv(environment)
-    config = global.config()
+    config = require('../src/config').default
   })
   afterEach(() => restoreEnv())
 
