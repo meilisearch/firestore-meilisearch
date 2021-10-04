@@ -92,7 +92,7 @@ describe('extensions config', () => {
   })
 
   // MEILISEARCH_INDEX_NAME
-  describe('Test meilisearchIndex parameter', () => {
+  describe('Test meilisearchIndex parameters', () => {
     test('param exists', () => {
       const extensionParam = extensionParams['MEILISEARCH_INDEX_NAME']
       expect(extensionParam).toMatchSnapshot()
