@@ -187,7 +187,7 @@ describe('getSearchableFields', () => {
     ])
   })
 
-  test('return list with multiple field and space', () => {
+  test('return list with multiple fields and spaces', () => {
     restoreEnv = mockedEnv({
       ...environment,
       SEARCHABLE_FIELDS: 'field1, field2,  field3',
