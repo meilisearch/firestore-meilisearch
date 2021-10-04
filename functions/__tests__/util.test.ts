@@ -201,7 +201,7 @@ describe('getSearchableFields', () => {
     ])
   })
 
-  test('return list with underscore', () => {
+  test('return list of fiels with underscore', () => {
     restoreEnv = mockedEnv({
       ...environment,
       SEARCHABLE_FIELDS: 'field_1,field_2,field_3',
