@@ -37,9 +37,6 @@ describe('extension', () => {
   // Mocking of MeiliSearch package
   const mockedMeilisearch = mocked(MeiliSearch, true)
   const mockedUpdateSearchableAttributes = jest.fn()
-  const mockedGetOrCreateIndex = jest.fn(() => ({
-    updateSearchableAttributes: mockedUpdateSearchableAttributes,
-  }))
   const mockedAddDocuments = jest.fn()
   const mockedUpdateDocuments = jest.fn()
   const mockedDeleteDocument = jest.fn()
@@ -47,12 +44,11 @@ describe('extension', () => {
     addDocuments: mockedAddDocuments,
     updateDocuments: mockedUpdateDocuments,
     deleteDocument: mockedDeleteDocument,
+    updateSearchableAttributes: mockedUpdateSearchableAttributes,
   }))
   mockedMeilisearch.mockReturnValue({
     // @ts-ignore
     index: mockedIndex,
-    // @ts-ignore
-    getOrCreateIndex: mockedGetOrCreateIndex,
   })
 
   // Mocking of firestore-meilisearch
@@ -85,16 +81,6 @@ describe('extension', () => {
 
   test('meilisearch index initialized', () => {
     expect(mockedIndex).toHaveBeenCalledWith(
-      defaultEnvironment.MEILISEARCH_INDEX_NAME
-    )
-    expect(mockConsoleLog).toBeCalledWith(
-      'Initializing extension with configuration',
-      config
-    )
-  })
-
-  test('meilisearch getOrCreateIndex', () => {
-    expect(mockedGetOrCreateIndex).toHaveBeenCalledWith(
       defaultEnvironment.MEILISEARCH_INDEX_NAME
     )
     expect(mockConsoleLog).toBeCalledWith(
