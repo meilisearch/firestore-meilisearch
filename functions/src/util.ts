@@ -54,6 +54,14 @@ export function getDocumentId(change: Change<DocumentSnapshot>): string {
 }
 
 /**
+ * getFieldsToIndex
+ * @return {string[]} Fields
+ */
+export function getFieldsToIndex(): string[] {
+  return config.fieldsToIndex ? config.fieldsToIndex.split(/[ ,]+/) : []
+}
+
+/**
  * getSearchableFields
  * @return {string[]} Fields
  */

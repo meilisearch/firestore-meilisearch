@@ -29,6 +29,7 @@ import {
 } from './util'
 import config from './config'
 import * as logs from './logs'
+import { processDocument } from './process'
 
 export const client = new MeiliSearch({
   host: config.meilisearchHost,
@@ -76,7 +77,7 @@ async function handleAddDocument(
   snapshot: DocumentSnapshot
 ): Promise<void> {
   try {
-    const document = Object.assign({ id: documentId }, snapshot.data())
+    const document = processDocument(documentId, snapshot)
     await index.addDocuments([document])
     logs.addDocument(documentId, document)
   } catch (e) {
@@ -107,7 +108,7 @@ async function handleUpdateDocument(
   after: DocumentSnapshot
 ): Promise<void> {
   try {
-    const document = Object.assign({ id: documentId }, after.data())
+    const document = processDocument(documentId, after)
     await index.updateDocuments([document])
     logs.updateDocument(documentId, document)
   } catch (e) {

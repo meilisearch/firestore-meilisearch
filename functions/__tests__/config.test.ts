@@ -1,4 +1,3 @@
-import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import { readFileSync } from 'fs'
 import { resolve as pathResolve } from 'path'
 
@@ -24,9 +23,6 @@ const environment = {
   MEILISEARCH_HOST: 'http://127.0.0.1:7700',
   MEILISEARCH_API_KEY: 'masterKey',
 }
-
-// Mocking of Firebase functions
-firebaseFunctionsTestInit()
 
 describe('extensions config', () => {
   let config
