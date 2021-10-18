@@ -214,3 +214,68 @@ describe('getSearchableFields', () => {
     ])
   })
 })
+
+describe('getFieldsToIndex', () => {
+  let util
+  let restoreEnv
+  let mockGetFieldsToIndex
+  const config = global.config
+
+  beforeEach(() => {
+    jest.resetModules()
+    restoreEnv = mockedEnv(environment)
+  })
+  afterEach(() => restoreEnv())
+
+  test('configuration detected from environment variables', () => {
+    const mockConfig = config()
+    expect(mockConfig).toMatchSnapshot({})
+  })
+
+  test('return empty list', () => {
+    util = require('../src/util')
+    mockGetFieldsToIndex = util.getFieldsToIndex()
+    expect(mockGetFieldsToIndex).toMatchObject([])
+  })
+
+  test('return list with one field', () => {
+    restoreEnv = mockedEnv({ ...environment, FIELDS_TO_INDEX: 'field' })
+    util = require('../src/util')
+    mockGetFieldsToIndex = util.getFieldsToIndex()
+    expect(mockGetFieldsToIndex).toMatchObject(['field'])
+  })
+
+  test('return list with multiple fields', () => {
+    restoreEnv = mockedEnv({
+      ...environment,
+      FIELDS_TO_INDEX: 'field1,field2,field3',
+    })
+    util = require('../src/util')
+    mockGetFieldsToIndex = util.getFieldsToIndex()
+    expect(mockGetFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
+  })
+
+  test('return list with multiple fields and spaces', () => {
+    restoreEnv = mockedEnv({
+      ...environment,
+      FIELDS_TO_INDEX: 'field1, field2,  field3',
+    })
+    util = require('../src/util')
+    mockGetFieldsToIndex = util.getFieldsToIndex()
+    expect(mockGetFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
+  })
+
+  test('return list of fiels with underscore', () => {
+    restoreEnv = mockedEnv({
+      ...environment,
+      FIELDS_TO_INDEX: 'field_1,field_2,field_3',
+    })
+    util = require('../src/util')
+    mockGetFieldsToIndex = util.getFieldsToIndex()
+    expect(mockGetFieldsToIndex).toMatchObject([
+      'field_1',
+      'field_2',
+      'field_3',
+    ])
+  })
+})
