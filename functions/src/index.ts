@@ -16,12 +16,17 @@
  */
 
 import * as functions from 'firebase-functions'
-import { EventContext, Change } from 'firebase-functions'
+import { Change } from 'firebase-functions'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 
 import { MeiliSearch } from 'meilisearch'
 
-import { getChangeType, getDocumentId, ChangeType } from './util'
+import {
+  getChangeType,
+  getDocumentId,
+  ChangeType,
+  getSearchableFields,
+} from './util'
 import config from './config'
 import * as logs from './logs'
 
@@ -31,6 +36,8 @@ export const client = new MeiliSearch({
 })
 
 const index = client.index(config.meilisearchIndex)
+
+void addSearchableFields()
 
 logs.init()
 
@@ -105,5 +112,16 @@ async function handleUpdateDocument(
     logs.updateDocument(documentId, document)
   } catch (e) {
     logs.error(e as Error)
+  }
+}
+
+/**
+ * addSearchableFields add searchable attributes on Meilisearch settings
+ */
+export async function addSearchableFields(): Promise<void> {
+  if (config.searchableFields?.length != 0) {
+    const index = client.index(config.meilisearchIndex)
+    const searchableFields = getSearchableFields()
+    await index.updateSearchableAttributes(searchableFields)
   }
 }

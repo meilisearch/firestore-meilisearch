@@ -29,13 +29,13 @@ const environment = {
 firebaseFunctionsTestInit()
 
 describe('extensions config', () => {
+  let config
   let restoreEnv
-  let functionsConfig
 
   beforeEach(() => {
     jest.resetModules()
     restoreEnv = mockedEnv(environment)
-    functionsConfig = global.config
+    config = require('../src/config').default
   })
   afterEach(() => restoreEnv())
 
@@ -50,11 +50,11 @@ describe('extensions config', () => {
       meilisearchApiKey: environment.MEILISEARCH_API_KEY,
     }
 
-    expect(functionsConfig()).toStrictEqual(testConfig)
+    expect(config).toStrictEqual(testConfig)
   })
 
   // FIELDS_TO_INDEX
-  describe('Test fieldsToIndex configuration', () => {
+  describe('Test fieldsToIndex parameter', () => {
     test('param exists', () => {
       const extensionParam = extensionParams['FIELDS_TO_INDEX']
       expect(extensionParam).toMatchSnapshot()
@@ -65,34 +65,34 @@ describe('extensions config', () => {
         const { validationRegex } = extensionParams['FIELDS_TO_INDEX']
         const text = 'foo bar'
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeFalsy()
+        expect(search.exec(text)).toBeNull()
       })
 
       test('allow comma-separated list', () => {
         const { validationRegex } = extensionParams['FIELDS_TO_INDEX']
         const text = 'field1,field2,field3'
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeTruthy()
+        expect(search.exec(text)).not.toBeNull()
       })
 
       test('allows a alphanumeric underscore list of field', () => {
         const { validationRegex } = extensionParams['FIELDS_TO_INDEX']
         const text = 'field_1,field_2,field_3'
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeTruthy()
+        expect(search.exec(text)).not.toBeNull()
       })
 
       test('allows a alphanumeric dash list of field', () => {
         const { validationRegex } = extensionParams['FIELDS_TO_INDEX']
         const text = 'field-1,field-2,field-3'
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeTruthy()
+        expect(search.exec(text)).not.toBeNull()
       })
     })
   })
 
   // MEILISEARCH_INDEX_NAME
-  describe('Test meilisearchIndex configuration', () => {
+  describe('Test meilisearchIndex parameters', () => {
     test('param exists', () => {
       const extensionParam = extensionParams['MEILISEARCH_INDEX_NAME']
       expect(extensionParam).toMatchSnapshot()
@@ -103,28 +103,66 @@ describe('extensions config', () => {
         const { validationRegex } = extensionParams['MEILISEARCH_INDEX_NAME']
         const text = ''
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeFalsy()
+        expect(search.exec(text)).toBeNull()
       })
 
       test('does not allow spaces', () => {
         const { validationRegex } = extensionParams['MEILISEARCH_INDEX_NAME']
         const text = 'foo bar'
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeFalsy()
+        expect(search.exec(text)).toBeNull()
       })
 
       test('allows a alphanumeric underscore in index name', () => {
         const { validationRegex } = extensionParams['MEILISEARCH_INDEX_NAME']
         const text = 'index_1'
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeTruthy()
+        expect(search.exec(text)).not.toBeNull()
       })
 
       test('allows a alphanumeric dash in index name', () => {
         const { validationRegex } = extensionParams['MEILISEARCH_INDEX_NAME']
         const text = 'index-1'
         const search = new RegExp(validationRegex)
-        expect(Boolean(search.exec(text))).toBeTruthy()
+        expect(search.exec(text)).not.toBeNull()
+      })
+    })
+  })
+
+  // SEARCHABLE_FIELDS
+  describe('Test searchableFields parameters', () => {
+    test('param exists', () => {
+      const extensionParam = extensionParams['SEARCHABLE_FIELDS']
+      expect(extensionParam).toMatchSnapshot()
+    })
+
+    describe('validationRegex', () => {
+      test('does not allow spaces', () => {
+        const { validationRegex } = extensionParams['SEARCHABLE_FIELDS']
+        const text = 'foo bar'
+        const search = new RegExp(validationRegex)
+        expect(search.exec(text)).toBeNull()
+      })
+
+      test('allow comma-separated list', () => {
+        const { validationRegex } = extensionParams['SEARCHABLE_FIELDS']
+        const text = 'field1,field2,field3'
+        const search = new RegExp(validationRegex)
+        expect(search.exec(text)).not.toBeNull()
+      })
+
+      test('allows a alphanumeric underscore list of field', () => {
+        const { validationRegex } = extensionParams['SEARCHABLE_FIELDS']
+        const text = 'field_1,field_2,field_3'
+        const search = new RegExp(validationRegex)
+        expect(search.exec(text)).not.toBeNull()
+      })
+
+      test('allows a alphanumeric dash list of field', () => {
+        const { validationRegex } = extensionParams['SEARCHABLE_FIELDS']
+        const text = 'field-1,field-2,field-3'
+        const search = new RegExp(validationRegex)
+        expect(search.exec(text)).not.toBeNull()
       })
     })
   })
