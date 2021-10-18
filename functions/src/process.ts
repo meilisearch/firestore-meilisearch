@@ -42,13 +42,11 @@ export function processDocument(
       if (fields.includes(key)) {
         const [field, value] = processValue(key, data[key])
         return { ...acc, [field]: value }
-        // return { ...acc, [key]: data[key] }
       }
       return acc
     },
     { id: documentId }
   )
-  console.log('document:', document)
   return document
 }
 
