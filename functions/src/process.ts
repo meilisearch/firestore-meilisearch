@@ -72,7 +72,7 @@ export function processValue(
 }
 
 /**
- * Processing GeoPoint
+ * Processing GeoPoint to fit with Meilisearch geo point
  * @param {GeoPoint} geoPoint
  * @return {object}
  */

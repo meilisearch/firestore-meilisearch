@@ -117,7 +117,7 @@ async function handleUpdateDocument(
 }
 
 /**
- * addSearchableFields add searchable attributes on Meilisearch settings
+ * Get searchable fields to add searchable attributes on Meilisearch settings
  */
 export async function addSearchableFields(): Promise<void> {
   if (config.searchableFields?.length != 0) {
