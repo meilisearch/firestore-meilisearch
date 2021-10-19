@@ -1,8 +1,9 @@
 import { readFileSync } from 'fs'
 import { resolve as pathResolve } from 'path'
-
 import * as yaml from 'js-yaml'
 import mockedEnv from 'mocked-env'
+
+import defaultEnvironment from './data/environment'
 
 const EXTENSION_YAML = yaml.load(
   readFileSync(pathResolve(__dirname, '../../extension.yaml'), 'utf8')
@@ -13,37 +14,26 @@ const extensionParams = EXTENSION_YAML.params.reduce((obj, parameter) => {
   return obj
 }, {})
 
-const environment = {
-  LOCATION: 'us-central1',
-  PROJECT_ID: 'fake-project',
-  COLLECTION_PATH: 'collection',
-  FIELDS_TO_INDEX: '',
-  SEARCHABLE_FIELDS: '',
-  MEILISEARCH_INDEX_NAME: 'example',
-  MEILISEARCH_HOST: 'http://127.0.0.1:7700',
-  MEILISEARCH_API_KEY: 'masterKey',
-}
-
 describe('extensions config', () => {
   let config
   let restoreEnv
 
   beforeEach(() => {
     jest.resetModules()
-    restoreEnv = mockedEnv(environment)
+    restoreEnv = mockedEnv(defaultEnvironment)
     config = require('../src/config').default
   })
   afterEach(() => restoreEnv())
 
   test('config loaded from environment variables', () => {
     const testConfig = {
-      location: environment.LOCATION,
-      collectionPath: environment.COLLECTION_PATH,
-      fieldsToIndex: environment.FIELDS_TO_INDEX,
-      searchableFields: environment.SEARCHABLE_FIELDS,
-      meilisearchIndex: environment.MEILISEARCH_INDEX_NAME,
-      meilisearchHost: environment.MEILISEARCH_HOST,
-      meilisearchApiKey: environment.MEILISEARCH_API_KEY,
+      location: defaultEnvironment.LOCATION,
+      collectionPath: defaultEnvironment.COLLECTION_PATH,
+      fieldsToIndex: defaultEnvironment.FIELDS_TO_INDEX,
+      searchableFields: defaultEnvironment.SEARCHABLE_FIELDS,
+      meilisearchIndex: defaultEnvironment.MEILISEARCH_INDEX_NAME,
+      meilisearchHost: defaultEnvironment.MEILISEARCH_HOST,
+      meilisearchApiKey: defaultEnvironment.MEILISEARCH_API_KEY,
     }
 
     expect(config).toStrictEqual(testConfig)
