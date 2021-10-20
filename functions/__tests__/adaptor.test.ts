@@ -3,8 +3,7 @@ import { mocked } from 'ts-jest/utils'
 import { mockConsoleInfo } from './__mocks__/console'
 import { firestore } from 'firebase-admin/lib/firestore'
 import GeoPoint = firestore.GeoPoint
-
-import { processDocument, processValue } from '../src/process'
+import { adaptDocument, adaptValues } from '../src/adaptor'
 import { getFieldsToIndex } from '../src/util'
 import defaultDocument from './data/document'
 
@@ -14,21 +13,21 @@ jest.mock('../src/util')
 const firebaseMock = firebaseFunctionsTestInit()
 
 describe('extensions process', () => {
-  describe('processDocument', () => {
+  describe('adaptDocument', () => {
     const mockedGetFieldsToIndex = mocked(getFieldsToIndex, true)
 
-    test('processDocument with fields not set', () => {
+    test('adaptDocument with fields not set', () => {
       mockedGetFieldsToIndex.mockReturnValueOnce([])
       const snapshot = firebaseMock.firestore.makeDocumentSnapshot(
         defaultDocument,
         'docs/1'
       )
-      expect(processDocument(defaultDocument.id, snapshot)).toStrictEqual(
+      expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual(
         defaultDocument
       )
     })
 
-    test('processDocument with fields set', () => {
+    test('adaptDocument with fields set', () => {
       mockedGetFieldsToIndex.mockReturnValueOnce([
         'title',
         'overview',
@@ -38,7 +37,7 @@ describe('extensions process', () => {
         defaultDocument,
         'docs/1'
       )
-      expect(processDocument(defaultDocument.id, snapshot)).toStrictEqual({
+      expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
         id: defaultDocument.id,
         title: defaultDocument.title,
         overview: defaultDocument.overview,
@@ -47,16 +46,16 @@ describe('extensions process', () => {
     })
   })
 
-  describe('processValue', () => {
-    test('processValue an id value', () => {
-      expect(processValue('id', defaultDocument.id as any)).toStrictEqual([
+  describe('adaptValues', () => {
+    test('adaptValues an id value', () => {
+      expect(adaptValues('id', defaultDocument.id as any)).toStrictEqual([
         'id',
         defaultDocument.id,
       ])
     })
-    test('processValue a geo point value', () => {
+    test('adaptValues a geo point value', () => {
       const geoPoint = new GeoPoint(48.866667, 2.333333)
-      expect(processValue('_geo', geoPoint)).toStrictEqual([
+      expect(adaptValues('_geo', geoPoint)).toStrictEqual([
         '_geo',
         {
           lat: 48.866667,
@@ -67,9 +66,9 @@ describe('extensions process', () => {
         `A GeoPoint was found with the field name '_geo' for compatibility with MeiliSearch the field 'latitude' was renamed to 'lat' and the field 'longitude' to 'lng'`
       )
     })
-    test('processValue a wrong geo point value', () => {
+    test('adaptValues a wrong geo point value', () => {
       const geoPoint = new GeoPoint(48.866667, 2.333333)
-      expect(processValue('wrong_geo', geoPoint)).toStrictEqual([
+      expect(adaptValues('wrong_geo', geoPoint)).toStrictEqual([
         'wrong_geo',
         geoPoint,
       ])

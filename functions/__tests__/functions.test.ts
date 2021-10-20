@@ -3,13 +3,10 @@ import mockedEnv from 'mocked-env'
 import { mocked } from 'ts-jest/utils'
 import { mockConsoleLog, mockConsoleInfo } from './__mocks__/console'
 import { MeiliSearch } from 'meilisearch'
-
 import defaultEnvironment from './data/environment'
 import defaultDocument from './data/document'
 
 jest.mock('meilisearch')
-
-defaultEnvironment.SEARCHABLE_FIELDS = 'title'
 
 // Mocking of Firebase functions
 let firebaseMock = firebaseFunctionsTestInit()

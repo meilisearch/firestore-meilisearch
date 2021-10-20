@@ -16,7 +16,6 @@
  */
 
 import { logger } from 'firebase-functions'
-
 import config from './config'
 
 /**
@@ -84,7 +83,7 @@ export function deleteDocument(id: string) {
 
 /**
  * Modification of geoPoint logger.
- * @param {boolean} hasBeenModify
+ * @param {boolean} hasGeoField
  */
 export function infoGeoPoint(hasGeoField: boolean) {
   if (hasGeoField) {

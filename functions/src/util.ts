@@ -17,7 +17,6 @@
 
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { Change } from 'firebase-functions'
-
 import config from './config'
 
 export enum ChangeType {
@@ -28,7 +27,7 @@ export enum ChangeType {
 
 /**
  * getChangeType get type of the modification perform on a document
- * @param {Change} change The Functions interface for events that change state
+ * @param {Change} change The interface for events that change state
  * @return {ChangeType} Final state type of the event
  */
 export function getChangeType(change: Change<DocumentSnapshot>): ChangeType {
@@ -43,7 +42,7 @@ export function getChangeType(change: Change<DocumentSnapshot>): ChangeType {
 
 /**
  * getDocumentId get final id of a document after modification
- * @param {Change} change The Functions interface for events that change state
+ * @param {Change} change The interface for events that change state
  * @return {string} Final state type of the event
  */
 export function getDocumentId(change: Change<DocumentSnapshot>): string {

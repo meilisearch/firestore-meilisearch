@@ -18,29 +18,33 @@
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { firestore } from 'firebase-admin/lib/firestore'
 import GeoPoint = firestore.GeoPoint
-
 import { getFieldsToIndex } from './util'
 import * as logs from './logs'
 
+type MeiliSearchGeoPoint = {
+  lat: number
+  lng: number
+}
+
 /**
- * Processing Document
+ * Adapt Document
  * @param {string} documentId
- * @param {DocumentSnapshot} snapshot The Functions interface for events that change state
+ * @param {DocumentSnapshot} snapshot Contains data read from a document in your Firestore database
  * @return {Record<string, any>}
  */
-export function processDocument(
+export function adaptDocument(
   documentId: string,
   snapshot: DocumentSnapshot
 ): Record<string, any> {
   const fields = getFieldsToIndex()
-  const data = { ...snapshot.data() }
-  if (fields.length === 0) {
+  const data = snapshot.data()
+  if (fields.length === 0 || !data) {
     return { id: documentId, ...data }
   }
   const document = Object.keys(data).reduce(
     (acc, key) => {
       if (fields.includes(key)) {
-        const [field, value] = processValue(key, data[key])
+        const [field, value] = adaptValues(key, data[key])
         return { ...acc, [field]: value }
       }
       return acc
@@ -51,10 +55,10 @@ export function processDocument(
 }
 
 /**
- * Processing fields
+ * Adapt fields
  * @param {string} field
  * @param {object} value
- * @return {string | object}
+ * @return {[string, Record<string, any>]}
  */
 export function adaptValues(
   field: string,
@@ -63,7 +67,7 @@ export function adaptValues(
   if (value instanceof GeoPoint) {
     if (field === '_geo') {
       logs.infoGeoPoint(true)
-      return [field, processGeoPoint(value)]
+      return [field, adaptGeoPoint(value)]
     } else {
       logs.infoGeoPoint(false)
     }
@@ -72,11 +76,11 @@ export function adaptValues(
 }
 
 /**
- * Processing GeoPoint to fit with Meilisearch geo point
+ * Adapt GeoPoint to fit with Meilisearch geo point
  * @param {GeoPoint} geoPoint
- * @return {object}
+ * @return {MeiliSearchGeoPoint}
  */
-const processGeoPoint = (geoPoint: GeoPoint) => {
+const adaptGeoPoint = (geoPoint: GeoPoint): MeiliSearchGeoPoint => {
   return {
     lat: geoPoint.latitude,
     lng: geoPoint.longitude,

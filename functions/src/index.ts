@@ -18,9 +18,7 @@
 import * as functions from 'firebase-functions'
 import { Change } from 'firebase-functions'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
-
 import { MeiliSearch } from 'meilisearch'
-
 import {
   getChangeType,
   getDocumentId,
@@ -29,7 +27,7 @@ import {
 } from './util'
 import config from './config'
 import * as logs from './logs'
-import { processDocument } from './process'
+import { adaptDocument } from './adaptor'
 
 export const client = new MeiliSearch({
   host: config.meilisearchHost,
@@ -77,7 +75,7 @@ async function handleAddDocument(
   snapshot: DocumentSnapshot
 ): Promise<void> {
   try {
-    const document = processDocument(documentId, snapshot)
+    const document = adaptDocument(documentId, snapshot)
     await index.addDocuments([document])
     logs.addDocument(documentId, document)
   } catch (e) {
@@ -108,7 +106,7 @@ async function handleUpdateDocument(
   after: DocumentSnapshot
 ): Promise<void> {
   try {
-    const document = processDocument(documentId, after)
+    const document = adaptDocument(documentId, after)
     await index.updateDocuments([document])
     logs.updateDocument(documentId, document)
   } catch (e) {

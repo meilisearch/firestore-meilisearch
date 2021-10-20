@@ -1,6 +1,5 @@
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
-
 import { getChangeType, ChangeType, getDocumentId } from '../src/util'
 import defaultEnvironment from './data/environment'
 
@@ -149,20 +148,20 @@ describe('getSearchableFields', () => {
     expect(mockConfig).toMatchSnapshot({})
   })
 
-  test('return empty list', () => {
+  test('return list with one field', () => {
     util = require('../src/util')
     mockGetSearchableFields = util.getSearchableFields()
-    expect(mockGetSearchableFields).toMatchObject([])
+    expect(mockGetSearchableFields).toMatchObject(['title'])
   })
 
-  test('return list with one field', () => {
+  test('return empty list', () => {
     restoreEnv = mockedEnv({
       ...defaultEnvironment,
-      SEARCHABLE_FIELDS: 'field',
+      SEARCHABLE_FIELDS: '',
     })
     util = require('../src/util')
     mockGetSearchableFields = util.getSearchableFields()
-    expect(mockGetSearchableFields).toMatchObject(['field'])
+    expect(mockGetSearchableFields).toMatchObject([])
   })
 
   test('return list with multiple fields', () => {
