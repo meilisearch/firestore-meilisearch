@@ -56,7 +56,7 @@ export function processDocument(
  * @param {object} value
  * @return {string | object}
  */
-export function processValue(
+export function adaptValues(
   field: string,
   value: Record<string, any>
 ): [string, Record<string, any>] {
