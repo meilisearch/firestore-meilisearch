@@ -27,7 +27,7 @@ import {
 } from './util'
 import config from './config'
 import * as logs from './logs'
-import { adaptDocument } from './adaptor'
+import { adaptDocument } from './adapter'
 
 export const client = new MeiliSearch({
   host: config.meilisearchHost,
