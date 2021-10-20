@@ -2,7 +2,6 @@ import { readFileSync } from 'fs'
 import { resolve as pathResolve } from 'path'
 import * as yaml from 'js-yaml'
 import mockedEnv from 'mocked-env'
-
 import defaultEnvironment from './data/environment'
 
 const EXTENSION_YAML = yaml.load(
