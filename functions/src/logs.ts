@@ -86,8 +86,8 @@ export function deleteDocument(id: string) {
  * Modification of geoPoint logger.
  * @param {boolean} hasBeenModify
  */
-export function infoGeoPoint(hasBeenModify: boolean) {
-  if (hasBeenModify) {
+export function infoGeoPoint(hasGeoField: boolean) {
+  if (hasGeoField) {
     logger.info(
       `A GeoPoint was found with the field name '_geo' for compatibility with MeiliSearch the field 'latitude' was renamed to 'lat' and the field 'longitude' to 'lng'`
     )
