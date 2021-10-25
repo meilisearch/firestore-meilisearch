@@ -53,7 +53,7 @@ export function getDocumentId(change: Change<DocumentSnapshot>): string {
 }
 
 /**
- * getFieldsToIndex
+ * Returns the fieldsToIndex value from the config file. 
  * @return {string[]} Fields
  */
 export function getFieldsToIndex(): string[] {
