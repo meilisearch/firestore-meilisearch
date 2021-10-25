@@ -1,6 +1,6 @@
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
-import { getChangeType, ChangeType, getDocumentId } from '../src/util'
+import { getChangeType, ChangeType, getChangedDocumentId } from '../src/util'
 import defaultEnvironment from './data/environment'
 
 describe('getChangeType', () => {
@@ -67,7 +67,7 @@ describe('getChangeType', () => {
   })
 })
 
-describe('getDocumentId', () => {
+describe('getChangedDocumentId', () => {
   const firebaseMock = firebaseFunctionsTestInit()
 
   test('return id after create document', () => {
@@ -85,7 +85,7 @@ describe('getDocumentId', () => {
       afterSnapshot
     )
 
-    const id: string = getDocumentId(documentChange)
+    const id: string = getChangedDocumentId(documentChange)
 
     expect(id).toEqual('2')
   })
@@ -105,7 +105,7 @@ describe('getDocumentId', () => {
       afterSnapshot
     )
 
-    const id: string = getDocumentId(documentChange)
+    const id: string = getChangedDocumentId(documentChange)
 
     expect(id).toEqual('2')
   })
@@ -125,7 +125,7 @@ describe('getDocumentId', () => {
       afterSnapshot
     )
 
-    const id: string = getDocumentId(documentChange)
+    const id: string = getChangedDocumentId(documentChange)
 
     expect(id).toEqual('1')
   })

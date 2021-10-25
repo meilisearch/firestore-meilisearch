@@ -21,7 +21,7 @@ import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { MeiliSearch } from 'meilisearch'
 import {
   getChangeType,
-  getDocumentId,
+  getChangedDocumentId,
   ChangeType,
   getSearchableFields,
 } from './util'
@@ -42,13 +42,13 @@ logs.init()
 
 /**
  * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
- * It is controlled by a Firestore handler
+ * It is controlled by a Firestore handler.
  */
 export const indexingWorker = functions.handler.firestore.document.onWrite(
   async (change: Change<DocumentSnapshot>): Promise<void> => {
     logs.start()
     const changeType = getChangeType(change)
-    const documentId = getDocumentId(change)
+    const documentId = getChangedDocumentId(change)
 
     switch (changeType) {
       case ChangeType.CREATE:
@@ -66,9 +66,9 @@ export const indexingWorker = functions.handler.firestore.document.onWrite(
 )
 
 /**
- * Handle addition of a document in the MeiliSearch index
- * @param {string} documentId
- * @param {Change} snapshot
+ * Handle addition of a document in the MeiliSearch index.
+ * @param {string} documentId Document id to add.
+ * @param {Change} snapshot Snapshot of the data contained in the document read from your Firestore database.
  */
 async function handleAddDocument(
   documentId: string,
@@ -84,8 +84,8 @@ async function handleAddDocument(
 }
 
 /**
- * Handle deletion of a document in the MeiliSearch index
- * @param {string} documentId
+ * Handle deletion of a document in the MeiliSearch index.
+ * @param {string} documentId Document id to delete.
  */
 async function handleDeleteDocument(documentId: string): Promise<void> {
   try {
@@ -97,9 +97,9 @@ async function handleDeleteDocument(documentId: string): Promise<void> {
 }
 
 /**
- * Handle update of a document in the MeiliSearch index
- * @param {string} documentId
- * @param {Change} after
+ * Handle update of a document in the MeiliSearch index.
+ * @param {string} documentId Document id to update.
+ * @param {Change} after Snapshot of the data contained in the document read from your Firestore database.
  */
 async function handleUpdateDocument(
   documentId: string,
@@ -115,7 +115,7 @@ async function handleUpdateDocument(
 }
 
 /**
- * Get searchable fields to add searchable attributes on Meilisearch settings
+ * Get searchable fields to add searchable attributes on Meilisearch settings.
  */
 export async function addSearchableFields(): Promise<void> {
   if (config.searchableFields?.length != 0) {

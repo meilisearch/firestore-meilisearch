@@ -26,9 +26,9 @@ export enum ChangeType {
 }
 
 /**
- * getChangeType get type of the modification perform on a document
- * @param {Change} change The interface for events that change state
- * @return {ChangeType} Final state type of the event
+ * Get type of the modification perform on a document.
+ * @param {Change<T>} change The Functions interface for events that change state.
+ * @return {ChangeType} Final type of the event.
  */
 export function getChangeType(change: Change<DocumentSnapshot>): ChangeType {
   if (!change.after.exists) {
@@ -41,11 +41,11 @@ export function getChangeType(change: Change<DocumentSnapshot>): ChangeType {
 }
 
 /**
- * getDocumentId get final id of a document after modification
- * @param {Change} change The interface for events that change state
- * @return {string} Final state type of the event
+ * Get final id of a document after modification.
+ * @param {Change<T>} change The Functions interface for events that change state.
+ * @return {string} Final state type of the event.
  */
-export function getDocumentId(change: Change<DocumentSnapshot>): string {
+export function getChangedDocumentId(change: Change<DocumentSnapshot>): string {
   if (change.after.exists) {
     return change.after.id
   }
@@ -53,16 +53,16 @@ export function getDocumentId(change: Change<DocumentSnapshot>): string {
 }
 
 /**
- * Returns the fieldsToIndex value from the config file. 
- * @return {string[]} Fields
+ * Returns the FIELDS_TO_INDEX value from the config file and formats it.
+ * @return {string[]} An array of fields.
  */
 export function getFieldsToIndex(): string[] {
   return config.fieldsToIndex ? config.fieldsToIndex.split(/[ ,]+/) : []
 }
 
 /**
- * getSearchableFields
- * @return {string[]} Fields
+ * Returns the SEARCHABLE_FIELDS value from the config file and formats it.
+ * @return {string[]} An array of fields.
  */
 export function getSearchableFields(): string[] {
   return config.searchableFields ? config.searchableFields.split(/[ ,]+/) : []
