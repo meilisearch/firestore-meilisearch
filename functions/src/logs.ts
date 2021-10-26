@@ -85,7 +85,7 @@ export function deleteDocument(id: string) {
  * Log a modification of geoPoint based on whether or not it has the correct naming to enable `geosearch` in Meilisearch.
  * @param {boolean} hasGeoField a boolean value that indicates whether the field is correctly named to enable `geosearch` in Meilisearch.
  */
-export function adaptGeoPointInfo(hasGeoField: boolean) {
+export function infoGeoPoint(hasGeoField: boolean) {
   if (hasGeoField) {
     logger.info(
       `A GeoPoint was found with the field name '_geo' for compatibility with MeiliSearch the field 'latitude' was renamed to 'lat' and the field 'longitude' to 'lng'`

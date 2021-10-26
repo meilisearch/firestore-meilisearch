@@ -77,10 +77,10 @@ export function adaptValues(
 ): [string, FirestoreRow | MeiliSearchGeoPoint] {
   if (value instanceof firestore.GeoPoint) {
     if (field === '_geo') {
-      logs.adaptGeoPointInfo(true)
+      logs.infoGeoPoint(true)
       return [field, adaptGeoPoint(value)]
     } else {
-      logs.adaptGeoPointInfo(false)
+      logs.infoGeoPoint(false)
     }
   }
   return [field, value]
