@@ -16,7 +16,6 @@
  */
 
 import { logger } from 'firebase-functions'
-
 import config from './config'
 
 /**
@@ -49,9 +48,9 @@ export function complete() {
 }
 
 /**
- * Addition of a document logger.
- * @param {string} id
- * @param {object} data
+ * Log an addition of a document.
+ * @param {string} id Document id added.
+ * @param {object} data Data contained in the document.
  */
 export function addDocument(id: string, data: Record<string, any>) {
   logger.info(
@@ -61,9 +60,9 @@ export function addDocument(id: string, data: Record<string, any>) {
 }
 
 /**
- * Update of a document logger.
- * @param {string} id
- * @param {object} data
+ * Log an update of a document.
+ * @param {string} id Document id updated.
+ * @param {object} data Data contained in the document.
  */
 export function updateDocument(id: string, data: Record<string, any>) {
   logger.info(
@@ -73,11 +72,27 @@ export function updateDocument(id: string, data: Record<string, any>) {
 }
 
 /**
- * Deletion of a document logger.
- * @param {string} id
+ * Log a deletion of a document.
+ * @param {string} id Document id deleted.
  */
 export function deleteDocument(id: string) {
   logger.info(
     `Deleting document ${id} in MeiliSearch index ${config.meilisearchIndex}`
   )
+}
+
+/**
+ * Log a modification of geoPoint based on whether or not it has the correct naming to enable `geosearch` in Meilisearch.
+ * @param {boolean} hasGeoField a boolean value that indicates whether the field is correctly named to enable `geosearch` in Meilisearch.
+ */
+export function infoGeoPoint(hasGeoField: boolean) {
+  if (hasGeoField) {
+    logger.info(
+      `A GeoPoint was found with the field name '_geo' for compatibility with MeiliSearch the field 'latitude' was renamed to 'lat' and the field 'longitude' to 'lng'`
+    )
+  } else {
+    logger.info(
+      `A GeoPoint was found without the field name '_geo' if you want to use the geoSearch with MeiliSearch rename it to '_geo'`
+    )
+  }
 }
