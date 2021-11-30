@@ -17,7 +17,7 @@
 
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { Change } from 'firebase-functions'
-import config from './config'
+import { config } from './config'
 
 export enum ChangeType {
   CREATE,
@@ -57,7 +57,9 @@ export function getChangedDocumentId(change: Change<DocumentSnapshot>): string {
  * @return {string[]} An array of fields.
  */
 export function getFieldsToIndex(): string[] {
-  return config.fieldsToIndex ? config.fieldsToIndex.split(/[ ,]+/) : []
+  return config.meilisearch.fieldsToIndex
+    ? config.meilisearch.fieldsToIndex.split(/[ ,]+/)
+    : []
 }
 
 /**
@@ -65,5 +67,7 @@ export function getFieldsToIndex(): string[] {
  * @return {string[]} An array of fields.
  */
 export function getSearchableFields(): string[] {
-  return config.searchableFields ? config.searchableFields.split(/[ ,]+/) : []
+  return config.meilisearch.searchableFields
+    ? config.meilisearch.searchableFields.split(/[ ,]+/)
+    : []
 }

@@ -18,12 +18,26 @@ describe('extensions process', () => {
     test('adaptDocument with fields not set', () => {
       mockedGetFieldsToIndex.mockReturnValueOnce([])
       const snapshot = firebaseMock.firestore.makeDocumentSnapshot(
-        defaultDocument,
-        'docs/1'
+        defaultDocument.document,
+        `docs/${defaultDocument.id}`
       )
-      expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual(
-        defaultDocument
+      expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
+        _firestore_id: defaultDocument.id,
+        ...defaultDocument.document,
+      })
+    })
+
+    test('adaptDocument with fields not set and with id field in document', () => {
+      mockedGetFieldsToIndex.mockReturnValueOnce([])
+      const snapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        { id: '12345', ...defaultDocument.document },
+        `docs/${defaultDocument.id}`
       )
+      expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
+        _firestore_id: defaultDocument.id,
+        id: '12345',
+        ...defaultDocument.document,
+      })
     })
 
     test('adaptDocument with fields set', () => {
@@ -33,14 +47,14 @@ describe('extensions process', () => {
         'release_date',
       ])
       const snapshot = firebaseMock.firestore.makeDocumentSnapshot(
-        defaultDocument,
-        'docs/1'
+        defaultDocument.document,
+        `docs/${defaultDocument.id}`
       )
       expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
-        id: defaultDocument.id,
-        title: defaultDocument.title,
-        overview: defaultDocument.overview,
-        release_date: defaultDocument.release_date,
+        _firestore_id: defaultDocument.id,
+        title: defaultDocument.document.title,
+        overview: defaultDocument.document.overview,
+        release_date: defaultDocument.document.release_date,
       })
     })
   })

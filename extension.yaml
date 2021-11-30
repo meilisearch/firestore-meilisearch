@@ -1,4 +1,4 @@
-# Copyright 2021 Meilisearch
+# Copyright 2021 MeiliSearch
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ displayName: Search in Firestore with MeiliSearch
 
 # Brief description of the task your extension performs (~1 sentence)
 description: >-
-  Fulltext Search on Firebase with Meilisearch
+  Fulltext Search on Firebase with MeiliSearch
 
 license: Apache-2.0  # https://spdx.org/licenses/
 
@@ -42,7 +42,7 @@ author:
 
 # Specify whether a paid-tier billing plan is required to use your extension.
 # Learn more in the docs: https://firebase.google.com/docs/extensions/alpha/ref-extension-yaml#billing-required-field
-billingRequired: false
+billingRequired: true
 
 # In an `apis` field, list any Google APIs (like Cloud Translation, BigQuery, etc.)
 # required for your extension to operate.
@@ -57,7 +57,7 @@ resources:
   - name: indexingWorker
     type: firebaseextensions.v1beta.function
     description: >-
-      Cloud function triggered by document modification in Firestore to import changes into Meilisearch.
+      Cloud function triggered by document modification in Firestore to import changes into MeiliSearch.
     properties:
       # LOCATION is a user-configured parameter value specified by the user
       # during installation.
@@ -118,14 +118,13 @@ params:
         value: southamerica-east1
       - label: Sydney (australia-southeast1)
         value: australia-southeast1
-    default: europe-west1
     required: true
     immutable: true
 
   - param: COLLECTION_PATH
     label: Collection path
     description: >-
-      What is the path of the collection you would like to export into Meilisearch?
+      What is the path of the collection you would like to export into MeiliSearch?
     example: movies
     type: string
     validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
@@ -138,11 +137,11 @@ params:
       What are the names of the fields you want to be indexed in MeiliSearch?
       Create a comma-separated list of the fields name, or leave blank to take all fields.
       The id field is always indexed even when omitted in the list.
+    default: ''
     example: title,overview,release_date
     validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
     validationErrorMessage:
       Fields must be given through a comma-separated list.
-    default: ''
     required: false
 
   - param: SEARCHABLE_FIELDS
@@ -152,15 +151,15 @@ params:
       This features is optional. See [the documentation about it](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
       for more information.
       Create a comma-separated list of fields, or leave blank to include all fields.
+    default: ''
     example: title,overview,release_date
     validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
     validationErrorMessage:
       Fields must be given through a comma-separated list.
-    default: ''
     required: false
 
   - param: MEILISEARCH_INDEX_NAME
-    label: Meilisearch Index Name
+    label: MeiliSearch Index Name
     description: >-
       What is the name of the index you want your data to be indexed in?
     type: string
@@ -172,15 +171,16 @@ params:
     required: true
 
   - param: MEILISEARCH_HOST
-    label: Meilisearch host
+    label: MeiliSearch host
     description: >-
-      What is the url of the host of your Meilisearch database?
+      What is the url of the host of your MeiliSearch database?
+      Make sure your url starts with `http://` or `https://`
     type: string
     example: 'http://127.0.0.1:7700'
     required: true
 
   - param: MEILISEARCH_API_KEY
-    label: Meilisearch API key
+    label: MeiliSearch API key
     description: >-
       What is your MeiliSearch API key with permission to perform actions on indexes?
       Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.

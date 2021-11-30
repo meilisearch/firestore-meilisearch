@@ -1,18 +1,20 @@
 {
-  "name": "functions",
+  "name": "firestore-meilisearch",
+  "version": "0.1.0",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "tsc",
     "watch": "tsc --watch",
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
+    "playground": "nodemon ./lib/import --project 521120192778 --source-collection-path movies --index movies --batch-size 300 --non-interactive -H 'http://localhost:7700' -a masterKey",
+    "serve": "yarn build && firebase emulators:start --only functions",
+    "shell": "yarn build && firebase functions:shell",
+    "start": "yarn shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test-coverage": "jest --coverage"
+    "test:coverage": "jest --coverage"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -20,6 +22,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "firebase-admin": "^9.8.0",
+    "firebase-functions": "^3.16.0",
     "meilisearch": "^0.21.0"
   },
   "devDependencies": {
@@ -27,14 +30,15 @@
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",
+    "commander": "^8.3.0",
     "eslint": "^7.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.4.2",
     "eslint-plugin-prettier": "^4.0.0",
-    "firebase-functions": "^3.15.7",
     "firebase-functions-test": "^0.3.2",
+    "inquirer": "^8.2.0",
     "jest": "^27.2.2",
     "jest-mock": "^27.1.1",
     "js-yaml": "^4.1.0",
@@ -44,5 +48,6 @@
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
-  "private": true
+  "private": true,
+  "bin": "lib/import/index.js"
 }

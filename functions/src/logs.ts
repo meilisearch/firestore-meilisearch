@@ -16,7 +16,7 @@
  */
 
 import { logger } from 'firebase-functions'
-import config from './config'
+import { config } from './config'
 
 /**
  * Initialization logger.
@@ -54,7 +54,7 @@ export function complete() {
  */
 export function addDocument(id: string, data: Record<string, any>) {
   logger.info(
-    `Creating new document ${id} in MeiliSearch index ${config.meilisearchIndex}`,
+    `Creating new document ${id} in MeiliSearch index ${config.meilisearch.indexUid}`,
     data
   )
 }
@@ -66,7 +66,7 @@ export function addDocument(id: string, data: Record<string, any>) {
  */
 export function updateDocument(id: string, data: Record<string, any>) {
   logger.info(
-    `Updating document ${id} in MeiliSearch index ${config.meilisearchIndex}`,
+    `Updating document ${id} in MeiliSearch index ${config.meilisearch.indexUid}`,
     data
   )
 }
@@ -77,13 +77,25 @@ export function updateDocument(id: string, data: Record<string, any>) {
  */
 export function deleteDocument(id: string) {
   logger.info(
-    `Deleting document ${id} in MeiliSearch index ${config.meilisearchIndex}`
+    `Deleting document ${id} in MeiliSearch index ${config.meilisearch.indexUid}`
   )
 }
 
 /**
- * Log a modification of geoPoint based on whether or not it has the correct naming to enable `geosearch` in Meilisearch.
- * @param {boolean} hasGeoField a boolean value that indicates whether the field is correctly named to enable `geosearch` in Meilisearch.
+ * Log set searchable fields on index in MeiliSearch.
+ * @param {string[]} searchableFields Searchable fields.
+ */
+export function updateSearchableFields(searchableFields: string[]) {
+  logger.info(
+    'Update searchable fields',
+    searchableFields,
+    ` in MeiliSearch index ${config.meilisearch.indexUid}`
+  )
+}
+
+/**
+ * Log a modification of geoPoint based on whether or not it has the correct naming to enable `geosearch` in MeiliSearch.
+ * @param {boolean} hasGeoField a boolean value that indicates whether the field is correctly named to enable `geosearch` in MeiliSearch.
  */
 export function infoGeoPoint(hasGeoField: boolean) {
   if (hasGeoField) {
@@ -95,4 +107,13 @@ export function infoGeoPoint(hasGeoField: boolean) {
       `A GeoPoint was found without the field name '_geo' if you want to use the geoSearch with MeiliSearch rename it to '_geo'`
     )
   }
+}
+
+/**
+ * Importation data logger.
+ * @param {number} total
+ * @param {number} batches
+ */
+export function importData(total: number, batches: number) {
+  logger.info(`Imported ${total} documents in ${batches} batches.`)
 }

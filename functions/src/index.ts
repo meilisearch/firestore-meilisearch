@@ -18,30 +18,25 @@
 import * as functions from 'firebase-functions'
 import { Change } from 'firebase-functions'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
-import { MeiliSearch } from 'meilisearch'
+import { createMeiliSearchIndex } from './meilisearch/create-index'
 import {
   getChangeType,
   getChangedDocumentId,
   ChangeType,
   getSearchableFields,
 } from './util'
-import config from './config'
 import * as logs from './logs'
 import { adaptDocument } from './adapter'
+import { config } from './config'
 
-export const client = new MeiliSearch({
-  host: config.meilisearchHost,
-  apiKey: config.meilisearchApiKey,
-})
-
-const index = client.index(config.meilisearchIndex)
+const index = createMeiliSearchIndex(config.meilisearch)
 
 void addSearchableFields()
 
 logs.init()
 
 /**
- * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
+ * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a MeiliSearch index.
  * It is controlled by a Firestore handler.
  */
 export const indexingWorker = functions.handler.firestore.document.onWrite(
@@ -76,7 +71,7 @@ async function handleAddDocument(
 ): Promise<void> {
   try {
     const document = adaptDocument(documentId, snapshot)
-    await index.addDocuments([document])
+    await index.addDocuments([document], { primaryKey: '_firestore_id' })
     logs.addDocument(documentId, document)
   } catch (e) {
     logs.error(e as Error)
@@ -115,12 +110,16 @@ async function handleUpdateDocument(
 }
 
 /**
- * Get searchable fields to add searchable attributes on Meilisearch settings.
+ * Get searchable fields to add searchable attributes on MeiliSearch settings.
  */
 export async function addSearchableFields(): Promise<void> {
-  if (config.searchableFields?.length != 0) {
-    const index = client.index(config.meilisearchIndex)
-    const searchableFields = getSearchableFields()
-    await index.updateSearchableAttributes(searchableFields)
+  if (config.meilisearch.searchableFields?.length != 0) {
+    try {
+      const searchableFields = getSearchableFields()
+      await index.updateSearchableAttributes(searchableFields)
+      logs.updateSearchableFields(searchableFields)
+    } catch (e) {
+      logs.error(e as Error)
+    }
   }
 }

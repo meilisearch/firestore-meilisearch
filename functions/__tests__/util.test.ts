@@ -145,7 +145,7 @@ describe('getSearchableFields', () => {
 
   test('configuration detected from environment variables', () => {
     const mockConfig = config()
-    expect(mockConfig).toMatchSnapshot({})
+    expect(mockConfig).toMatchSnapshot()
   })
 
   test('return list with one field', () => {
@@ -221,7 +221,7 @@ describe('getFieldsToIndex', () => {
 
   test('configuration detected from environment variables', () => {
     const mockConfig = config()
-    expect(mockConfig).toMatchSnapshot({})
+    expect(mockConfig).toMatchSnapshot()
   })
 
   test('return empty list', () => {

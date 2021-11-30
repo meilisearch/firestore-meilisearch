@@ -20,7 +20,7 @@ describe('extensions config', () => {
   beforeEach(() => {
     jest.resetModules()
     restoreEnv = mockedEnv(defaultEnvironment)
-    config = require('../src/config').default
+    config = require('../src/config').config
   })
   afterEach(() => restoreEnv())
 
@@ -28,11 +28,13 @@ describe('extensions config', () => {
     const testConfig = {
       location: defaultEnvironment.LOCATION,
       collectionPath: defaultEnvironment.COLLECTION_PATH,
-      fieldsToIndex: defaultEnvironment.FIELDS_TO_INDEX,
-      searchableFields: defaultEnvironment.SEARCHABLE_FIELDS,
-      meilisearchIndex: defaultEnvironment.MEILISEARCH_INDEX_NAME,
-      meilisearchHost: defaultEnvironment.MEILISEARCH_HOST,
-      meilisearchApiKey: defaultEnvironment.MEILISEARCH_API_KEY,
+      meilisearch: {
+        host: defaultEnvironment.MEILISEARCH_HOST,
+        apiKey: defaultEnvironment.MEILISEARCH_API_KEY,
+        indexUid: defaultEnvironment.MEILISEARCH_INDEX_NAME,
+        fieldsToIndex: defaultEnvironment.FIELDS_TO_INDEX,
+        searchableFields: defaultEnvironment.SEARCHABLE_FIELDS,
+      },
     }
 
     expect(config).toStrictEqual(testConfig)

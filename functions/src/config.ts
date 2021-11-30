@@ -14,13 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { MeiliSearchConfig } from './types'
 
-export default {
+type PluginConfiguration = {
+  location: string
+  collectionPath: string
+  meilisearch: MeiliSearchConfig
+}
+
+export const config: PluginConfiguration = {
   location: process.env.LOCATION || 'europe-west1',
   collectionPath: process.env.COLLECTION_PATH || '',
-  fieldsToIndex: process.env.FIELDS_TO_INDEX || '',
-  searchableFields: process.env.SEARCHABLE_FIELDS || '',
-  meilisearchIndex: process.env.MEILISEARCH_INDEX_NAME || '',
-  meilisearchHost: process.env.MEILISEARCH_HOST || '',
-  meilisearchApiKey: process.env.MEILISEARCH_API_KEY || '',
+  meilisearch: {
+    host: process.env.MEILISEARCH_HOST || '',
+    apiKey: process.env.MEILISEARCH_API_KEY || '',
+    indexUid: process.env.MEILISEARCH_INDEX_NAME || '',
+    fieldsToIndex: process.env.FIELDS_TO_INDEX || '',
+    searchableFields: process.env.SEARCHABLE_FIELDS || '',
+  },
 }

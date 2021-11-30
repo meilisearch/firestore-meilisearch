@@ -35,12 +35,16 @@ First of all, thank you for contributing to MeiliSearch! The goal of this docume
 To run this project, you will need:
 
 - Node >= 12
-- Npm >= v7
+- Yarn or Npm >= v7
 - A google account
 - Latest version of `firebase-tools` the Firebase CLI:
-``` bash
-npm install -g firebase-tools
-```
+  ``` bash
+  yarn global add firebase-tools
+  ```
+  Add the directory for the commands of the packages installed globally in yarn, to access of firebase binary:
+  ``` bash
+  export PATH="$(yarn global bin):$PATH"
+  ```
 
 ### Setup <!-- omit in toc -->
 
@@ -54,20 +58,24 @@ firebase --open-sesame extdev
 ```
 Install dependencies:
 ``` bash
-npm run install:functions
+yarn install:functions
 ```
 Build the project:
 ``` bash
-npm run build
+yarn build
 ```
 Launch MeiliSearch instance:
 ``` bash
-docker pull getmeili/meilisearch:latest # Fetch the latest version of MeiliSearch image from Docker Hub
-docker run -p 7700:7700 getmeili/meilisearch:latest ./meilisearch --master-key=masterKey --no-analytics=true
+curl -L https://install.meilisearch.com | sh # download MeiliSearch
+./meilisearch --master-key=masterKey --no-analytics=true # run MeiliSearch
 ```
 Launch emulator:
 ``` bash
 firebase ext:dev:emulators:start --test-params=test-params-example.env --import=dataset --project=name-of-the-project
+```
+or just
+``` bash
+yarn emulator
 ```
 The emulator runs with environment parameters found in `test-params-example.env` and with a provided dataset found in `/dataset`.
 
@@ -80,20 +88,55 @@ NB: If you want to change your MeiliSearch credentials or the plugins options yo
 Each PR should pass the tests and the linter to be accepted.
 
 ```bash
+curl -L https://install.meilisearch.com | sh # download MeiliSearch
+./meilisearch --master-key=masterKey --no-analytics=true # run MeiliSearch
+
 # Tests
-npm run test
+yarn test
 
 # Tests in watch mode
-npm run test:watch
+yarn test:watch
 
 # Linter
-npm run lint
+yarn lint
 
 # Linter with fixing
-npm run lint:fix
+yarn lint:fix
 
 # Build the project
-npm run build
+yarn build
+```
+
+### Run the backfilled-data script
+
+Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.com/package/npx) via `yarn` (the Node Package Manager).
+- Set up credentials. The import script uses Application Default Credentials to communicate with Firebase. Please follow the instructions [generate a private key file for your service account](https://firebase.google.com/docs/admin/setup#initialize-sdk).
+
+- Run the import script interactively via `npx` by running ONE of the following commands:
+  - Run interactively:
+    ```bash
+    npx firestore-meilisearch
+    ```
+
+  - Or run non-interactively with paramaters:
+    ```bash
+    npx firestore-meilisearch --project <project_id> --source-collection-path <collection_name> --index <index_uid> --batch-size <100/default=300> --non-interactive --host <host_adress> --api-key <api_key>
+    ```
+    **Note**: The `--batch-size` argument is optional. To see its usage, run the above command with --help.
+
+- Run the project for development:
+Launch MeiliSearch instance:
+``` bash
+curl -L https://install.meilisearch.com | sh # download MeiliSearch
+./meilisearch --master-key=masterKey --no-analytics=true # run MeiliSearch
+```
+Launch the watcher on the project:
+``` bash
+yarn watch
+```
+Launch the watcher on the script. You must first have modified this command in the `package.json` file with your own data:
+``` bash
+yarn playground
 ```
 
 ## Git Guidelines
@@ -139,7 +182,26 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 ### How to Publish the Release <!-- omit in toc -->
 
-WIP
+⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md).
+
+1. Make a PR modifying the files [`package.json`](/package.json), [`package.json` in functions directory](/functions/package.json) and the [`extension.yaml`](/extension.yaml) with the right version.
+
+```javascript
+"version": "X.X.X",
+```
+
+2. Test the extension  by installing it on Firestore database:
+```bash
+firebase ext:install . --project=meilisearch-e2fe1
+```
+
+3. Publish the extension by run the following command in the root of the extension directory:
+```bash
+firebase ext:dev:publish meilisearch/firestore-meilisearch --project=meilisearch-e2fe1
+```
+**Note**: `meilisearch` is the publisher id and `meilisearch-e2fe1` is the publish project id for this extension.
+
+Once the changes are merged on `main`, you can publish the current draft release via the [GitHub interface](https://github.com/meilisearch/meilisearch-go/releases): on this page, click on `Edit` (related to the draft release) > update the description (be sure you apply [these recommandations](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md#writting-the-release-description)) > when you are ready, click on `Publish release`.
 
 <hr>
 

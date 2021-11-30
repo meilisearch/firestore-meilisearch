@@ -41,7 +41,7 @@ type FirestoreRow =
  * Adapts documents from the Firestore database to MeiliSearch compatible documents.
  * @param {string} documentId Document id.
  * @param {DocumentSnapshot} snapshot Snapshot of the data contained in the document read from your Firestore database.
- * @return {Record<string, any>} A properly formatted document to be added or updated in Meilisearch.
+ * @return {Record<string, any>} A properly formatted document to be added or updated in MeiliSearch.
  */
 export function adaptDocument(
   documentId: string,
@@ -49,8 +49,11 @@ export function adaptDocument(
 ): Record<string, any> {
   const fields = getFieldsToIndex()
   const data = snapshot.data()
+  if (data && '_firestore_id' in data) {
+    delete data.id
+  }
   if (fields.length === 0 || !data) {
-    return { id: documentId, ...data }
+    return { _firestore_id: documentId, ...data }
   }
   const document = Object.keys(data).reduce(
     (acc, key) => {
@@ -60,13 +63,13 @@ export function adaptDocument(
       }
       return acc
     },
-    { id: documentId }
+    { _firestore_id: documentId }
   )
   return document
 }
 
 /**
- * Checks and adapts each values to be compatible with Meilisearch documents.
+ * Checks and adapts each values to be compatible with MeiliSearch documents.
  * @param {string} field
  * @param {FirestoreRow} value
  * @return {[string,FirestoreRow]} A properly formatted array of field and value.
@@ -87,9 +90,9 @@ export function adaptValues(
 }
 
 /**
- * Adapts GeoPoint Firestore instance to fit with Meilisearch geo point.
+ * Adapts GeoPoint Firestore instance to fit with MeiliSearch geo point.
  * @param {firestore.GeoPoint} geoPoint GeoPoint Firestore object.
- * @return {MeiliSearchGeoPoint} A properly formatted geo point for Meilisearch.
+ * @return {MeiliSearchGeoPoint} A properly formatted geo point for MeiliSearch.
  */
 const adaptGeoPoint = (geoPoint: firestore.GeoPoint): MeiliSearchGeoPoint => {
   return {
