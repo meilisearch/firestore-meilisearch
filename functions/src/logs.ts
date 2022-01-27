@@ -1,6 +1,6 @@
 'use strict'
 /*
- * Copyright 2021 MeiliSearch
+ * Copyright 2021 Meilisearch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ export function complete() {
  */
 export function addDocument(id: string, data: Record<string, any>) {
   logger.info(
-    `Creating new document ${id} in MeiliSearch index ${config.meilisearchIndex}`,
+    `Creating new document ${id} in Meilisearch index ${config.meilisearchIndex}`,
     data
   )
 }
@@ -66,7 +66,7 @@ export function addDocument(id: string, data: Record<string, any>) {
  */
 export function updateDocument(id: string, data: Record<string, any>) {
   logger.info(
-    `Updating document ${id} in MeiliSearch index ${config.meilisearchIndex}`,
+    `Updating document ${id} in Meilisearch index ${config.meilisearchIndex}`,
     data
   )
 }
@@ -77,7 +77,7 @@ export function updateDocument(id: string, data: Record<string, any>) {
  */
 export function deleteDocument(id: string) {
   logger.info(
-    `Deleting document ${id} in MeiliSearch index ${config.meilisearchIndex}`
+    `Deleting document ${id} in Meilisearch index ${config.meilisearchIndex}`
   )
 }
 
@@ -88,11 +88,11 @@ export function deleteDocument(id: string) {
 export function infoGeoPoint(hasGeoField: boolean) {
   if (hasGeoField) {
     logger.info(
-      `A GeoPoint was found with the field name '_geo' for compatibility with MeiliSearch the field 'latitude' was renamed to 'lat' and the field 'longitude' to 'lng'`
+      `A GeoPoint was found with the field name '_geo' for compatibility with Meilisearch the field 'latitude' was renamed to 'lat' and the field 'longitude' to 'lng'`
     )
   } else {
     logger.info(
-      `A GeoPoint was found without the field name '_geo' if you want to use the geoSearch with MeiliSearch rename it to '_geo'`
+      `A GeoPoint was found without the field name '_geo' if you want to use the geoSearch with Meilisearch rename it to '_geo'`
     )
   }
 }
