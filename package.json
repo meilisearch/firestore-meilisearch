@@ -1,9 +1,9 @@
 {
   "name": "firestore-meilisearch",
   "version": "0.1.0",
-  "description": "Search in Firestore with MeiliSearch",
+  "description": "Search in Firestore with Meilisearch",
   "repository": "",
-  "author": "MeiliSearch (https://meilisearch.com/)",
+  "author": "Meilisearch (https://meilisearch.com/)",
   "license": "Apache-2.0",
   "scripts": {
     "emulator": "firebase ext:dev:emulators:start --test-params=test-params.env --import=dataset --project=firebase-extension-test --config=./firebase.json",
