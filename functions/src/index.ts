@@ -1,6 +1,6 @@
 'use strict'
 /*
- * Copyright 2021 MeiliSearch
+ * Copyright 2021 Meilisearch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ export const indexingWorker = functions.handler.firestore.document.onWrite(
 )
 
 /**
- * Handle addition of a document in the MeiliSearch index.
+ * Handle addition of a document in the Meilisearch index.
  * @param {string} documentId Document id to add.
  * @param {Change} snapshot Snapshot of the data contained in the document read from your Firestore database.
  */
@@ -79,7 +79,7 @@ async function handleAddDocument(
 }
 
 /**
- * Handle deletion of a document in the MeiliSearch index.
+ * Handle deletion of a document in the Meilisearch index.
  * @param {string} documentId Document id to delete.
  */
 async function handleDeleteDocument(documentId: string): Promise<void> {
@@ -92,7 +92,7 @@ async function handleDeleteDocument(documentId: string): Promise<void> {
 }
 
 /**
- * Handle update of a document in the MeiliSearch index.
+ * Handle update of a document in the Meilisearch index.
  * @param {string} documentId Document id to update.
  * @param {Change} after Snapshot of the data contained in the document read from your Firestore database.
  */

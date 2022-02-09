@@ -76,7 +76,7 @@ describe('extensions process', () => {
         },
       ])
       expect(mockConsoleInfo).toBeCalledWith(
-        `A GeoPoint was found with the field name '_geo' for compatibility with MeiliSearch the field 'latitude' was renamed to 'lat' and the field 'longitude' to 'lng'`
+        `A GeoPoint was found with the field name '_geo' for compatibility with Meilisearch the field 'latitude' was renamed to 'lat' and the field 'longitude' to 'lng'`
       )
     })
     test('adaptValues a wrong geo point value', () => {
@@ -86,7 +86,7 @@ describe('extensions process', () => {
         geoPoint,
       ])
       expect(mockConsoleInfo).toBeCalledWith(
-        `A GeoPoint was found without the field name '_geo' if you want to use the geoSearch with MeiliSearch rename it to '_geo'`
+        `A GeoPoint was found without the field name '_geo' if you want to use the geoSearch with Meilisearch rename it to '_geo'`
       )
     })
   })

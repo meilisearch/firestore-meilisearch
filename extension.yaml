@@ -36,7 +36,7 @@ sourceUrl: https://github.com/meilisearch/firestore-meilisearch
 releaseNotesUrl: https://github.com/meilisearch/firestore-meilisearch/releases
 
 author:
-  authorName: MeiliSearch
+  authorName: Meilisearch
   email: bonjour@meilisearch.com
   url: https://meilisearch.com
 
@@ -132,9 +132,9 @@ params:
     required: true
 
   - param: FIELDS_TO_INDEX
-    label: Fields to index in MeiliSearch
+    label: Fields to index in Meilisearch
     description: >-
-      What are the names of the fields you want to be indexed in MeiliSearch?
+      What are the names of the fields you want to be indexed in Meilisearch?
       Create a comma-separated list of the fields name, or leave blank to take all fields.
       The id field is always indexed even when omitted in the list.
     default: ''
@@ -147,7 +147,7 @@ params:
   - param: SEARCHABLE_FIELDS
     label: Fields in which to search. - Optional
     description: >-
-      What are the names of the fields you want to make searchable in MeiliSearch?
+      What are the names of the fields you want to make searchable in Meilisearch?
       This features is optional. See [the documentation about it](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
       for more information.
       Create a comma-separated list of fields, or leave blank to include all fields.
@@ -182,7 +182,7 @@ params:
   - param: MEILISEARCH_API_KEY
     label: MeiliSearch API key
     description: >-
-      What is your MeiliSearch API key with permission to perform actions on indexes?
+      What is your Meilisearch API key with permission to perform actions on indexes?
       Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.
       Check out our guide on [authentification](https://dev.docs.meilisearch.com/reference/features/authentication.html#key-types).
     type: string
