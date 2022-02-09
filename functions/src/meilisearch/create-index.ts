@@ -1,16 +1,16 @@
 import { MeiliSearch, Index } from 'meilisearch'
-import { MeiliSearchConfig } from '../types'
+import { MeilisearchConfig } from '../types'
 
 /**
- * createMeiliSearchIndex
- * @param {MeiliSearchConfig} - MeiliSearch configuration
+ * createMeilisearchIndex
+ * @param {MeilisearchConfig} - Meilisearch configuration
  * @return {Index}
  */
-export function createMeiliSearchIndex({
+export function createMeilisearchIndex({
   host,
   apiKey,
   indexUid,
-}: MeiliSearchConfig): Index {
+}: MeilisearchConfig): Index {
   const client = new MeiliSearch({
     host,
     apiKey,

@@ -1,6 +1,6 @@
 export type { Index } from 'meilisearch'
 
-export type MeiliSearchConfig = {
+export type MeilisearchConfig = {
   host: string
   apiKey: string
   indexUid: string

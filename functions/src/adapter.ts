@@ -1,6 +1,6 @@
 'use strict'
 /*
- * Copyright 2021 MeiliSearch
+ * Copyright 2021 Meilisearch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import { firestore } from 'firebase-admin/lib/firestore'
 import { getFieldsToIndex } from './util'
 import * as logs from './logs'
 
-type MeiliSearchGeoPoint = {
+type MeilisearchGeoPoint = {
   lat: number
   lng: number
 }
@@ -35,13 +35,13 @@ type FirestoreRow =
   | firestore.Timestamp
   | Array<any>
   | Map<any, any>
-  | MeiliSearchGeoPoint
+  | MeilisearchGeoPoint
 
 /**
- * Adapts documents from the Firestore database to MeiliSearch compatible documents.
+ * Adapts documents from the Firestore database to Meilisearch compatible documents.
  * @param {string} documentId Document id.
  * @param {DocumentSnapshot} snapshot Snapshot of the data contained in the document read from your Firestore database.
- * @return {Record<string, any>} A properly formatted document to be added or updated in MeiliSearch.
+ * @return {Record<string, any>} A properly formatted document to be added or updated in Meilisearch.
  */
 export function adaptDocument(
   documentId: string,
@@ -69,7 +69,7 @@ export function adaptDocument(
 }
 
 /**
- * Checks and adapts each values to be compatible with MeiliSearch documents.
+ * Checks and adapts each values to be compatible with Meilisearch documents.
  * @param {string} field
  * @param {FirestoreRow} value
  * @return {[string,FirestoreRow]} A properly formatted array of field and value.
@@ -77,7 +77,7 @@ export function adaptDocument(
 export function adaptValues(
   field: string,
   value: FirestoreRow
-): [string, FirestoreRow | MeiliSearchGeoPoint] {
+): [string, FirestoreRow | MeilisearchGeoPoint] {
   if (value instanceof firestore.GeoPoint) {
     if (field === '_geo') {
       logs.infoGeoPoint(true)
@@ -90,11 +90,11 @@ export function adaptValues(
 }
 
 /**
- * Adapts GeoPoint Firestore instance to fit with MeiliSearch geo point.
+ * Adapts GeoPoint Firestore instance to fit with Meilisearch geo point.
  * @param {firestore.GeoPoint} geoPoint GeoPoint Firestore object.
- * @return {MeiliSearchGeoPoint} A properly formatted geo point for MeiliSearch.
+ * @return {MeilisearchGeoPoint} A properly formatted geo point for Meilisearch.
  */
-const adaptGeoPoint = (geoPoint: firestore.GeoPoint): MeiliSearchGeoPoint => {
+const adaptGeoPoint = (geoPoint: firestore.GeoPoint): MeilisearchGeoPoint => {
   return {
     lat: geoPoint.latitude,
     lng: geoPoint.longitude,

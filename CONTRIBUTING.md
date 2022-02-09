@@ -88,8 +88,8 @@ NB: If you want to change your Meilisearch credentials or the plugins options yo
 Each PR should pass the tests and the linter to be accepted.
 
 ```bash
-curl -L https://install.meilisearch.com | sh # download MeiliSearch
-./meilisearch --master-key=masterKey --no-analytics=true # run MeiliSearch
+curl -L https://install.meilisearch.com | sh # download Meilisearch
+./meilisearch --master-key=masterKey --no-analytics=true # run Meilisearch
 
 # Tests
 yarn test
@@ -122,13 +122,13 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
     ```bash
     npx firestore-meilisearch --project <project_id> --source-collection-path <collection_name> --index <index_uid> --batch-size <100/default=300> --non-interactive --host <host_adress> --api-key <api_key>
     ```
-    **Note**: The `--batch-size` argument is optional. To see its usage, run the above command with --help.
+    **Note**: The `--batch-size` and `--query-collection-group` arguments are optional. To see its usage, run the above command with `--help`.
 
 - Run the project for development:
-Launch MeiliSearch instance:
+Launch Meilisearch instance:
 ``` bash
-curl -L https://install.meilisearch.com | sh # download MeiliSearch
-./meilisearch --master-key=masterKey --no-analytics=true # run MeiliSearch
+curl -L https://install.meilisearch.com | sh # download Meilisearch
+./meilisearch --master-key=masterKey --no-analytics=true # run Meilisearch
 ```
 Launch the watcher on the project:
 ``` bash

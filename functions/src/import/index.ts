@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*
- * Copyright 2021 MeiliSearch
+ * Copyright 2021 Meilisearch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import * as admin from 'firebase-admin'
 import { CliConfig, parseConfig } from './config'
 import * as logs from '../logs'
 import { adaptDocument } from '../adapter'
-import { createMeiliSearchIndex } from '../meilisearch/create-index'
+import { createMeilisearchIndex } from '../meilisearch/create-index'
 import { Index } from '../types'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 
@@ -36,8 +36,8 @@ const run = async () => {
 
   const database = admin.firestore()
 
-  // Initialize MeiliSearch index.
-  const index = createMeiliSearchIndex(config.meilisearch)
+  // Initialize Meilisearch index.
+  const index = createMeilisearchIndex(config.meilisearch)
 
   await retrieveCollectionFromFirestore(database, config, index)
 }
@@ -91,7 +91,7 @@ async function retrieveCollectionFromFirestore(
 }
 
 /**
- * Adapts documents and indexes them in MeiliSearch.
+ * Adapts documents and indexes them in Meilisearch.
  * @param {any} docs
  * @param {Index} index
  * @param {Change<DocumentSnapshot>} change

@@ -18,7 +18,7 @@
 import * as functions from 'firebase-functions'
 import { Change } from 'firebase-functions'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
-import { createMeiliSearchIndex } from './meilisearch/create-index'
+import { createMeilisearchIndex } from './meilisearch/create-index'
 import {
   getChangeType,
   getChangedDocumentId,
@@ -29,14 +29,14 @@ import * as logs from './logs'
 import { adaptDocument } from './adapter'
 import { config } from './config'
 
-const index = createMeiliSearchIndex(config.meilisearch)
+const index = createMeilisearchIndex(config.meilisearch)
 
 void addSearchableFields()
 
 logs.init()
 
 /**
- * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a MeiliSearch index.
+ * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
  * It is controlled by a Firestore handler.
  */
 export const indexingWorker = functions.handler.firestore.document.onWrite(
@@ -110,7 +110,7 @@ async function handleUpdateDocument(
 }
 
 /**
- * Get searchable fields to add searchable attributes on MeiliSearch settings.
+ * Get searchable fields to add searchable attributes on Meilisearch settings.
  */
 export async function addSearchableFields(): Promise<void> {
   if (config.meilisearch.searchableFields?.length != 0) {

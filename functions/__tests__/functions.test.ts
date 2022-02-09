@@ -161,7 +161,7 @@ describe('extension', () => {
       expect(mockConsoleInfo).toBeCalledWith(
         `Creating new document ${
           afterSnapshot.id as string
-        } in MeiliSearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
+        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
         { _firestore_id: defaultDocument.id, ...afterSnapshot.data() }
       )
       expect(mockedAddDocuments).toHaveBeenCalledWith(
@@ -244,7 +244,7 @@ describe('extension', () => {
         config
       )
       expect(mockConsoleInfo).toBeCalledWith(
-        `Updating document ${afterSnapshot.id as string} in MeiliSearch index ${
+        `Updating document ${afterSnapshot.id as string} in Meilisearch index ${
           defaultEnvironment.MEILISEARCH_INDEX_NAME
         }`,
         {

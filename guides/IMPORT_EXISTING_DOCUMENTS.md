@@ -1,12 +1,12 @@
-The `firestore-meilisearch` script is for use with the official Firebase Extension [**MeiliSearch**](https://github.com/firebase/extensions/tree/main/firestore-meilisearch).
+The `firestore-meilisearch` script is for use with the official Firebase Extension [**Meilisearch**](https://github.com/firebase/extensions/tree/main/firestore-meilisearch).
 
 ### Overview
 
-The import script can read all existing documents in a Cloud Firestore collection or in sub-collections and index them into an index in MeiliSearch.
+The import script can read all existing documents in a Cloud Firestore collection or in sub-collections and index them into an index in Meilisearch.
 
 #### Important notes
 
-- You must run the import script over the entire collection **_after_** installing the MeiliSearch extension; otherwise the writes to your database during the import might not be exported to the your `${param:MEILISEARCH_INDEX_NAME}` index.
+- You must run the import script over the entire collection **_after_** installing the Meilisearch extension; otherwise the writes to your database during the import might not be exported to the your `${param:MEILISEARCH_INDEX_NAME}` index.
 
 - The import script may take up to a while to complete. If your collection is large, you may want to consider importing in batches.
 
@@ -21,10 +21,10 @@ The import script uses several values from your installation of the extension:
 - `${PROJECT_ID}`: the project ID for the Firebase project in which you installed the extension
 - `${COLLECTION_PATH}`: the collection path that you specified during extension installation
 - `${COLLECTION_GROUP_QUERY}`: uses a collectionGroup query if this value is "true". For any other value, a collection query is used.
-- `${MEILISEARCH_INDEX_NAME}`: the UID of the MeiliSearch index that you specified for your indexation during extension installation
-- `${BATCHSIZE}`: the number of documents you want to import into MeiliSearch at once
-- `${MEILISEARCH_HOST}`: the url of the host of the MeiliSearch database that you specified during extension installation
-- `${MEILISEARCH_API_KEY}`: the MeiliSearch API key with permission to perform actions on indexes you specified during extension installation
+- `${MEILISEARCH_INDEX_NAME}`: the UID of the Meilisearch index that you specified for your indexation during extension installation
+- `${BATCHSIZE}`: the number of documents you want to import into Meilisearch at once
+- `${MEILISEARCH_HOST}`: the url of the host of the Meilisearch database that you specified during extension installation
+- `${MEILISEARCH_API_KEY}`: the Meilisearch API key with permission to perform actions on indexes you specified during extension installation
 
 Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.com/package/npx) via `npm` (the Node Package Manager).
 
@@ -49,19 +49,19 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
     ```
     **Note**: The `--batch-size` and `--query-collection-group` arguments are optional. To see its usage, run the above command with `--help`.
 
-4. Check if the index and Document are imported in MeiliSearch:
+4. Check if the index and Document are imported in Meilisearch:
 
   1. Check that the index has been created.:
     ```bash
     curl \
       -X GET 'http://${MEILISEARCH_HOST}/indexes/${MEILISEARCH_INDEX_NAME}'
     ```
-    **Note**:  This example must be launched in your terminal but if you are already using the MeiliSearch SDK you can use the command related to the [latter](https://docs.meilisearch.com/reference/api/indexes.html#get-one-index)
+    **Note**:  This example must be launched in your terminal but if you are already using the Meilisearch SDK you can use the command related to the [latter](https://docs.meilisearch.com/reference/api/indexes.html#get-one-index)
 
-  2. Check that the documents has been added to your MeiliSearch database:
+  2. Check that the documents has been added to your Meilisearch database:
     ```bash
     curl \
       -X GET 'http://${MEILISEARCH_HOST}/indexes/${MEILISEARCH_INDEX_NAME}/stats'
     ```
-    The response will contain the number of documents in MeiliSearch index.
-    **Note**:  This example must be launched in your terminal but if you are already using the MeiliSearch SDK you can use the command related to the [latter](https://docs.meilisearch.com/reference/api/stats.html#get-stat-of-an-index)
+    The response will contain the number of documents in Meilisearch index.
+    **Note**:  This example must be launched in your terminal but if you are already using the Meilisearch SDK you can use the command related to the [latter](https://docs.meilisearch.com/reference/api/stats.html#get-stat-of-an-index)

@@ -1,6 +1,6 @@
 import { Command } from 'commander'
 import * as inquirer from 'inquirer'
-import { MeiliSearchConfig } from '../types'
+import { MeilisearchConfig } from '../types'
 
 const FIRESTORE_VALID_CHARACTERS = /^[^/]+$/
 const FIRESTORE_COLLECTION_NAME_MAX_CHARS = 6144
@@ -31,11 +31,11 @@ program
   )
   .option(
     '-i, --index <index>',
-    "The Uid of the index in MeiliSearch to import to. (A index will be created if it doesn't already exist.)"
+    "The Uid of the index in Meilisearch to import to. (A index will be created if it doesn't already exist.)"
   )
   .option(
     '-b, --batch-size [batch-size]',
-    'Number of documents to stream into MeiliSearch at once.',
+    'Number of documents to stream into Meilisearch at once.',
     value => parseInt(value, 10),
     300
   )
@@ -45,7 +45,7 @@ program
   )
   .option(
     '-a, --api-key <api-key>',
-    'The MeiliSearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.'
+    'The Meilisearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.'
   )
 
 const validateInput = (
@@ -105,7 +105,7 @@ const questions = [
   },
   {
     message:
-      "What is the Uid of the MeiliSearch index that you would like to use? (A index will be created if it doesn't already exist)",
+      "What is the Uid of the Meilisearch index that you would like to use? (A index will be created if it doesn't already exist)",
     name: 'index',
     type: 'input',
     validate: value =>
@@ -118,7 +118,7 @@ const questions = [
   },
   {
     message:
-      'How many documents should the import stream into MeiliSearch at once?',
+      'How many documents should the import stream into Meilisearch at once?',
     name: 'batchSize',
     type: 'input',
     default: 300,
@@ -126,13 +126,13 @@ const questions = [
   },
   {
     message:
-      "What is the host of the MeiliSearch database that you would like to use? Example: 'http://localhost:7700'.",
+      "What is the host of the Meilisearch database that you would like to use? Example: 'http://localhost:7700'.",
     name: 'host',
     type: 'input',
   },
   {
     message:
-      'What The MeiliSearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.',
+      'What The Meilisearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.',
     name: 'apiKey',
     type: 'input',
   },
@@ -143,7 +143,7 @@ export interface CliConfig {
   sourceCollectionPath: string
   queryCollectionGroup: boolean
   batchSize: string
-  meilisearch: MeiliSearchConfig
+  meilisearch: MeilisearchConfig
 }
 
 /**
