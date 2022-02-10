@@ -23,7 +23,7 @@ program
   )
   .option(
     '-s, --source-collection-path <source-collection-path>',
-    'The path of the the Cloud Firestore Collection to import from. (This may, or may not, be the same Collection for which you plan to mirror changes.)'
+    'The path of the Cloud Firestore Collection to import from. (This may, or may not, be the same Collection for which you plan to mirror changes.)'
   )
   .option(
     '-q, --query-collection-group [true|false]',
@@ -41,7 +41,7 @@ program
   )
   .option(
     '-H, --host <host>',
-    "The Host of your meilisearch database. Example: 'http://localhost:7700'."
+    'The Host of your meilisearch database. Example: http://localhost:7700.'
   )
   .option(
     '-a, --api-key <api-key>',
@@ -85,7 +85,7 @@ const questions = [
   },
   {
     message:
-      'What is the path of the the Cloud Firestore Collection you would like to import from? ' +
+      'What is the path of the Cloud Firestore Collection you would like to import from? ' +
       '(This may, or may not, be the same Collection for which you plan to mirror changes.)',
     name: 'sourceCollectionPath',
     type: 'input',
@@ -126,7 +126,7 @@ const questions = [
   },
   {
     message:
-      "What is the host of the Meilisearch database that you would like to use? Example: 'http://localhost:7700'.",
+      'What is the host of the Meilisearch database that you would like to use? Example: http://localhost:7700.',
     name: 'host',
     type: 'input',
   },
@@ -194,9 +194,9 @@ export async function parseConfig(): Promise<CliConfig> {
     queryCollectionGroup: queryCollectionGroup,
     batchSize: batchSize,
     meilisearch: {
-      indexUid: options.index,
-      host: options.host,
-      apiKey: options.apiKey,
+      indexUid: index,
+      host: host,
+      apiKey: apiKey,
     },
   }
 }
