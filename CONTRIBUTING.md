@@ -120,7 +120,7 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
 
   - Or run non-interactively with paramaters:
     ```bash
-    npx firestore-meilisearch --project <project_id> --source-collection-path <collection_name> --index <index_uid> --batch-size <100/default=300> --non-interactive --host <host_adress> --api-key <api_key>
+    npx firestore-meilisearch --project <project_id> --source-collection-path <collection_name> --index <index_uid> --batch-size <100/default=300> --non-interactive --host <host_address> --api-key <api_key>
     ```
     **Note**: The `--batch-size` and `--query-collection-group` arguments are optional. To see its usage, run the above command with `--help`.
 
