@@ -8,6 +8,7 @@ const PROJECT_ID_MAX_CHARS = 6144
 const MEILISEARCH_VALID_CHARACTERS = /^[a-zA-Z-_0-9,]*$/
 const MEILISEARCH_UID_MAX_CHARS = 6144
 
+// Create a new interface to manage the arguments from the non-interactive command line.
 const program = new Command()
 
 program
@@ -70,6 +71,7 @@ const validateBatchSize = (value: string) => {
   return parseInt(value, 10) > 0
 }
 
+// Questions for the interactive user interface in command line.
 const questions = [
   {
     message: 'What is your Firebase project ID?',
@@ -147,7 +149,7 @@ export interface CliConfig {
 }
 
 /**
- * Parse the argument from the command line.
+ * Parse the argument from the interactive or non-interactive command line.
  */
 export async function parseConfig(): Promise<CliConfig> {
   program.parse(process.argv)
