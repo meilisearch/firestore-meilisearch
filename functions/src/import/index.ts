@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*
- * Copyright 2021 Meilisearch
+ * Copyright 2022 Meilisearch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,14 +70,14 @@ async function retrieveCollectionFromFirestore(
       query = database.collection(config.sourceCollectionPath).limit(batch)
     }
 
-    if (lastDocument != null) {
+    if (lastDocument !== null) {
       query = query.startAfter(lastDocument)
     }
 
     const snapshot = await query.get()
     const docs = snapshot.docs
 
-    if (docs.length == 0) break
+    if (docs.length === 0) break
     total += await sendDocumentsToMeilisearch(docs, index)
 
     if (docs.length) {

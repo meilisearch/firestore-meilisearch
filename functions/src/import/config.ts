@@ -4,7 +4,7 @@ import { MeilisearchConfig } from '../types'
 
 const FIRESTORE_VALID_CHARACTERS = /^[^/]+$/
 const FIRESTORE_COLLECTION_NAME_MAX_CHARS = 6144
-const PROJECT_ID_MAX_CHARS = 6144
+const PROJECT_ID_MAX_CHARS = 30
 const MEILISEARCH_VALID_CHARACTERS = /^[a-zA-Z-_0-9,]*$/
 const MEILISEARCH_UID_MAX_CHARS = 6144
 
@@ -32,7 +32,7 @@ program
   )
   .option(
     '-i, --index <index>',
-    "The Uid of the index in Meilisearch to import to. (A index will be created if it doesn't already exist.)"
+    "The Uid of the index in Meilisearch to import to. (An index will be created if it doesn't already exist.)"
   )
   .option(
     '-b, --batch-size [batch-size]',
@@ -42,7 +42,7 @@ program
   )
   .option(
     '-H, --host <host>',
-    'The Host of your meilisearch database. Example: http://localhost:7700.'
+    'The Host of your Meilisearch database. Example: http://localhost:7700.'
   )
   .option(
     '-a, --api-key <api-key>',
@@ -55,10 +55,10 @@ const validateInput = (
   regex: RegExp,
   sizeLimit: number
 ) => {
-  if (!value || value === '' || value.trim() === '') {
+  if (!value || value === '' || !value.trim()) {
     return `Please supply a ${name}`
   }
-  if (value.length >= sizeLimit) {
+  if (value.length > sizeLimit) {
     return `${name} must be at most ${sizeLimit} characters long`
   }
   if (!value.match(regex)) {
@@ -134,7 +134,7 @@ const questions = [
   },
   {
     message:
-      'What The Meilisearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.',
+      'Which Meilisearch API key with permission to perform actions on indexes do you like to use? Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.',
     name: 'apiKey',
     type: 'input',
   },

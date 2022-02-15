@@ -16,8 +16,8 @@
     "test": "yarn --cwd functions test",
     "test:watch": "yarn --cwd functions test:watch",
     "test:coverage": "yarn --cwd functions test:coverage",
-    "clean-log": "rm *.log",
     "clean": "rm *.log && rm -rf functions/coverage && rm -rf functions/__tests__/__snapshots__",
-    "deep-clean": "rm *.log && rm -rf functions/coverage && rm -rf functions/node_modules/ && functions/package-lock.json"
+    "clean-log": "rm *.log",
+    "clean-deep": "rm *.log && rm -rf functions/coverage && rm -rf functions/node_modules/ && functions/package-lock.json"
   }
 }
