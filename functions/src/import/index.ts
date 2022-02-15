@@ -20,7 +20,7 @@ import * as admin from 'firebase-admin'
 import { CliConfig, parseConfig } from './config'
 import * as logs from '../logs'
 import { adaptDocument } from '../adapter'
-import { createMeilisearchIndex } from '../meilisearch/create-index'
+import { initMeilisearchIndex } from '../meilisearch/create-index'
 import { Index } from '../types'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 
@@ -37,7 +37,7 @@ const run = async () => {
   const database = admin.firestore()
 
   // Initialize Meilisearch index.
-  const index = createMeilisearchIndex(config.meilisearch)
+  const index = initMeilisearchIndex(config.meilisearch)
 
   await retrieveCollectionFromFirestore(database, config, index)
 }

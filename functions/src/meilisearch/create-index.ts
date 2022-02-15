@@ -2,11 +2,11 @@ import { MeiliSearch, Index } from 'meilisearch'
 import { MeilisearchConfig } from '../types'
 
 /**
- * createMeilisearchIndex
+ * initMeilisearchIndex
  * @param {MeilisearchConfig} - Meilisearch configuration
  * @return {Index}
  */
-export function createMeilisearchIndex({
+export function initMeilisearchIndex({
   host,
   apiKey,
   indexUid,

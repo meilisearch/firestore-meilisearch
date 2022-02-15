@@ -38,7 +38,7 @@ program
     '-b, --batch-size [batch-size]',
     'Number of documents to stream into Meilisearch at once.',
     value => parseInt(value, 10),
-    300
+    1000
   )
   .option(
     '-H, --host <host>',
@@ -123,7 +123,7 @@ const questions = [
       'How many documents should the import stream into Meilisearch at once?',
     name: 'batchSize',
     type: 'input',
-    default: 300,
+    default: 1000,
     validate: validateBatchSize,
   },
   {
