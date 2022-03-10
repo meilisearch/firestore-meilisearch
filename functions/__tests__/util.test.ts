@@ -157,7 +157,7 @@ describe('getSearchableFields', () => {
   test('return empty list', () => {
     restoreEnv = mockedEnv({
       ...defaultEnvironment,
-      SEARCHABLE_FIELDS: '',
+      MEILISEARCH_SEARCHABLE_FIELDS: '',
     })
     util = require('../src/util')
     mockGetSearchableFields = util.getSearchableFields()
@@ -167,7 +167,7 @@ describe('getSearchableFields', () => {
   test('return list with multiple fields', () => {
     restoreEnv = mockedEnv({
       ...defaultEnvironment,
-      SEARCHABLE_FIELDS: 'field1,field2,field3',
+      MEILISEARCH_SEARCHABLE_FIELDS: 'field1,field2,field3',
     })
     util = require('../src/util')
     mockGetSearchableFields = util.getSearchableFields()
@@ -181,7 +181,7 @@ describe('getSearchableFields', () => {
   test('return list with multiple fields and spaces', () => {
     restoreEnv = mockedEnv({
       ...defaultEnvironment,
-      SEARCHABLE_FIELDS: 'field1, field2,  field3',
+      MEILISEARCH_SEARCHABLE_FIELDS: 'field1, field2,  field3',
     })
     util = require('../src/util')
     mockGetSearchableFields = util.getSearchableFields()
@@ -195,7 +195,7 @@ describe('getSearchableFields', () => {
   test('return list of fiels with underscore', () => {
     restoreEnv = mockedEnv({
       ...defaultEnvironment,
-      SEARCHABLE_FIELDS: 'field_1,field_2,field_3',
+      MEILISEARCH_SEARCHABLE_FIELDS: 'field_1,field_2,field_3',
     })
     util = require('../src/util')
     mockGetSearchableFields = util.getSearchableFields()
@@ -231,7 +231,10 @@ describe('getFieldsToIndex', () => {
   })
 
   test('return list with one field', () => {
-    restoreEnv = mockedEnv({ ...defaultEnvironment, FIELDS_TO_INDEX: 'field' })
+    restoreEnv = mockedEnv({
+      ...defaultEnvironment,
+      MEILISEARCH_FIELDS_TO_INDEX: 'field',
+    })
     util = require('../src/util')
     mockGetFieldsToIndex = util.getFieldsToIndex()
     expect(mockGetFieldsToIndex).toMatchObject(['field'])
@@ -240,7 +243,7 @@ describe('getFieldsToIndex', () => {
   test('return list with multiple fields', () => {
     restoreEnv = mockedEnv({
       ...defaultEnvironment,
-      FIELDS_TO_INDEX: 'field1,field2,field3',
+      MEILISEARCH_FIELDS_TO_INDEX: 'field1,field2,field3',
     })
     util = require('../src/util')
     mockGetFieldsToIndex = util.getFieldsToIndex()
@@ -250,7 +253,7 @@ describe('getFieldsToIndex', () => {
   test('return list with multiple fields and spaces', () => {
     restoreEnv = mockedEnv({
       ...defaultEnvironment,
-      FIELDS_TO_INDEX: 'field1, field2,  field3',
+      MEILISEARCH_FIELDS_TO_INDEX: 'field1, field2,  field3',
     })
     util = require('../src/util')
     mockGetFieldsToIndex = util.getFieldsToIndex()
@@ -260,7 +263,7 @@ describe('getFieldsToIndex', () => {
   test('return list of fiels with underscore', () => {
     restoreEnv = mockedEnv({
       ...defaultEnvironment,
-      FIELDS_TO_INDEX: 'field_1,field_2,field_3',
+      MEILISEARCH_FIELDS_TO_INDEX: 'field_1,field_2,field_3',
     })
     util = require('../src/util')
     mockGetFieldsToIndex = util.getFieldsToIndex()

@@ -53,7 +53,7 @@ export function getChangedDocumentId(change: Change<DocumentSnapshot>): string {
 }
 
 /**
- * Returns the FIELDS_TO_INDEX value from the config file and formats it.
+ * Returns the MEILISEARCH_FIELDS_TO_INDEX value from the config file and formats it.
  * @return {string[]} An array of fields.
  */
 export function getFieldsToIndex(): string[] {
@@ -63,7 +63,7 @@ export function getFieldsToIndex(): string[] {
 }
 
 /**
- * Returns the SEARCHABLE_FIELDS value from the config file and formats it.
+ * Returns the MEILISEARCH_SEARCHABLE_FIELDS value from the config file and formats it.
  * @return {string[]} An array of fields.
  */
 export function getSearchableFields(): string[] {

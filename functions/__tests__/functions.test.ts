@@ -46,6 +46,7 @@ describe('extension', () => {
 
   test('functions are exported', () => {
     const exportedFunctions = jest.requireActual('../src')
+
     expect(exportedFunctions.indexingWorker).toBeInstanceOf(Function)
   })
 
@@ -72,7 +73,7 @@ describe('extension', () => {
 
   test('Meilisearch updateSearchableAttributes', () => {
     expect(mockedUpdateSearchableAttributes).toHaveBeenCalledWith([
-      defaultEnvironment.SEARCHABLE_FIELDS,
+      defaultEnvironment.MEILISEARCH_SEARCHABLE_FIELDS,
     ])
     expect(mockConsoleLog).toBeCalledWith(
       'Initializing extension with configuration',
@@ -96,7 +97,6 @@ describe('extension', () => {
         defaultDocument.document,
         `collection/${defaultDocument.id}`
       )
-
       const documentChange = firebaseMock.makeChange(
         beforeSnapshot,
         afterSnapshot
@@ -140,7 +140,6 @@ describe('extension', () => {
         { id: '12345', ...defaultDocument.document },
         `collection/${defaultDocument.id}`
       )
-
       const documentChange = firebaseMock.makeChange(
         beforeSnapshot,
         afterSnapshot
@@ -185,7 +184,6 @@ describe('extension', () => {
         defaultDocument.document,
         `collection/${defaultDocument.id}`
       )
-
       const documentChange = firebaseMock.makeChange(
         beforeSnapshot,
         afterSnapshot
@@ -226,7 +224,6 @@ describe('extension', () => {
         { id: '12345', ...defaultDocument.document },
         `collection/${defaultDocument.id}`
       )
-
       const documentChange = firebaseMock.makeChange(
         beforeSnapshot,
         afterSnapshot
@@ -269,7 +266,6 @@ describe('extension', () => {
         `collection/${defaultDocument.id}`
       )
       const afterSnapshot = { ...defaultDocument.document, exists: false }
-
       const documentChange = firebaseMock.makeChange(
         beforeSnapshot,
         afterSnapshot

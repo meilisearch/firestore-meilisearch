@@ -17,12 +17,12 @@
  */
 
 import * as admin from 'firebase-admin'
+import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { CliConfig, parseConfig } from './config'
 import * as logs from '../logs'
 import { adaptDocument } from '../adapter'
 import { initMeilisearchIndex } from '../meilisearch/create-index'
 import { Index } from '../types'
-import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 
 const run = async () => {
   // Retrieve all arguments from the commande line.
@@ -107,6 +107,7 @@ async function sendDocumentsToMeilisearch(
     await index.addDocuments(document, { primaryKey: '_firestore_id' })
   } catch (e) {
     logs.error(e as Error)
+    return 0
   }
   return document.length
 }

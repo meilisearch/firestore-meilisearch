@@ -34,8 +34,8 @@ First of all, thank you for contributing to Meilisearch! The goal of this docume
 
 To run this project, you will need:
 
-- Node >= 12
-- Yarn or Npm >= v7
+- Node >= 14 && node <= 17
+- Npm >= v7
 - A google account
 - Latest version of `firebase-tools` the Firebase CLI:
   ``` bash
@@ -67,7 +67,7 @@ yarn build
 Launch Meilisearch instance:
 ``` bash
 curl -L https://install.meilisearch.com | sh # download Meilisearch
-./meilisearch --master-key=masterKey --no-analytics=true # run Meilisearch
+./meilisearch --master-key=masterKey --no-analytics # run Meilisearch
 ```
 Launch emulator:
 ``` bash
@@ -89,7 +89,7 @@ Each PR should pass the tests and the linter to be accepted.
 
 ```bash
 curl -L https://install.meilisearch.com | sh # download Meilisearch
-./meilisearch --master-key=masterKey --no-analytics=true # run Meilisearch
+./meilisearch --master-key=masterKey --no-analytics # run Meilisearch
 
 # Tests
 yarn test
@@ -110,7 +110,7 @@ yarn build
 ### Run the backfilled-data script
 
 Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.com/package/npx) via `yarn` (the Node Package Manager).
-- Set up credentials. The import script uses Application Default Credentials to communicate with Firebase. Please follow the instructions [generate a private key file for your service account](https://firebase.google.com/docs/admin/setup#initialize-sdk).
+- Set up credentials. The import script uses the application's default credentials to communicate with Firebase. Please follow the instructions [generate a private key file for your service account](https://firebase.google.com/docs/admin/setup#initialize-sdk).
 
 - Run the import script interactively via `npx` by running ONE of the following commands:
   - Run interactively:
@@ -120,7 +120,14 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
 
   - Or run non-interactively with paramaters:
     ```bash
-    npx firestore-meilisearch --project <project_id> --source-collection-path <collection_name> --index <index_uid> --batch-size <100/default=300> --non-interactive --host <host_address> --api-key <api_key>
+    npx firestore-meilisearch \
+      --project <project_id> \
+      --source-collection-path <collection_name> \
+      --index <index_uid> \
+      --batch-size <100/default=300> \
+      --host <host_address> \
+      --api-key <api_key> \
+      --non-interactive
     ```
     **Note**: The `--batch-size` and `--query-collection-group` arguments are optional. To see its usage, run the above command with `--help`.
 
@@ -128,7 +135,7 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
 Launch Meilisearch instance:
 ``` bash
 curl -L https://install.meilisearch.com | sh # download Meilisearch
-./meilisearch --master-key=masterKey --no-analytics=true # run Meilisearch
+./meilisearch --master-key=masterKey --no-analytics # run Meilisearch
 ```
 Launch the watcher on the project:
 ``` bash
@@ -186,7 +193,7 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 1. Make a PR modifying the files [`package.json`](/package.json), [`package.json` in functions directory](/functions/package.json) and the [`extension.yaml`](/extension.yaml) with the right version.
 
-```javascript
+```yaml
 "version": "X.X.X",
 ```
 

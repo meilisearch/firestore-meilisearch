@@ -21,6 +21,7 @@ describe('extensions process', () => {
         defaultDocument.document,
         `docs/${defaultDocument.id}`
       )
+
       expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
         _firestore_id: defaultDocument.id,
         ...defaultDocument.document,
@@ -33,6 +34,7 @@ describe('extensions process', () => {
         { id: '12345', ...defaultDocument.document },
         `docs/${defaultDocument.id}`
       )
+
       expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
         _firestore_id: defaultDocument.id,
         id: '12345',
@@ -50,6 +52,7 @@ describe('extensions process', () => {
         defaultDocument.document,
         `docs/${defaultDocument.id}`
       )
+
       expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
         _firestore_id: defaultDocument.id,
         title: defaultDocument.document.title,
@@ -68,6 +71,7 @@ describe('extensions process', () => {
     })
     test('adaptValues a geo point value', () => {
       const geoPoint = new firestore.GeoPoint(48.866667, 2.333333)
+
       expect(adaptValues('_geo', geoPoint)).toStrictEqual([
         '_geo',
         {
@@ -81,6 +85,7 @@ describe('extensions process', () => {
     })
     test('adaptValues a wrong geo point value', () => {
       const geoPoint = new firestore.GeoPoint(48.866667, 2.333333)
+
       expect(adaptValues('wrong_geo', geoPoint)).toStrictEqual([
         'wrong_geo',
         geoPoint,

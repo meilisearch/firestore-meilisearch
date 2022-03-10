@@ -2,17 +2,17 @@ The `firestore-meilisearch` script is for use with the official Firebase Extensi
 
 ### Overview
 
-The import script can read all existing documents in a Cloud Firestore collection or in sub-collections and index them into an index in Meilisearch.
+The import script reads all existing documents in a Cloud Firestore collection or in sub-collections and index them into an index in Meilisearch.
 
 #### Important notes
 
-- You must run the import script over the entire collection **_after_** installing the Meilisearch extension; otherwise the writes to your database during the import might not be exported to the your `${param:MEILISEARCH_INDEX_NAME}` index.
+- You must run the import script over the entire collection **_after_** installing the Meilisearch extension in Firebase; otherwise all the data written in the meantime or during the import in your database might not be exported to your `${param:MEILISEARCH_INDEX_NAME}` index.
 
-- The import script may take up to a while to complete. If your collection is large, you may want to consider importing in batches.
+- The import script may take a while to complete if your collection is large. In which case we suggest setting a larger batch size in the configuration.
 
-- You cannot use wildcard notation in the collection path (i.e. /collection/{document}/sub_collection}). Instead, you can use a collectionGroup query. To use a collectionGroup query, provide the collection name value as ${COLLECTION_PATH}, and set ${COLLECTION_GROUP_QUERY} to true.
+- You cannot use wildcard notation in the collection path (i.e. `/collection/{document}/sub_collection}`). Instead, you can use a collectionGroup query. To use a collectionGroup query, provide the collection name value as `${COLLECTION_PATH}`, and set `${COLLECTION_GROUP_QUERY}` to true.
 
-Warning: A collectionGroup query will target every collection in your Firestore project with the provided ${COLLECTION_PATH}. For example, if you have 10,000 documents with a sub-collection named: actors, the import script will query every document in 10,000 actors collections.
+Warning: A collectionGroup query will target every collection in your Firestore project with the provided `${COLLECTION_PATH}`. For example, if you have 10,000 documents with a sub-collection named: actors, the import script will query every document in 10,000 actors collections.
 
 ### Run the script
 
@@ -45,7 +45,14 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
 
   - Run non-interactively with paramaters:
     ```bash
-    npx firestore-meilisearch --project <project_id> --source-collection-path <collection_name> --index <index_uid> --batch-size 300 --non-interactive -H <host_address> -a <api_key>
+    npx firestore-meilisearch
+      --project <project_id> \
+      --source-collection-path <collection_name> \
+      --index <index_uid> \
+      --batch-size <100/default=300> \
+      --host <host_address> \
+      --api-key <api_key> \
+      --non-interactive
     ```
     **Note**: The `--batch-size` and `--query-collection-group` arguments are optional. To see its usage, run the above command with `--help`.
 

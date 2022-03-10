@@ -131,7 +131,7 @@ params:
     validationErrorMessage: Must be a valid Cloud Firestore Collection.
     required: true
 
-  - param: FIELDS_TO_INDEX
+  - param: MEILISEARCH_FIELDS_TO_INDEX
     label: Fields to index in Meilisearch
     description: >-
       What are the names of the fields you want to be indexed in Meilisearch?
@@ -144,7 +144,7 @@ params:
       Fields must be given through a comma-separated list.
     required: false
 
-  - param: SEARCHABLE_FIELDS
+  - param: MEILISEARCH_SEARCHABLE_FIELDS
     label: Fields in which to search. - Optional
     description: >-
       What are the names of the fields you want to make searchable in Meilisearch?
