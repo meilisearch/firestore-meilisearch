@@ -112,7 +112,7 @@ yarn build
 Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.com/package/npx).
 - Set up credentials. The import script uses the application's default credentials to communicate with Firebase. Please follow the instructions [generate a private key file for your service account](https://firebase.google.com/docs/admin/setup#initialize-sdk).
 
-- Run the import script interactively via `npx` by running ONE of the following commands:
+- Run the import script interactively using `npx` and run ONE of the following commands:
   - Run interactively:
     ```bash
     npx firestore-meilisearch
@@ -141,7 +141,7 @@ Launch the watcher on the project:
 ``` bash
 yarn watch
 ```
-Launch the watcher on the script. You must first have modified this command in the `package.json` file with your own data:
+Launch the watcher on the script. You have to modify the informations of the playground script by your own parameters inside the `package.json` file:
 ``` bash
 yarn playground
 ```
