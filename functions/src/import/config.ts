@@ -68,6 +68,9 @@ const validateInput = (
 }
 
 const validateBatchSize = (value: string) => {
+  if (/^\d+$/.test(value) == false) {
+    return `The batchsize ${value} should be a number`
+  }
   return parseInt(value, 10) > 0
 }
 
@@ -125,6 +128,7 @@ const questions = [
     type: 'input',
     default: 1000,
     validate: validateBatchSize,
+    // validate: value => validateBatchSize(value),
   },
   {
     message:
