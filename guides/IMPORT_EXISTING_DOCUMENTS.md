@@ -16,7 +16,7 @@ Warning: A collectionGroup query will target every collection in your Firestore 
 
 ### Run the script
 
-The import script uses several values from your installation of the extension:
+The import script uses several values from the configuration provided when you installed the extension:
 
 - `${PROJECT_ID}`: the project ID for the Firebase project in which you installed the extension
 - `${COLLECTION_PATH}`: the collection path that you specified during extension installation
@@ -26,7 +26,7 @@ The import script uses several values from your installation of the extension:
 - `${MEILISEARCH_HOST}`: the url of the host of the Meilisearch database that you specified during extension installation
 - `${MEILISEARCH_API_KEY}`: the Meilisearch API key with permission to perform actions on indexes you specified during extension installation
 
-Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.com/package/npx) via `npm` (the Node Package Manager).
+Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.com/package/npx).
 
 1.  Make sure that you've installed the required tools to run the import script:
 
