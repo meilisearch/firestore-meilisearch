@@ -55,7 +55,7 @@ const validateInput = (
   regex: RegExp,
   sizeLimit: number
 ) => {
-  if (!value || typeof value !== 'string' || value === '' || !value.trim()) {
+  if (!value || typeof value !== 'string' || value.trim() === '') {
     return `Please supply a ${name}`
   }
   if (value.trim().length > sizeLimit) {

@@ -48,11 +48,11 @@ export function adaptDocument(
   snapshot: DocumentSnapshot
 ): Record<string, any> {
   const fields = getFieldsToIndex()
-  const data = snapshot.data()
-  if (data && '_firestore_id' in data) {
+  const data = snapshot.data() || {}
+  if ('_firestore_id' in data) {
     delete data.id
   }
-  if (fields.length === 0 || !data) {
+  if (fields.length === 0) {
     return { _firestore_id: documentId, ...data }
   }
   const document = Object.keys(data).reduce(
