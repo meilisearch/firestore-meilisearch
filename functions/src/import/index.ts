@@ -18,7 +18,7 @@
 
 import * as admin from 'firebase-admin'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
-import { CliConfig, parseConfig } from './config'
+import { CLIConfig, parseConfig } from './config'
 import * as logs from '../logs'
 import { adaptDocument } from '../adapter'
 import { initMeilisearchIndex } from '../meilisearch/create-index'
@@ -26,7 +26,7 @@ import { Index } from '../types'
 
 const run = async () => {
   // Retrieve all arguments from the commande line.
-  const config: CliConfig = await parseConfig()
+  const config: CLIConfig = await parseConfig()
 
   // Initialize Firebase using the Google Credentials in the GOOGLE_APPLICATION_CREDENTIALS environment variable.
   admin.initializeApp({
@@ -45,12 +45,12 @@ const run = async () => {
 /**
  * Retrieves a collection or collection group in Firestore and aggregates the data.
  * @param {FirebaseFirestore.Firestore} database
- * @param {CliConfig} config
+ * @param {CLIConfig} config
  * @param {Index} index
  */
 async function retrieveCollectionFromFirestore(
   database: FirebaseFirestore.Firestore,
-  config: CliConfig,
+  config: CLIConfig,
   index: Index
 ): Promise<number> {
   const batch: number = parseInt(config.batchSize)

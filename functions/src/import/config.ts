@@ -128,7 +128,6 @@ const questions = [
     type: 'input',
     default: 1000,
     validate: validateBatchSize,
-    // validate: value => validateBatchSize(value),
   },
   {
     message:
@@ -144,7 +143,7 @@ const questions = [
   },
 ]
 
-export interface CliConfig {
+export interface CLIConfig {
   projectId: string
   sourceCollectionPath: string
   queryCollectionGroup: boolean
@@ -155,7 +154,7 @@ export interface CliConfig {
 /**
  * Parse the argument from the interactive or non-interactive command line.
  */
-export async function parseConfig(): Promise<CliConfig> {
+export async function parseConfig(): Promise<CLIConfig> {
   program.parse(process.argv)
 
   const options = program.opts()
