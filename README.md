@@ -24,7 +24,7 @@
 
 <p align="center">⚡ The Meilisearch API extension written for Firebase</p>
 
-# Search in Firestore with Meilisearch
+# Search in your Firestore content with Meilisearch
 
 **Author**: Meilisearch (**[https://meilisearch.com](https://meilisearch.com)**)
 
@@ -75,15 +75,6 @@ a Google Cloud API or making outbound network requests to non-Google services.
 All Firebase services offer a free tier of usage.
 [Learn more about Firebase billing.](https://firebase.google.com/pricing)
 
-<Applicable info about billing implications for non-Google services, such as:>
-Usage of this extension also requires you to have a <non-Google-service> account.
-You are responsible for any associated costs with your usage of <non-Google-service>.
-
-TO DO SAS
-
-Usage of this extension also requires you to have a Meilisearch account.
-You are responsible for any associated costs with your usage of Meilisearch.
-
 
 
 
@@ -109,7 +100,8 @@ You are responsible for any associated costs with your usage of Meilisearch.
 
 * **indexingWorker:** Cloud function triggered by document modification in Firestore to import changes into Meilisearch.
 
-## ⚙️ Development Workflow and Contributing
+
+## Development Workflow and Contributing
 
 Any new contribution is more than welcome in this project!
 
