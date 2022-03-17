@@ -1,6 +1,6 @@
 'use strict'
 /*
- * Copyright 2021 Meilisearch
+ * Copyright 2022 Meilisearch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { MeilisearchConfig } from './types'
 
-export default {
+type PluginConfiguration = {
+  location: string
+  collectionPath: string
+  meilisearch: MeilisearchConfig
+}
+
+export const config: PluginConfiguration = {
   location: process.env.LOCATION || 'europe-west1',
   collectionPath: process.env.COLLECTION_PATH || '',
-  fieldsToIndex: process.env.FIELDS_TO_INDEX || '',
-  searchableFields: process.env.SEARCHABLE_FIELDS || '',
-  meilisearchIndex: process.env.MEILISEARCH_INDEX_NAME || '',
-  meilisearchHost: process.env.MEILISEARCH_HOST || '',
-  meilisearchApiKey: process.env.MEILISEARCH_API_KEY || '',
+  meilisearch: {
+    host: process.env.MEILISEARCH_HOST || '',
+    apiKey: process.env.MEILISEARCH_API_KEY || '',
+    indexUid: process.env.MEILISEARCH_INDEX_NAME || '',
+    fieldsToIndex: process.env.MEILISEARCH_FIELDS_TO_INDEX || '',
+    searchableFields: process.env.MEILISEARCH_SEARCHABLE_FIELDS || '',
+  },
 }

@@ -6,14 +6,18 @@
   "author": "Meilisearch (https://meilisearch.com/)",
   "license": "Apache-2.0",
   "scripts": {
-    "emulator": "firebase ext:dev:emulators:start --test-params=test-params.env --import=dataset --project=firebase-extension-test --config=./firebase.json",
-    "lint": "npm run lint --prefix functions",
-    "lint:fix": "npm run lint:fix --prefix functions",
-    "build": "npm run build --prefix functions",
-    "watch": "npm run watch --prefix functions",
-    "install:functions": "npm install --prefix functions",
-    "test": "npm run test --prefix functions",
-    "test:watch": "npm run test:watch --prefix functions",
-    "test-coverage": "npm run test-coverage --prefix functions"
+    "emulator": "firebase ext:dev:emulators:start --test-params=test-params-example.env --import=dataset --project=meilisearch --config=./firebase.json",
+    "lint": "yarn --cwd functions lint",
+    "lint:fix": "yarn --cwd functions lint:fix",
+    "build": "yarn --cwd functions build",
+    "watch": "yarn --cwd functions watch",
+    "playground": "yarn --cwd functions playground",
+    "install:functions": "yarn --cwd functions",
+    "test": "yarn --cwd functions test",
+    "test:watch": "yarn --cwd functions test:watch",
+    "test:coverage": "yarn --cwd functions test:coverage",
+    "clean": "rm *.log && rm -rf functions/coverage && rm -rf functions/__tests__/__snapshots__",
+    "clean-log": "rm *.log",
+    "clean-deep": "rm *.log && rm -rf functions/coverage && rm -rf functions/node_modules/ && functions/package-lock.json"
   }
 }
