@@ -40,12 +40,13 @@ describe('extension', () => {
 
   beforeEach(() => {
     restoreEnv = mockedEnv(defaultEnvironment)
-    config = require('../src/config').default
+    config = require('../src/config').config
   })
   afterEach(() => restoreEnv())
 
   test('functions are exported', () => {
     const exportedFunctions = jest.requireActual('../src')
+
     expect(exportedFunctions.indexingWorker).toBeInstanceOf(Function)
   })
 
@@ -72,7 +73,7 @@ describe('extension', () => {
 
   test('Meilisearch updateSearchableAttributes', () => {
     expect(mockedUpdateSearchableAttributes).toHaveBeenCalledWith([
-      defaultEnvironment.SEARCHABLE_FIELDS,
+      defaultEnvironment.MEILISEARCH_SEARCHABLE_FIELDS,
     ])
     expect(mockConsoleLog).toBeCalledWith(
       'Initializing extension with configuration',
@@ -90,13 +91,12 @@ describe('extension', () => {
     test('function runs with created data', async () => {
       const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
         {},
-        'collection/doc'
+        `collection/{}`
       )
       const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
-        defaultDocument,
-        'collection/doc'
+        defaultDocument.document,
+        `collection/${defaultDocument.id}`
       )
-
       const documentChange = firebaseMock.makeChange(
         beforeSnapshot,
         afterSnapshot
@@ -118,21 +118,72 @@ describe('extension', () => {
         `Creating new document ${
           afterSnapshot.id as string
         } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
-        { ...afterSnapshot.data() }
+        { _firestore_id: defaultDocument.id, ...afterSnapshot.data() }
       )
-      expect(mockedAddDocuments).toHaveBeenCalledWith([defaultDocument])
+      expect(mockedAddDocuments).toHaveBeenCalledWith(
+        [
+          {
+            _firestore_id: defaultDocument.id,
+            ...defaultDocument.document,
+          },
+        ],
+        { primaryKey: '_firestore_id' }
+      )
+    })
+
+    test('function runs with created data with id fields in document', async () => {
+      const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        {},
+        `collection/{}`
+      )
+      const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        { id: '12345', ...defaultDocument.document },
+        `collection/${defaultDocument.id}`
+      )
+      const documentChange = firebaseMock.makeChange(
+        beforeSnapshot,
+        afterSnapshot
+      )
+
+      const callResult = await mockExport(documentChange, {
+        resource: {
+          name: 'test',
+        },
+      })
+
+      expect(callResult).toBeUndefined()
+      expect(mockConsoleLog).toBeCalledWith(
+        'Started execution of extension with configuration',
+        config
+      )
+      expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
+      expect(mockConsoleInfo).toBeCalledWith(
+        `Creating new document ${
+          afterSnapshot.id as string
+        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
+        { _firestore_id: defaultDocument.id, ...afterSnapshot.data() }
+      )
+      expect(mockedAddDocuments).toHaveBeenCalledWith(
+        [
+          {
+            _firestore_id: defaultDocument.id,
+            id: '12345',
+            ...defaultDocument.document,
+          },
+        ],
+        { primaryKey: '_firestore_id' }
+      )
     })
 
     test('function runs with updated data', async () => {
       const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
         { foo: 'bar' },
-        'collection/doc'
+        `collection/${defaultDocument.id}`
       )
       const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
-        defaultDocument,
-        'collection/doc'
+        defaultDocument.document,
+        `collection/${defaultDocument.id}`
       )
-
       const documentChange = firebaseMock.makeChange(
         beforeSnapshot,
         afterSnapshot
@@ -153,16 +204,68 @@ describe('extension', () => {
         `Updating document ${afterSnapshot.id as string} in Meilisearch index ${
           defaultEnvironment.MEILISEARCH_INDEX_NAME
         }`,
-        { ...afterSnapshot.data() }
+        { _firestore_id: defaultDocument.id, ...afterSnapshot.data() }
       )
       expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
-      expect(mockedUpdateDocuments).toHaveBeenCalledWith([defaultDocument])
+      expect(mockedUpdateDocuments).toHaveBeenCalledWith([
+        {
+          _firestore_id: defaultDocument.id,
+          ...defaultDocument.document,
+        },
+      ])
+    })
+
+    test('function runs with updated data with id fields in document', async () => {
+      const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        { foo: 'bar' },
+        `collection/${defaultDocument.id}`
+      )
+      const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        { id: '12345', ...defaultDocument.document },
+        `collection/${defaultDocument.id}`
+      )
+      const documentChange = firebaseMock.makeChange(
+        beforeSnapshot,
+        afterSnapshot
+      )
+
+      const callResult = await mockExport(documentChange, {
+        resource: {
+          name: 'test',
+        },
+      })
+
+      expect(callResult).toBeUndefined()
+      expect(mockConsoleLog).toBeCalledWith(
+        'Started execution of extension with configuration',
+        config
+      )
+      expect(mockConsoleInfo).toBeCalledWith(
+        `Updating document ${afterSnapshot.id as string} in Meilisearch index ${
+          defaultEnvironment.MEILISEARCH_INDEX_NAME
+        }`,
+        {
+          _firestore_id: defaultDocument.id,
+          id: '12345',
+          ...afterSnapshot.data(),
+        }
+      )
+      expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
+      expect(mockedUpdateDocuments).toHaveBeenCalledWith([
+        {
+          _firestore_id: defaultDocument.id,
+          id: '12345',
+          ...defaultDocument.document,
+        },
+      ])
     })
 
     test('functions runs with deleted data', async () => {
-      const beforeSnapshot = defaultDocument
-      const afterSnapshot = { ...defaultDocument, exists: false }
-
+      const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        { foo: 'bar' },
+        `collection/${defaultDocument.id}`
+      )
+      const afterSnapshot = { ...defaultDocument.document, exists: false }
       const documentChange = firebaseMock.makeChange(
         beforeSnapshot,
         afterSnapshot

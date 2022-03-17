@@ -1,6 +1,6 @@
 'use strict'
 /*
- * Copyright 2021 Meilisearch
+ * Copyright 2022 Meilisearch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,23 +18,18 @@
 import * as functions from 'firebase-functions'
 import { Change } from 'firebase-functions'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
-import { MeiliSearch } from 'meilisearch'
+import { initMeilisearchIndex } from './meilisearch/create-index'
 import {
   getChangeType,
   getChangedDocumentId,
   ChangeType,
   getSearchableFields,
 } from './util'
-import config from './config'
 import * as logs from './logs'
 import { adaptDocument } from './adapter'
+import { config } from './config'
 
-export const client = new MeiliSearch({
-  host: config.meilisearchHost,
-  apiKey: config.meilisearchApiKey,
-})
-
-const index = client.index(config.meilisearchIndex)
+const index = initMeilisearchIndex(config.meilisearch)
 
 void addSearchableFields()
 
@@ -76,7 +71,7 @@ async function handleAddDocument(
 ): Promise<void> {
   try {
     const document = adaptDocument(documentId, snapshot)
-    await index.addDocuments([document])
+    await index.addDocuments([document], { primaryKey: '_firestore_id' })
     logs.addDocument(documentId, document)
   } catch (e) {
     logs.error(e as Error)
@@ -118,9 +113,16 @@ async function handleUpdateDocument(
  * Get searchable fields to add searchable attributes on Meilisearch settings.
  */
 export async function addSearchableFields(): Promise<void> {
-  if (config.searchableFields?.length != 0) {
-    const index = client.index(config.meilisearchIndex)
-    const searchableFields = getSearchableFields()
-    await index.updateSearchableAttributes(searchableFields)
+  // Check if searchableFields is not undefined
+  if (config.meilisearch.searchableFields?.length) {
+    try {
+      const searchableFields = getSearchableFields()
+      await index.updateSearchableAttributes(searchableFields)
+      logs.updateSearchableFields(searchableFields)
+    } catch (e) {
+      logs.error(e as Error)
+    }
+  } else {
+    await index.resetSearchableAttributes()
   }
 }

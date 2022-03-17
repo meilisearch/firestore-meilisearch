@@ -1,6 +1,6 @@
 'use strict'
 /*
- * Copyright 2021 Meilisearch
+ * Copyright 2022 Meilisearch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { Change } from 'firebase-functions'
-import config from './config'
+import { config } from './config'
 
 export enum ChangeType {
   CREATE,
@@ -53,17 +53,21 @@ export function getChangedDocumentId(change: Change<DocumentSnapshot>): string {
 }
 
 /**
- * Returns the FIELDS_TO_INDEX value from the config file and formats it.
+ * Returns the MEILISEARCH_FIELDS_TO_INDEX value from the config file and formats it.
  * @return {string[]} An array of fields.
  */
 export function getFieldsToIndex(): string[] {
-  return config.fieldsToIndex ? config.fieldsToIndex.split(/[ ,]+/) : []
+  return config.meilisearch.fieldsToIndex
+    ? config.meilisearch.fieldsToIndex.split(/[ ,]+/)
+    : []
 }
 
 /**
- * Returns the SEARCHABLE_FIELDS value from the config file and formats it.
+ * Returns the MEILISEARCH_SEARCHABLE_FIELDS value from the config file and formats it.
  * @return {string[]} An array of fields.
  */
 export function getSearchableFields(): string[] {
-  return config.searchableFields ? config.searchableFields.split(/[ ,]+/) : []
+  return config.meilisearch.searchableFields
+    ? config.meilisearch.searchableFields.split(/[ ,]+/)
+    : []
 }

@@ -1,4 +1,4 @@
-# Copyright 2021 Meilisearch
+# Copyright 2022 Meilisearch
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Identifier for your extension
-name: firestore-meilisearch-search
+name: firestore-meilisearch
 
 # Follow semver versioning
 version: 0.1.0
@@ -22,7 +22,7 @@ version: 0.1.0
 specVersion: v1beta
 
 # Friendly display name for your extension (~3-5 words)
-displayName: Search in Firestore with MeiliSearch
+displayName: Search in your Firestore content with Meilisearch
 
 # Brief description of the task your extension performs (~1 sentence)
 description: >-
@@ -42,7 +42,7 @@ author:
 
 # Specify whether a paid-tier billing plan is required to use your extension.
 # Learn more in the docs: https://firebase.google.com/docs/extensions/alpha/ref-extension-yaml#billing-required-field
-billingRequired: false
+billingRequired: true
 
 # In an `apis` field, list any Google APIs (like Cloud Translation, BigQuery, etc.)
 # required for your extension to operate.
@@ -118,7 +118,6 @@ params:
         value: southamerica-east1
       - label: Sydney (australia-southeast1)
         value: australia-southeast1
-    default: europe-west1
     required: true
     immutable: true
 
@@ -132,31 +131,31 @@ params:
     validationErrorMessage: Must be a valid Cloud Firestore Collection.
     required: true
 
-  - param: FIELDS_TO_INDEX
+  - param: MEILISEARCH_FIELDS_TO_INDEX
     label: Fields to index in Meilisearch
     description: >-
       What are the names of the fields you want to be indexed in Meilisearch?
       Create a comma-separated list of the fields name, or leave blank to take all fields.
       The id field is always indexed even when omitted in the list.
+    default: ''
     example: title,overview,release_date
     validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
     validationErrorMessage:
       Fields must be given through a comma-separated list.
-    default: ''
     required: false
 
-  - param: SEARCHABLE_FIELDS
+  - param: MEILISEARCH_SEARCHABLE_FIELDS
     label: Fields in which to search. - Optional
     description: >-
       What are the names of the fields you want to make searchable in Meilisearch?
       This features is optional. See [the documentation about it](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
       for more information.
       Create a comma-separated list of fields, or leave blank to include all fields.
+    default: ''
     example: title,overview,release_date
     validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
     validationErrorMessage:
       Fields must be given through a comma-separated list.
-    default: ''
     required: false
 
   - param: MEILISEARCH_INDEX_NAME
@@ -175,6 +174,7 @@ params:
     label: Meilisearch host
     description: >-
       What is the url of the host of your Meilisearch database?
+      Make sure your url starts with `http://` or `https://`
     type: string
     example: 'http://127.0.0.1:7700'
     required: true
