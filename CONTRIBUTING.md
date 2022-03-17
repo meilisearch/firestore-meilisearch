@@ -146,6 +146,14 @@ Launch the watcher on the script. You have to modify the informations of the pla
 yarn playground
 ```
 
+### Generate the README
+
+The Firebase CLI offers the possibility to automatically generate the `README.md` file with this following command:
+```bash
+firebase ext:info ./path/to/extension --markdown > README.md
+```
+**Note:** Becareful this will only regenerate the text of the central part of the README from the Title: `Search in your Firestore content with Meilisearch` to the `**Cloud Functions:**` section
+
 ## Git Guidelines
 
 ### Git Branches <!-- omit in toc -->
