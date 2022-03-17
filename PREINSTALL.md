@@ -40,12 +40,3 @@ extension uses a service that requires a paid-tier plan, for example calling to
 a Google Cloud API or making outbound network requests to non-Google services.
 All Firebase services offer a free tier of usage.
 [Learn more about Firebase billing.](https://firebase.google.com/pricing)
-
-<Applicable info about billing implications for non-Google services, such as:>
-Usage of this extension also requires you to have a <non-Google-service> account.
-You are responsible for any associated costs with your usage of <non-Google-service>.
-
-TO DO CLOUD
-
-Usage of this extension also requires you to have a Meilisearch account.
-You are responsible for any associated costs with your usage of Meilisearch.
