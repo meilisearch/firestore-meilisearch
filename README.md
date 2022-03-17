@@ -113,7 +113,7 @@ All Firebase services offer a free tier of usage.
 ### Firebase CLI
 
 ```bash
-firebase ext:install publisher_id/extension_name --project=[your-project-id]
+firebase ext:install meilisearch/firestore-meilisearch --project=[your-project-id]
 ```
 
 > Learn more about installing extensions in the Firebase Extensions documentation:
