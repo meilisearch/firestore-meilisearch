@@ -12,7 +12,7 @@ You can test out this extension right away!
 
     ```
     curl \
-      -X GET 'http://localhost:7700/tasks'
+      -X GET '`${param:MEILISEARCH_HOST}`/tasks'
     ```
     More on [tasks](https://docs.meilisearch.com/reference/api/tasks.html#tasks)
 
@@ -33,7 +33,7 @@ The import script can read all existing documents in a Cloud Firestore collectio
 
 **Important:** Run the import script over the entire collection _after_ installing this extension, otherwise all writes to your database during the import might be lost.
 
-Learn more about using the import script to [backfill your existing collection](https://github.com/meilisearch/firestore-meilisearch/guides/IMPORT_EXISTING_DOCUMENTS.md).
+Learn more about using the import script to [backfill your existing collection](https://github.com/meilisearch/firestore-meilisearch/blob/main/guides/IMPORT_EXISTING_DOCUMENTS.md).
 
 ### Monitoring
 
