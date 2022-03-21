@@ -45,7 +45,7 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
 
   - Run non-interactively with paramaters:
     ```bash
-    npx firestore-meilisearch
+    npx firestore-meilisearch \
       --project <project_id> \
       --source-collection-path <collection_name> \
       --index <index_uid> \
