@@ -205,7 +205,7 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 "version": "X.X.X",
 ```
 
-2. Test the extension by installing it on Firestore database:
+2. Test the extension by installing it in Firestore:
 ```bash
 firebase ext:install . --project=[your_project_id]
 ```
