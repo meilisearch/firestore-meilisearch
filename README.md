@@ -16,7 +16,6 @@
 </h4>
 
 <p align="center">
-  <a href="https://packagist.org/packages/meilisearch/firestore-meilisearch"><img src="https://img.shields.io/packagist/v/meilisearch/firestore-meilisearch" alt="Latest Stable Version"></a>
   <a href="https://github.com/meilisearch/firestore-meilisearch/actions"><img src="https://github.com/meilisearch/firestore-meilisearch/workflows/Tests/badge.svg" alt="Test"></a>
   <a href="https://github.com/meilisearch/firestore-meilisearch/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational" alt="License"></a>
   <a href="https://ms-bors.herokuapp.com/repositories/8"><img src="https://bors.tech/images/badge_small.svg" alt="Bors enabled"></a>
