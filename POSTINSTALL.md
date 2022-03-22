@@ -27,7 +27,7 @@ This extension:
 
 ### _(Optional)_ Import existing documents
 
-This extension will only export your documents if they have been modified or created after its installation -- it does not export your complete dataset of existing documents into Meilisearch. So, to backfill your Meilisearch dataset with all the documents present in your Firestore collection, you can run the import script provided by this extension.
+This extension will only export your documents if they have been modified or created after its installation -- it does not export your already existing dataset of documents into Meilisearch. So, to backfill your Meilisearch dataset with all the documents present in your Firestore collection, you can run the import script provided by this extension.
 
 The import script reads all existing documents in a Cloud Firestore collection or group collection and indexes them into Meilisearch.
 
