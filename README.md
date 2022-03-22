@@ -1,4 +1,4 @@
-<h1 align="center">⚠ WIP ⚠️</h1>
+<h1 align="center">firestore-meilisearch</h1>
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/meilisearch/integration-guides/main/assets/logos/meilisearch_firebase.svg" alt="Meilisearch-Firestore" width="200" height="200" />
