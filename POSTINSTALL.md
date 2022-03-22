@@ -21,17 +21,17 @@ You can test out this extension right away!
 Whenever a document is created, updated, or deleted in the specified collection `${param:COLLECTION_PATH}`, this extension sends that update to your Meilisearch instance.
 
 This extension:
-- Indexes a document in Meilisearch and send all the fields or configured fields defined in the extension.
+- Indexes a document in Meilisearch. It will send all fields unless you have specified fields to index in the extension configuration.
 - Update a document in your Meilisearch index.
 - Delete a document from your Meilisearch index.
 
 ### _(Optional)_ Import existing documents
 
-This extension will only export your documents if they have been modified or created after its installation -- it does not export your already existing dataset of documents into Meilisearch. So, to backfill your Meilisearch dataset with all the documents present in your Firestore collection, you can run the import script provided by this extension.
+This extension exports your documents only if they have been modified or created after its installation -- it does not export your existing document dataset in Meilisearch. So, to populate your Meilisearch database with all the documents in your Firestore collection, you can run the import script provided by this extension.
 
 The import script reads all existing documents in a Cloud Firestore collection or group collection and indexes them into Meilisearch.
 
-**Important:** Run the import script over the entire collection _after_ installing this extension, otherwise all writes to your database during the import might be lost.
+**Important:** Run the import script over the entire collection _after_ installing this extension, otherwise the current writes in your database during the import may be lost.
 
 Learn more about using the import script to [backfill your existing collection](https://github.com/meilisearch/firestore-meilisearch/blob/main/guides/IMPORT_EXISTING_DOCUMENTS.md).
 
