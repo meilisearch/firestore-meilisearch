@@ -210,7 +210,7 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 firebase ext:install . --project=[your_project_id]
 ```
 
-3. Publish the extension by run the following command in the root of the extension directory:
+3. Publish the extension by running the following command in the root of the extension directory:
 ```bash
 firebase ext:dev:publish meilisearch/firestore-meilisearch
 ```
