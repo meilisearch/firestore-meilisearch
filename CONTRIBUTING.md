@@ -152,7 +152,7 @@ The Firebase CLI offers the possibility to automatically generate the `README.md
 ```bash
 firebase ext:info ./path/to/extension --markdown > README.md
 ```
-**Note:** Becareful this will only regenerate the text of the central part of the `README.md` from the Title: `Search in your Firestore content with Meilisearch` to the `**Cloud Functions:**` section.
+**Note:** Be careful this will only regenerate the text of the central part of the `README.md` from the Title: `Search in your Firestore content with Meilisearch` to the `**Cloud Functions:**` section.
 
 ## Git Guidelines
 
