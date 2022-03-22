@@ -17,7 +17,7 @@ Documents indexed in Meilisearch need to have a [unique id](https://docs.meilise
 
 **Important:**  If your document have a field `_firestore_id` it will be ignored.
 
-[GeoSearch](https://docs.meilisearch.com/reference/features/geosearch.html#geosearch) has a specific format in Meilisearch, if a `GeoPoint` from Firestore with the name `_geo` is found the field `latitude` would renamed to `lat` and the field `longitude` to `lng`.
+[GeoSearch](https://docs.meilisearch.com/reference/features/geosearch.html#geosearch) has a specific format in Meilisearch, if a `GeoPoint` from Firestore with the name `_geo` is found the field `latitude` is renamed to `lat` and the field `longitude` to `lng`.
 If a `GeoPoint` is found without the name `_geo` it would added like an array.
 
 #### Backfill your Meilisearch
