@@ -123,7 +123,7 @@ firebase ext:install meilisearch/firestore-meilisearch --project=[your-project-i
 
 Any new contribution is more than welcome in this project!
 
-If you want to know more about the development workflow or want to contribute, please visit our [contributing guidelines](/CONTRIBUTING.md) for detailed instructions!
+If you want to know more about the development workflow or wish to contribute, please see our [contributing guidelines](/CONTRIBUTING.md) for detailed instructions!
 
 <hr>
 
