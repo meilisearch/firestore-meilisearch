@@ -77,7 +77,7 @@ All Firebase services offer a free tier of usage.
 
 **Configuration Parameters:**
 
-* Cloud Functions location: Where do you want to deploy the functions created for this extension? For help selecting a location, refer to the [location selection guide](https://firebase.google.com/docs/functions/locations).
+* Cloud Functions location: Where do you want to deploy the functions created for this extension? If you need help selecting a location, refer to the [location selection guide](https://firebase.google.com/docs/functions/locations).
 
 * Collection path: What is the path of the collection you would like to export into Meilisearch?
 
