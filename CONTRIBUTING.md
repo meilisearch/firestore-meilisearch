@@ -148,7 +148,7 @@ yarn playground
 
 ### Generate the README
 
-The Firebase CLI offers the possibility to automatically generate the `README.md` file with this following command:
+The Firebase CLI offers the possibility of automatically generating the `README.md` file with the following command:
 ```bash
 firebase ext:info ./path/to/extension --markdown > README.md
 ```
