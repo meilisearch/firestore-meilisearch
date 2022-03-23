@@ -15,7 +15,7 @@ Before installing this extension, you'll need to:
 
 Documents indexed in Meilisearch must have a primary key and a [unique identifier](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field), this extension will use the default field provided for this purpose in Firestore: `Document ID` which will be renamed in `_firestore_id` and used as [primary key] and [document identifier](https://docs.meilisearch.com/learn/core_concepts/documents.html#document-id). If your documents have an `id` field, it will be added to your documents without being your primary key.
 
-**Important:**  If your document have a field `_firestore_id` it will be ignored.
+**Important:**  If your documents contain a field called `_firestore_id`, it will be ignored.
 
 [GeoSearch](https://docs.meilisearch.com/reference/features/geosearch.html#geosearch) has a specific format in Meilisearch, if a `GeoPoint` from Firestore with the name `_geo` is found the field `latitude` is renamed to `lat` and the field `longitude` to `lng`.
 If a `GeoPoint` is found without the name `_geo` it is added like an array.
