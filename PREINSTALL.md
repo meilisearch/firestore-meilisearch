@@ -36,7 +36,7 @@ To install an extension, your project must be on the [Blaze (pay as you go) plan
 
 When you use Firebase extensions, you're only charged for the underlying
 resources that you use. A paid-tier billing plan is only required if the
-extension uses a service that requires a paid-tier plan, for example calling to
+extension uses a service that requires a paid-tier plan, for example calling
 a Google Cloud API or making outbound network requests to non-Google services.
 All Firebase services offer a free tier of usage.
 [Learn more about Firebase billing.](https://firebase.google.com/pricing)
