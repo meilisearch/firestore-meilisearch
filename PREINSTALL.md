@@ -34,7 +34,7 @@ To install an extension, your project must be on the [Blaze (pay as you go) plan
   *   Cloud Firestore
   *   Cloud Functions (Node.js 10+ runtime. [See FAQs](https://firebase.google.com/support/faq#extensions-pricing))
 
-When you use Firebase Extensions, you're only charged for the underlying
+When you use Firebase extensions, you're only charged for the underlying
 resources that you use. A paid-tier billing plan is only required if the
 extension uses a service that requires a paid-tier plan, for example calling to
 a Google Cloud API or making outbound network requests to non-Google services.
