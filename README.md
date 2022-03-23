@@ -31,7 +31,7 @@
 
 **Details**: Use this extension to synchronize documents from a Cloud Firestore collection to a Meilisearch index. This allows you to use full-text search in your Cloud Firestore documents.
 
-This extension listens to each creation, update, or deletion of your documents to keep them in sync with your Meilisearch index. This ensures that the data in Meilisearch is a mirror of your content in Cloud Firestore. You can then run queries on this mirrored dataset.
+This extension listens to each creation, update, or deletion of your documents to keep them in sync with your Meilisearch index. The data in Meilisearch is a mirror of your content in Cloud Firestore. You can then run queries on this mirrored dataset.
 
 Note that this extension only listens for changes to _documents_ in a specific collection, but not changes in any _subcollection_. However, you can install additional instances of this extension to listen to other collections in your Firestore database.
 
@@ -81,7 +81,7 @@ All Firebase services offer a free tier of usage.
 
 * Collection path: What is the path of the collection you would like to export into Meilisearch?
 
-* Fields to index in Meilisearch: What fields do you want to index in Meilisearch? Create a comma-separated list of the field names, or leave it blank to include all fields. The id field is always indexed even when omitted from the list.
+* Fields to index in Meilisearch: What are the names of the fields you want to index in Meilisearch? Create a comma-separated list of the field names, or leave it blank to include all fields. The id field is always indexed even when omitted in the list.
 
 * Fields in which to search. - Optional: What fields do you want to make searchable in Meilisearch? This feature is optional. See [the documentation for more details.](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields) Create a comma-separated list of fields, or leave it blank to include all fields.
 

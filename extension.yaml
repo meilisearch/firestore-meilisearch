@@ -26,7 +26,7 @@ displayName: Search in your Firestore content with Meilisearch
 
 # Brief description of the task your extension performs (~1 sentence)
 description: >-
-  Fulltext Search on Firebase with Meilisearch
+  Full-text Search on Firebase with Meilisearch
 
 license: Apache-2.0  # https://spdx.org/licenses/
 
@@ -134,8 +134,8 @@ params:
   - param: MEILISEARCH_FIELDS_TO_INDEX
     label: Fields to index in Meilisearch
     description: >-
-      What are the names of the fields you want to be indexed in Meilisearch?
-      Create a comma-separated list of the fields name, or leave blank to take all fields.
+      What are the names of the fields you want to index in Meilisearch?
+      Create a comma-separated list of the field names, or leave it blank to include all fields.
       The id field is always indexed even when omitted in the list.
     default: ''
     example: title,overview,release_date
@@ -147,10 +147,9 @@ params:
   - param: MEILISEARCH_SEARCHABLE_FIELDS
     label: Fields in which to search. - Optional
     description: >-
-      What are the names of the fields you want to make searchable in Meilisearch?
-      This features is optional. See [the documentation about it](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
-      for more information.
-      Create a comma-separated list of fields, or leave blank to include all fields.
+      What fields do you want to make searchable in Meilisearch?
+      This feature is optional. See [the documentation for more details.](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
+      Create a comma-separated list of fields, or leave it blank to include all fields.
     default: ''
     example: title,overview,release_date
     validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
@@ -161,7 +160,7 @@ params:
   - param: MEILISEARCH_INDEX_NAME
     label: Meilisearch Index Name
     description: >-
-      What is the name of the index you want your data to be indexed in?
+      What Meilisearch index do you want to index your data in?
     type: string
     example: movies
     validationRegex: "^[0-9A-Za-z_-]+$"
@@ -173,8 +172,8 @@ params:
   - param: MEILISEARCH_HOST
     label: Meilisearch host
     description: >-
-      What is the url of the host of your Meilisearch database?
-      Make sure your url starts with `http://` or `https://`
+      What is the URL of the host of your Meilisearch database?
+      Make sure your URL starts with `http://` or `https://`
     type: string
     example: 'http://127.0.0.1:7700'
     required: true
