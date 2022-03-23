@@ -31,7 +31,7 @@ This extension does not export your existing document dataset in Meilisearch. It
 
 The import script reads all existing documents in a Cloud Firestore collection or group collection and indexes them into Meilisearch.
 
-**Important:** Run the import script over the entire collection _after_ installing this extension, otherwise the current writes in your database during the import may be lost.
+**Important:** Run the import script over the entire collection _after_ installing this extension; otherwise, you may lose the current writes in your database during the import.
 
 Learn more about using the import script to [backfill your existing collection](https://github.com/meilisearch/firestore-meilisearch/blob/main/guides/IMPORT_EXISTING_DOCUMENTS.md).
 
