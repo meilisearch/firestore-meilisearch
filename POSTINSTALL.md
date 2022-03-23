@@ -22,7 +22,7 @@ Whenever a document is created, updated, or deleted in the specified collection 
 
 This extension:
 - Indexes a document in Meilisearch. It will send all fields unless you have specified fields to index in the extension configuration.
-- Update a document in your Meilisearch index.
+- Updates a document in your Meilisearch index
 - Delete a document from your Meilisearch index.
 
 ### _(Optional)_ Import existing documents
