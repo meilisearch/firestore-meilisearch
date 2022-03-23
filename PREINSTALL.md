@@ -22,7 +22,7 @@ If a `GeoPoint` is found without the name `_geo` it is added as an array.
 
 #### Backfill your Meilisearch
 
-This extension will only export your documents if they have been modified or created after its installation -- it does not export your complete dataset of existing documents into Meilisearch. So, to backfill your Meilisearch dataset with all the documents present in your Firestore collection, you can run the [import script](https://github.com/meilisearch/firestore-meilisearch/) provided by this extension.
+This extension does not export your complete dataset of existing documents into Meilisearch unless they have been modified or created after its installation. So, to backfill your Meilisearch dataset with all the documents present in your Firestore collection, you can run the [import script](https://github.com/meilisearch/firestore-meilisearch/) provided by this extension.
 
 #### Billing
 
