@@ -13,7 +13,7 @@ Before installing this extension, you'll need to:
 
 #### Data import format
 
-Documents indexed in Meilisearch must have a primary key and a [unique identifier](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field), this extension will use the default field provided for this purpose in Firestore: `Document ID` which will be renamed in `_firestore_id` and used as [primary key] and [document identifier](https://docs.meilisearch.com/learn/core_concepts/documents.html#document-id). If your documents have an `id` field, it will be added to your documents without being your primary key.
+Documents indexed in Meilisearch must have a primary key and a [unique identifier](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field). This extension will use Firestore's default `Document ID` as the primary key. `Document ID` will be renamed to `_firestore_id` and used as the [primary key] and [document identifier](https://docs.meilisearch.com/learn/core_concepts/documents.html#document-id). If any of your document fields contain the string `id`, they will be added to your documents without being the primary key.
 
 **Important:**  If your documents contain a field called `_firestore_id`, it will be ignored.
 
