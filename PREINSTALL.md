@@ -26,7 +26,7 @@ This extension does not export your complete dataset of existing documents into 
 
 #### Billing
 
-To install an extension, your project must be on the [Blaze (pay as you go) plan](https://firebase.google.com/pricing)
+To install an extension, your project must be on the [Blaze (pay as you go) plan.](https://firebase.google.com/pricing)
 
 * You will be charged a small amount (typically around $0.01/month) for the Firebase resources required by this extension (even if it is not used).
 * This extension uses other Firebase or Google Cloud services which may have
