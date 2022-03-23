@@ -27,7 +27,7 @@
 
 **Author**: Meilisearch (**[https://meilisearch.com](https://meilisearch.com)**)
 
-**Description**: Fulltext Search on Firebase with Meilisearch
+**Description**: Full-text Search on Firebase with Meilisearch
 
 **Details**: Use this extension to synchronize documents from a Cloud Firestore collection to a Meilisearch index. This allows you to use a full text search in your Cloud Firestore documents.
 
