@@ -21,7 +21,7 @@ You can test out this extension right away!
 Whenever a document is created, updated, or deleted in the specified collection `${param:COLLECTION_PATH}`, this extension sends that update to your Meilisearch instance.
 
 This extension:
-- Indexes a document in Meilisearch. Unless specified in the extension configuration, it will send all fields to the index 
+- Indexes a document in Meilisearch and sends all the fields or configured fields defined in the extension
 - Updates a document in your Meilisearch index
 - Deletes a document from your Meilisearch index
 
