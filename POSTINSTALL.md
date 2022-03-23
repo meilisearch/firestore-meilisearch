@@ -8,7 +8,7 @@ You can test out this extension right away!
 
 3.  Create, update, or delete a document in the collection called `${param:COLLECTION_PATH}` that contains any fields with any values that you'd like.
 
-4.  You can check the tasks of your Meilisearch instance with this query to see if the action has been well performed:
+4.  You can check the status of tasks in your Meilisearch instance using the following query:
 
     ```
     curl \
