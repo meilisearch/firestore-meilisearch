@@ -14,7 +14,7 @@ You can test out this extension right away!
     curl \
       -X GET '`${param:MEILISEARCH_HOST}`/tasks'
     ```
-    More on [tasks](https://docs.meilisearch.com/reference/api/tasks.html#tasks)
+    You can read more on [tasks](https://docs.meilisearch.com/reference/api/tasks.html#tasks) in the documentation.
 
 ### Using the extension
 
