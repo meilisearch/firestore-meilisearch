@@ -81,7 +81,7 @@ All Firebase services offer a free tier of usage.
 
 * Collection path: What is the path of the collection you would like to export into Meilisearch?
 
-* Fields to index in Meilisearch: What are the names of the fields you want to be indexed in Meilisearch? Create a comma-separated list of the fields name, or leave blank to take all fields. The id field is always indexed even when omitted in the list.
+* Fields to index in Meilisearch: What fields do you want to index in Meilisearch? Create a comma-separated list of the field names, or leave it blank to include all fields. The id field is always indexed even when omitted from the list.
 
 * Fields in which to search. - Optional: What are the names of the fields you want to make searchable in Meilisearch? This features is optional. See [the documentation about it](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields) for more information. Create a comma-separated list of fields, or leave blank to include all fields.
 
