@@ -87,7 +87,7 @@ All Firebase services offer a free tier of usage.
 
 * Meilisearch Index Name: What Meilisearch index do you want to index your data in?
 
-* Meilisearch host: What is the url of the host of your Meilisearch database? Make sure your url starts with `http://` or `https://`
+* Meilisearch host: What is the URL of the host of your Meilisearch database? Make sure your URL starts with `http://` or `https://`
 
 * Meilisearch API key: What is your Meilisearch API key with permission to perform actions on indexes? Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes. Check out our guide on [authentification](https://dev.docs.meilisearch.com/reference/features/authentication.html#key-types).
 
