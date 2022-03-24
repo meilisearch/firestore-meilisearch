@@ -9,7 +9,7 @@ Note that this extension only listens for changes to _documents_ in a specific c
 Before installing this extension, you'll need to:
 
 - [Set up Cloud Firestore in your Firebase project](https://firebase.google.com/docs/firestore/quickstart)
-- Run Meilisearch instance. There are many easy ways [to download and run a Meilisearch instance](https://docs.meilisearch.com/learn/getting_started/installation.html#download-and-launch)
+- Run a Meilisearch instance. There are many easy ways [to download and run a Meilisearch instance](https://docs.meilisearch.com/learn/getting_started/installation.html#download-and-launch)
 
 #### Data import format
 
