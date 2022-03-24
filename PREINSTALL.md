@@ -20,9 +20,9 @@ Documents indexed in Meilisearch must have a [unique id](https://docs.meilisearc
 [Geosearch](https://docs.meilisearch.com/reference/features/geosearch.html#geosearch) has a specific format in Meilisearch. If a `GeoPoint` from Firestore with the name `_geo` is found, the field `latitude` is renamed to `lat` and `longitude` to `lng`.
 If a `GeoPoint` is found without the name `_geo`, it is added as an array.
 
-#### Backfill your Meilisearch
+#### Backfill your Meilisearch data
 
-This extension does not export all existing documents into Meilisearch unless they have been modified or created after its installation. You can run the [import script](https://github.com/meilisearch/firestore-meilisearch/) provided by this extension to backfill your Meilisearch dataset with all the documents present in your Firestore collection
+This extension does not export all existing documents into Meilisearch unless they have been modified or created after its installation. You can run the [import script](https://github.com/meilisearch/firestore-meilisearch/) provided by this extension to retrieve your Meilisearch dataset with all the documents present in your Firestore collection
 
 #### Billing
 
