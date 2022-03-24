@@ -31,7 +31,7 @@
 
 **Details**: Use this extension to synchronize documents from a Cloud Firestore collection to a Meilisearch index. This allows you to use full-text search in your Cloud Firestore documents.
 
-This extension listens to each creation, update, or deletion of your documents to keep them in sync with your Meilisearch index. This ensures that the data in Meilisearch is a mirror of your content in Cloud Firestore. You can then run queries on this mirrored dataset.
+This extension listens to each creation, update, or deletion of your documents to keep them in sync with your Meilisearch index. This ensures that the data in Meilisearch mirrors your content in Cloud Firestore. You can then run queries on this mirrored dataset.
 
 Note that this extension only listens for changes to _documents_ in a specific collection, but not changes in any _subcollection_. However, you can install additional instances of this extension to listen to other collections in your Firestore database.
 
@@ -40,7 +40,7 @@ Note that this extension only listens for changes to _documents_ in a specific c
 Before installing this extension, you'll need to:
 
 - [Set up Cloud Firestore in your Firebase project](https://firebase.google.com/docs/firestore/quickstart)
-- Run Meilisearch instance. There are many easy ways [to download and run a Meilisearch instance](https://docs.meilisearch.com/learn/getting_started/installation.html#download-and-launch)
+- Run a Meilisearch instance. There are many easy ways [to download and run a Meilisearch instance](https://docs.meilisearch.com/learn/getting_started/installation.html#download-and-launch)
 
 #### Data import format
 
@@ -48,12 +48,12 @@ Documents indexed in Meilisearch must have a [unique id](https://docs.meilisearc
 
 **Important:**  If your documents contain a field called `_firestore_id`, it will be ignored.
 
-[Geosearch](https://docs.meilisearch.com/reference/features/geosearch.html#geosearch) has a specific format in Meilisearch. If a `GeoPoint` from Firestore with the name `_geo` is found, the field `latitude` is renamed to `lat` and `longitude` to `lng`.
+[Geosearch](https://docs.meilisearch.com/reference/features/geosearch.html#geosearch) has a specific format in Meilisearch, your documents must have a valid `_geo` field with an object composed of `lat` and `lng`. If a `GeoPoint` from Firestore with the name `_geo` is found, the field `latitude` is renamed to `lat` and `longitude` to `lng`.
 If a `GeoPoint` is found without the name `_geo`, it is added as an array.
 
-#### Backfill your Meilisearch
+#### Backfill your Meilisearch data
 
-This extension does not export all existing documents into Meilisearch unless they have been modified or created after its installation. You can run the [import script](https://github.com/meilisearch/firestore-meilisearch/) provided by this extension to backfill your Meilisearch dataset with all the documents present in your Firestore collection
+This extension does not export all existing documents into Meilisearch unless they have been modified or created after its installation. You can run the [import script](https://github.com/meilisearch/firestore-meilisearch/) provided by this extension to retrieve your Meilisearch dataset with all the documents present in your Firestore collection
 
 #### Billing
 
@@ -89,7 +89,7 @@ All Firebase services offer a free tier of usage.
 
 * Meilisearch host: What is the URL of the host of your Meilisearch database? Make sure your URL starts with `http://` or `https://`
 
-* Meilisearch API key: What is your Meilisearch API key with permission to perform actions on indexes? Both the API keys and the master key are valid choices but we strongly recommend using an API key for security purposes. Check out our guide about [security](https://docs.meilisearch.com/learn/security/master_api_keys.html).
+* Meilisearch API key: What is your Meilisearch API key with permission to perform actions on indexes? Both the API keys and the master key are valid choices but we strongly recommend using an API key for security purposes. Check out our guide on [security](https://docs.meilisearch.com/learn/security/master_api_keys.html).
 
 
 
