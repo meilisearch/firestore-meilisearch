@@ -89,7 +89,7 @@ All Firebase services offer a free tier of usage.
 
 * Meilisearch host: What is the URL of the host of your Meilisearch database? Make sure your URL starts with `http://` or `https://`
 
-* Meilisearch API key: What is your Meilisearch API key with permission to perform actions on indexes? Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes. Check out our guide on [authentification](https://dev.docs.meilisearch.com/reference/features/authentication.html#key-types).
+* Meilisearch API key: What is your Meilisearch API key with permission to perform actions on indexes? Both the API keys and the master key are valid choices but we strongly recommend using an API key for security purposes. Check out our guide about [security](https://docs.meilisearch.com/learn/security/master_api_keys.html).
 
 
 
