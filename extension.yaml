@@ -74,7 +74,7 @@ params:
     label: Cloud Functions location
     description: >-
       Where do you want to deploy the functions created for this extension?
-      For help selecting a location, refer to the [location selection
+      If you need help selecting a location, refer to the [location selection
       guide](https://firebase.google.com/docs/functions/locations).
     type: select
     options:
@@ -134,9 +134,9 @@ params:
   - param: MEILISEARCH_FIELDS_TO_INDEX
     label: Fields to index in Meilisearch
     description: >-
-      What are the names of the fields you want to index in Meilisearch?
+      What fields do you want to index in Meilisearch?
       Create a comma-separated list of the field names, or leave it blank to include all fields.
-      The id field is always indexed even when omitted in the list.
+      The id field is always indexed even when omitted from the list.
     default: ''
     example: title,overview,release_date
     validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"

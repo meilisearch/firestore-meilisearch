@@ -23,7 +23,7 @@ The import script uses several values from the configuration provided when you i
 - `${COLLECTION_GROUP_QUERY}`: uses a collectionGroup query if this value is "true". For any other value, a collection query is used.
 - `${MEILISEARCH_INDEX_NAME}`: the UID of the Meilisearch index that you specified for your indexation during extension installation
 - `${BATCHSIZE}`: the number of documents you want to import into Meilisearch at once
-- `${MEILISEARCH_HOST}`: the url of the host of the Meilisearch database that you specified during extension installation
+- `${MEILISEARCH_HOST}`: the URL of the host of the Meilisearch database that you specified during extension installation
 - `${MEILISEARCH_API_KEY}`: the Meilisearch API key with permission to perform actions on indexes you specified during extension installation
 
 Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.com/package/npx).
