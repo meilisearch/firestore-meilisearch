@@ -1,6 +1,6 @@
 Use this extension to synchronize documents from a Cloud Firestore collection to a Meilisearch index. This allows you to use full-text search in your Cloud Firestore documents.
 
-This extension listens to each creation, update, or deletion of your documents to keep them in sync with your Meilisearch index. This ensures that the data in Meilisearch is a mirror of your content in Cloud Firestore. You can then run queries on this mirrored dataset.
+This extension listens to each creation, update, or deletion of your documents to keep them in sync with your Meilisearch index. This ensures that the data in Meilisearch mirrors your content in Cloud Firestore. You can then run queries on this mirrored dataset.
 
 Note that this extension only listens for changes to _documents_ in a specific collection, but not changes in any _subcollection_. However, you can install additional instances of this extension to listen to other collections in your Firestore database.
 
