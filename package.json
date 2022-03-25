@@ -1,7 +1,7 @@
 {
   "name": "firestore-meilisearch",
   "version": "0.1.0",
-  "description": "Search in Firestore with Meilisearch",
+  "description": "Search in your Firestore content with Meilisearch",
   "repository": "",
   "author": "Meilisearch (https://meilisearch.com/)",
   "license": "Apache-2.0",

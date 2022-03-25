@@ -146,6 +146,14 @@ Launch the watcher on the script. You have to modify the informations of the pla
 yarn playground
 ```
 
+### Generate the README
+
+The Firebase CLI offers the possibility of automatically generating the `README.md` file with the following command:
+```bash
+firebase ext:info ./path/to/extension --markdown > README.md
+```
+**Note:** Be careful this will only regenerate the text of the central part of the `README.md` from the Title: `Search in your Firestore content with Meilisearch` to the `**Cloud Functions:**` section.
+
 ## Git Guidelines
 
 ### Git Branches <!-- omit in toc -->
@@ -197,16 +205,16 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 "version": "X.X.X",
 ```
 
-2. Test the extension  by installing it on Firestore database:
+2. Test the extension by installing it in Firestore:
 ```bash
-firebase ext:install . --project=meilisearch-e2fe1
+firebase ext:install . --project=[your_project_id]
 ```
 
-3. Publish the extension by run the following command in the root of the extension directory:
+3. Publish the extension by running the following command in the root of the extension directory:
 ```bash
-firebase ext:dev:publish meilisearch/firestore-meilisearch --project=meilisearch-e2fe1
+firebase ext:dev:publish meilisearch/firestore-meilisearch
 ```
-**Note**: `meilisearch` is the publisher id and `meilisearch-e2fe1` is the publish project id for this extension.
+**Note**: `meilisearch` is the `publisher id` for this extension.
 
 Once the changes are merged on `main`, you can publish the current draft release via the [GitHub interface](https://github.com/meilisearch/meilisearch-go/releases): on this page, click on `Edit` (related to the draft release) > update the description (be sure you apply [these recommandations](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md#writting-the-release-description)) > when you are ready, click on `Publish release`.
 
