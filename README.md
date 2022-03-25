@@ -83,8 +83,6 @@ All Firebase services offer a free tier of usage.
 
 * Fields to index in Meilisearch: What fields do you want to index in Meilisearch? Create a comma-separated list of the field names, or leave it blank to include all fields. The id field is always indexed even when omitted from the list.
 
-* Fields in which to search. - Optional: What fields do you want to make searchable in Meilisearch? This feature is optional. See [the documentation for more details.](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields) Create a comma-separated list of fields, or leave it blank to include all fields.
-
 * Meilisearch Index Name: What Meilisearch index do you want to index your data in?
 
 * Meilisearch host: What is the URL of the host of your Meilisearch database? Make sure your URL starts with `http://` or `https://`

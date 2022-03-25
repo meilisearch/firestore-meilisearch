@@ -17,7 +17,6 @@ describe('extension', () => {
 
   // Mocking of Meilisearch package
   const mockedMeilisearch = mocked(MeiliSearch, true)
-  const mockedUpdateSearchableAttributes = jest.fn()
   const mockedAddDocuments = jest.fn()
   const mockedUpdateDocuments = jest.fn()
   const mockedDeleteDocument = jest.fn()
@@ -25,7 +24,6 @@ describe('extension', () => {
     addDocuments: mockedAddDocuments,
     updateDocuments: mockedUpdateDocuments,
     deleteDocument: mockedDeleteDocument,
-    updateSearchableAttributes: mockedUpdateSearchableAttributes,
   }))
   mockedMeilisearch.mockReturnValue({
     // @ts-ignore
@@ -65,16 +63,6 @@ describe('extension', () => {
     expect(mockedIndex).toHaveBeenCalledWith(
       defaultEnvironment.MEILISEARCH_INDEX_NAME
     )
-    expect(mockConsoleLog).toBeCalledWith(
-      'Initializing extension with configuration',
-      config
-    )
-  })
-
-  test('Meilisearch updateSearchableAttributes', () => {
-    expect(mockedUpdateSearchableAttributes).toHaveBeenCalledWith([
-      defaultEnvironment.MEILISEARCH_SEARCHABLE_FIELDS,
-    ])
     expect(mockConsoleLog).toBeCalledWith(
       'Initializing extension with configuration',
       config
