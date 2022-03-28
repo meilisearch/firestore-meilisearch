@@ -82,18 +82,6 @@ export function deleteDocument(id: string) {
 }
 
 /**
- * Log set searchable fields on index in Meilisearch.
- * @param {string[]} searchableFields Searchable fields.
- */
-export function updateSearchableFields(searchableFields: string[]) {
-  logger.info(
-    'Update searchable fields',
-    searchableFields,
-    ` in Meilisearch index ${config.meilisearch.indexUid}`
-  )
-}
-
-/**
  * Log a modification of geoPoint based on whether or not it has the correct naming to enable `geosearch` in Meilisearch.
  * @param {boolean} hasGeoField a boolean value that indicates whether the field is correctly named to enable `geosearch` in Meilisearch.
  */

@@ -61,13 +61,3 @@ export function getFieldsToIndex(): string[] {
     ? config.meilisearch.fieldsToIndex.split(/[ ,]+/)
     : []
 }
-
-/**
- * Returns the MEILISEARCH_SEARCHABLE_FIELDS value from the config file and formats it.
- * @return {string[]} An array of fields.
- */
-export function getSearchableFields(): string[] {
-  return config.meilisearch.searchableFields
-    ? config.meilisearch.searchableFields.split(/[ ,]+/)
-    : []
-}

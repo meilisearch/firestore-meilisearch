@@ -5,5 +5,4 @@ export type MeilisearchConfig = {
   apiKey: string
   indexUid: string
   fieldsToIndex?: string
-  searchableFields?: string
 }

@@ -30,6 +30,5 @@ export const config: PluginConfiguration = {
     apiKey: process.env.MEILISEARCH_API_KEY || '',
     indexUid: process.env.MEILISEARCH_INDEX_NAME || '',
     fieldsToIndex: process.env.MEILISEARCH_FIELDS_TO_INDEX || '',
-    searchableFields: process.env.MEILISEARCH_SEARCHABLE_FIELDS || '',
   },
 }

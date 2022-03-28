@@ -144,19 +144,6 @@ params:
       Fields must be given through a comma-separated list.
     required: false
 
-  - param: MEILISEARCH_SEARCHABLE_FIELDS
-    label: Fields in which to search. - Optional
-    description: >-
-      What fields do you want to make searchable in Meilisearch?
-      This feature is optional. See [the documentation for more details.](https://docs.meilisearch.com/reference/features/field_properties.html#searchable-fields)
-      Create a comma-separated list of fields, or leave it blank to include all fields.
-    default: ''
-    example: title,overview,release_date
-    validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
-    validationErrorMessage:
-      Fields must be given through a comma-separated list.
-    required: false
-
   - param: MEILISEARCH_INDEX_NAME
     label: Meilisearch Index Name
     description: >-
