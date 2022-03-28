@@ -205,10 +205,9 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 ⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md).
 
-1. Make a PR modifying the files [`package.json`](/package.json), [`package.json` in functions directory](/functions/package.json) and the [`extension.yaml`](/extension.yaml) with the right version.
-
-```yaml
-"version": "X.X.X",
+1. To update the version package in all needed file you can run the `version.sh` script with the version number in argument: `"X.X.X"`. If you want to modify it by hand you had to update the version in [`package.json`](/package.json), [`package.json`](/functions/package.json) in functions directory, the [`extension.yaml`](/extension.yaml) and the [`version.ts`](/functions/src/version.ts).
+```bash
+sh script/version.sh X.X.X
 ```
 
 2. Test the extension by installing it in Firestore:

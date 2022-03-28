@@ -1,6 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addSearchableFields = exports.indexingWorker = void 0;
+exports.indexingWorker = void 0;
 /*
  * Copyright 2022 Meilisearch
  *
@@ -23,7 +23,6 @@ const logs = require("./logs");
 const adapter_1 = require("./adapter");
 const config_1 = require("./config");
 const index = (0, create_index_1.initMeilisearchIndex)(config_1.config.meilisearch);
-void addSearchableFields();
 logs.init();
 /**
  * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
@@ -89,24 +88,3 @@ async function handleUpdateDocument(documentId, after) {
         logs.error(e);
     }
 }
-/**
- * Get searchable fields to add searchable attributes on Meilisearch settings.
- */
-async function addSearchableFields() {
-    var _a;
-    // Check if searchableFields is not undefined
-    if ((_a = config_1.config.meilisearch.searchableFields) === null || _a === void 0 ? void 0 : _a.length) {
-        try {
-            const searchableFields = (0, util_1.getSearchableFields)();
-            await index.updateSearchableAttributes(searchableFields);
-            logs.updateSearchableFields(searchableFields);
-        }
-        catch (e) {
-            logs.error(e);
-        }
-    }
-    else {
-        await index.resetSearchableAttributes();
-    }
-}
-exports.addSearchableFields = addSearchableFields;
