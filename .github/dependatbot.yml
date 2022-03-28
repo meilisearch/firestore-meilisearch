@@ -3,7 +3,8 @@ updates:
 - package-ecosystem: 'npm'
   directory: '/'
   schedule:
-    interval: 'daily'
+    interval: weekly
+    time: "04:00"
   open-pull-requests-limit: 10
   labels:
   - skip-changelog
@@ -15,7 +16,8 @@ updates:
 - package-ecosystem: github-actions
   directory: '/functions'
   schedule:
-    interval: daily
+    interval: weekly
+    time: "04:00"
   labels:
     - skip-changelog
     - dependencies
