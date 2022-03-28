@@ -1,7 +1,7 @@
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import { mocked } from 'ts-jest/utils'
 import { mockConsoleInfo } from './__mocks__/console'
-import { GeoPoint } from 'firebase-admin/lib/firestore'
+import { firestore } from 'firebase-admin/lib/firestore'
 import { adaptDocument, adaptValues } from '../src/adapter'
 import { getFieldsToIndex } from '../src/util'
 import defaultDocument from './data/document'
@@ -70,7 +70,7 @@ describe('extensions process', () => {
       ])
     })
     test('adaptValues a geo point value', () => {
-      const geoPoint = new GeoPoint(48.866667, 2.333333)
+      const geoPoint = new firestore.GeoPoint(48.866667, 2.333333)
 
       expect(adaptValues('_geo', geoPoint)).toStrictEqual([
         '_geo',
@@ -84,7 +84,7 @@ describe('extensions process', () => {
       )
     })
     test('adaptValues a wrong geo point value', () => {
-      const geoPoint = new GeoPoint(48.866667, 2.333333)
+      const geoPoint = new firestore.GeoPoint(48.866667, 2.333333)
 
       expect(adaptValues('wrong_geo', geoPoint)).toStrictEqual([
         'wrong_geo',
