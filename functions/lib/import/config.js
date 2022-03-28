@@ -21,7 +21,7 @@ program
     .option('-H, --host <host>', 'The Host of your Meilisearch database. Example: http://localhost:7700.')
     .option('-a, --api-key <api-key>', 'The Meilisearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.');
 const validateInput = (value, name, regex, sizeLimit) => {
-    if (!value || typeof value !== 'string' || value === '' || !value.trim()) {
+    if (!value || typeof value !== 'string' || value.trim() === '') {
         return `Please supply a ${name}`;
     }
     if (value.trim().length > sizeLimit) {
@@ -36,9 +36,6 @@ const validateBatchSize = (value) => {
     if (/^\d+$/.test(value) == false) {
         return `The batchsize ${value} should be a number`;
     }
-    const isnum = /^\d+$/.test(value);
-    // console.log('IS NUM?')
-    // console.log(isnum)
     return parseInt(value, 10) > 0;
 };
 // Questions for the interactive user interface in command line.
@@ -74,7 +71,6 @@ const questions = [
         type: 'input',
         default: 1000,
         validate: validateBatchSize,
-        // validate: value => validateBatchSize(value),
     },
     {
         message: 'What is the host of the Meilisearch database that you would like to use? Example: http://localhost:7700.',

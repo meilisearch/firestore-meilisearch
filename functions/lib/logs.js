@@ -1,6 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.importData = exports.infoGeoPoint = exports.updateSearchableFields = exports.deleteDocument = exports.updateDocument = exports.addDocument = exports.complete = exports.error = exports.start = exports.init = void 0;
+exports.importData = exports.infoGeoPoint = exports.deleteDocument = exports.updateDocument = exports.addDocument = exports.complete = exports.error = exports.start = exports.init = void 0;
 /*
  * Copyright 2022 Meilisearch
  *
@@ -73,14 +73,6 @@ function deleteDocument(id) {
     firebase_functions_1.logger.info(`Deleting document ${id} in Meilisearch index ${config_1.config.meilisearch.indexUid}`);
 }
 exports.deleteDocument = deleteDocument;
-/**
- * Log set searchable fields on index in Meilisearch.
- * @param {string[]} searchableFields Searchable fields.
- */
-function updateSearchableFields(searchableFields) {
-    firebase_functions_1.logger.info('Update searchable fields', searchableFields, ` in Meilisearch index ${config_1.config.meilisearch.indexUid}`);
-}
-exports.updateSearchableFields = updateSearchableFields;
 /**
  * Log a modification of geoPoint based on whether or not it has the correct naming to enable `geosearch` in Meilisearch.
  * @param {boolean} hasGeoField a boolean value that indicates whether the field is correctly named to enable `geosearch` in Meilisearch.

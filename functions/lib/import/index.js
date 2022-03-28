@@ -37,7 +37,7 @@ const run = async () => {
 /**
  * Retrieves a collection or collection group in Firestore and aggregates the data.
  * @param {FirebaseFirestore.Firestore} database
- * @param {CliConfig} config
+ * @param {CLIConfig} config
  * @param {Index} index
  */
 async function retrieveCollectionFromFirestore(database, config, index) {

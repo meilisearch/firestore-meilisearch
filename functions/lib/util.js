@@ -1,6 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSearchableFields = exports.getFieldsToIndex = exports.getChangedDocumentId = exports.getChangeType = exports.ChangeType = void 0;
+exports.getFieldsToIndex = exports.getChangedDocumentId = exports.getChangeType = exports.ChangeType = void 0;
 const config_1 = require("./config");
 var ChangeType;
 (function (ChangeType) {
@@ -45,13 +45,3 @@ function getFieldsToIndex() {
         : [];
 }
 exports.getFieldsToIndex = getFieldsToIndex;
-/**
- * Returns the MEILISEARCH_SEARCHABLE_FIELDS value from the config file and formats it.
- * @return {string[]} An array of fields.
- */
-function getSearchableFields() {
-    return config_1.config.meilisearch.searchableFields
-        ? config_1.config.meilisearch.searchableFields.split(/[ ,]+/)
-        : [];
-}
-exports.getSearchableFields = getSearchableFields;
