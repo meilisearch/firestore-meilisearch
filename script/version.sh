@@ -50,3 +50,4 @@ cd ..
 
 git add -u
 git commit -m "Update version for the next release (v$version)"
+echo "The updated files are ready to be pushed"
