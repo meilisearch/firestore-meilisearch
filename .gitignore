@@ -83,6 +83,9 @@ typings/
 .env
 .env.test
 
+# jest snapshot
+functions/__tests__/__snapshots__
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
