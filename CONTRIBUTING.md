@@ -27,6 +27,8 @@ First of all, thank you for contributing to Meilisearch! The goal of this docume
 5. Make the changes on your branch.
 6. [Submit the branch as a PR](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork) pointing to the `main` branch of the main meilisearch-js repository. A maintainer should comment and/or review your Pull Request within a few days. Although depending on the circumstances, it may take longer.<br>
  We do not enforce a naming convention for the PRs, but **please use something descriptive of your changes**, having in mind that the title of your PR will be automatically added to the next [release changelog](https://github.com/meilisearch/meilisearch-js/releases/).
+7. You will need to build the project with `yarn build` before pushing files.
+8. Don't forget to add `js` files from the `./lib/` directory to your PR.
 
 ## Development Workflow
 
@@ -68,6 +70,11 @@ Launch Meilisearch instance:
 ``` bash
 curl -L https://install.meilisearch.com | sh # download Meilisearch
 ./meilisearch --master-key=masterKey --no-analytics # run Meilisearch
+```
+You may need to [install Java](https://www.java.com/en/download/help/download_options.html) to run the emulator.</br>
+Set emulator:
+```bash
+firebase init emulators
 ```
 Launch emulator:
 ``` bash
