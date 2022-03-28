@@ -16,15 +16,15 @@ jobs:
         run: sh .github/scripts/check-release.sh
       - name: Install dependencies
         run: yarn && yarn install:functions
-      - name: Enter functions directory
-        run: cd functions
       - name: Publish with latest tag
         if: "!github.event.release.prerelease"
-        run: npm publish .
+        run:
+          npm publish functions
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Publish with beta tag
         if: "github.event.release.prerelease"
-        run: npm publish . --tag beta
+        run:
+          npm publish functions --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
