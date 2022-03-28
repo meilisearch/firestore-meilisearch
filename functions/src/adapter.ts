@@ -16,7 +16,11 @@
  */
 
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
-import { firestore } from 'firebase-admin/lib/firestore'
+import {
+  DocumentReference,
+  GeoPoint,
+  Timestamp,
+} from 'firebase-admin/lib/firestore'
 import { getFieldsToIndex } from './util'
 import * as logs from './logs'
 
@@ -30,9 +34,9 @@ type FirestoreRow =
   | boolean
   | number
   | string
-  | firestore.DocumentReference
-  | firestore.GeoPoint
-  | firestore.Timestamp
+  | DocumentReference
+  | GeoPoint
+  | Timestamp
   | Array<any>
   | Map<any, any>
   | MeilisearchGeoPoint
@@ -78,7 +82,7 @@ export function adaptValues(
   field: string,
   value: FirestoreRow
 ): [string, FirestoreRow | MeilisearchGeoPoint] {
-  if (value instanceof firestore.GeoPoint) {
+  if (value instanceof GeoPoint) {
     if (field === '_geo') {
       logs.infoGeoPoint(true)
       return [field, adaptGeoPoint(value)]
@@ -91,10 +95,10 @@ export function adaptValues(
 
 /**
  * Adapts GeoPoint Firestore instance to fit with Meilisearch geo point.
- * @param {firestore.GeoPoint} geoPoint GeoPoint Firestore object.
+ * @param {GeoPoint} geoPoint GeoPoint Firestore object.
  * @return {MeilisearchGeoPoint} A properly formatted geo point for Meilisearch.
  */
-const adaptGeoPoint = (geoPoint: firestore.GeoPoint): MeilisearchGeoPoint => {
+const adaptGeoPoint = (geoPoint: GeoPoint): MeilisearchGeoPoint => {
   return {
     lat: geoPoint.latitude,
     lng: geoPoint.longitude,

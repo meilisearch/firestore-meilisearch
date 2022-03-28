@@ -21,7 +21,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "firebase-admin": "^9.8.0",
+    "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.16.0",
     "meilisearch": "^0.25.0"
   },
