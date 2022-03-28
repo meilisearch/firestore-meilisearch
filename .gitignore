@@ -115,5 +115,7 @@ dist
 .tern-port
 
 # Misc
-
-functions/lib/
+functions/src/Firestore.code-workspace
+.vscode/
+.DS_Store
+package-lock.json
