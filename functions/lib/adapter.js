@@ -36,7 +36,7 @@ exports.adaptDocument = adaptDocument;
  * @return {[string,FirestoreRow]} A properly formatted array of field and value.
  */
 function adaptValues(field, value) {
-    if (value instanceof firestore_1.firestore.GeoPoint) {
+    if (value instanceof firestore_1.GeoPoint) {
         if (field === '_geo') {
             logs.infoGeoPoint(true);
             return [field, adaptGeoPoint(value)];
@@ -50,7 +50,7 @@ function adaptValues(field, value) {
 exports.adaptValues = adaptValues;
 /**
  * Adapts GeoPoint Firestore instance to fit with Meilisearch geo point.
- * @param {firestore.GeoPoint} geoPoint GeoPoint Firestore object.
+ * @param {GeoPoint} geoPoint GeoPoint Firestore object.
  * @return {MeilisearchGeoPoint} A properly formatted geo point for Meilisearch.
  */
 const adaptGeoPoint = (geoPoint) => {
