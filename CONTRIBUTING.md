@@ -109,18 +109,17 @@ yarn build
 
 ### Run the backfilled-data script
 
-Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.com/package/npx).
 - Set up credentials. The import script uses the application's default credentials to communicate with Firebase. Please follow the instructions [generate a private key file for your service account](https://firebase.google.com/docs/admin/setup#initialize-sdk).
 
-- Run the import script interactively using `npx` and run ONE of the following commands:
+- Run the import script interactively and run ONE of the following commands:
   - Run interactively:
     ```bash
-    npx firestore-meilisearch
+    yarn run-cli
     ```
 
   - Or run non-interactively with paramaters:
     ```bash
-    npx firestore-meilisearch \
+    yarn run-cli \
       --project <project_id> \
       --source-collection-path <collection_name> \
       --index <index_uid> \
