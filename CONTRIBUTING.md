@@ -71,7 +71,7 @@ Launch Meilisearch instance:
 curl -L https://install.meilisearch.com | sh # download Meilisearch
 ./meilisearch --master-key=masterKey --no-analytics # run Meilisearch
 ```
-You may have need to [install Java](https://www.java.com/en/download/help/download_options.html) to run the emulator.</br>
+You may need to [install Java](https://www.java.com/en/download/help/download_options.html) to run the emulator.</br>
 Set emulator:
 ```bash
 firebase init emulators
