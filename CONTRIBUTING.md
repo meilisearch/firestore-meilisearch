@@ -205,7 +205,14 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 ⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md).
 
-1. To update the version package in all needed file you can run the `version.sh` script with the version number in argument: `"X.X.X"`. If you want to modify it by hand you had to update the version in [`package.json`](/package.json), [`package.json`](/functions/package.json) in functions directory, the [`extension.yaml`](/extension.yaml) and the [`version.ts`](/functions/src/version.ts).</br>
+1. To update the version package in all needed files you can run the `version.sh` script with the version number in argument: `"X.X.X"`. If you want to modify it by hand you have to update the version in the following files:
+- [`package.json`](/package.json).
+- [`package.json`](/functions/packag e.json) in the functions directory.
+- [`extension.yaml`](/extension.yaml).
+- [`version.ts`](/functions/src/version.ts).
+
+After which don't forget to rebuild the project.
+</br>
 The `version.sh` script will `add` and `commit` the modification but you till need to verify it and push it.
 ```bash
 sh script/version.sh X.X.X
