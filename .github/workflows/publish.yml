@@ -18,13 +18,15 @@ jobs:
         run: yarn && yarn install:functions
       - name: Publish with latest tag
         if: "!github.event.release.prerelease"
-        run:
-          npm publish functions
+        run: |
+          cd functions
+          npm publish .
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Publish with beta tag
         if: "github.event.release.prerelease"
-        run:
-          npm publish functions --tag beta
+        run: |
+          cd functions
+          npm publish . --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
