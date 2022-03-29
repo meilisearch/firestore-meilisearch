@@ -16,6 +16,9 @@ jobs:
         run: sh .github/scripts/check-release.sh
       - name: Install dependencies
         run: yarn && yarn install:functions
+      - name: Copy README in the functions directory
+        run:
+          cp README.md functions/
       - name: Publish with latest tag
         if: "!github.event.release.prerelease"
         run: |
