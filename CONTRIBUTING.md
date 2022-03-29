@@ -224,7 +224,7 @@ sh script/version.sh X.X.X
 ```
 
 3. Commit and push the modifications:
-```
+```bash
 git commit -m "Update version for the next release (vX.X.X)"
 ```
 
