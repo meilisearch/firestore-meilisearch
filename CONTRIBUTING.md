@@ -228,7 +228,7 @@ sh script/version.sh X.X.X
 git commit -m "Update version for the next release (vX.X.X)"
 ```
 
-4. Once the changes are merged on `main`, you can publish the current draft release via the [GitHub interface](https://github.com/meilisearch/meilisearch-go/releases): on this page, click on `Edit` (related to the draft release) > update the description (be sure you apply [these recommandation](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md#writting-the-release-description)) > when you are ready, click on `Publish release`.
+4. Once the changes are merged on `main`, you can publish the current draft release via the [GitHub interface](https://github.com/meilisearch/firestore-meilisearch/releases): on this page, click on `Edit` (related to the draft release) > update the description (be sure you apply [this recommandation](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md#writting-the-release-description)) > when you are ready, click on `Publish release`.
 
 GitHub Actions will be triggered and push the package to [npm](https://www.npmjs.com/package/firestore-meilisearch).
 
