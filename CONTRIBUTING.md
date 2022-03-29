@@ -216,7 +216,7 @@ firebase ext:install . --project=[your_project_id]
 - [`extension.yaml`](/extension.yaml).
 - [`version.ts`](/functions/src/version.ts).
 
-After which, don't forget to rebuild the project to check if any changes has been forgotten on the `js` files in the `functions/lib` directory.
+After which, don't forget to rebuild the project to check if any changes have been overlooked on the `js` files in the `functions/lib` directory.
 </br>
 The `version.sh` script will update the version in all necessary files but you still need to check them:
 ```bash
