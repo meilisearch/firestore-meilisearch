@@ -205,31 +205,43 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 ⚠️ Before doing anything, make sure you got through the guide about [Releasing an Integration](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md).
 
-1. To update the version package in all needed files you can run the `version.sh` script with the version number in argument: `"X.X.X"`. If you want to modify it by hand you have to update the version in the following files:
-- [`package.json`](/package.json).
-- [`package.json`](/functions/packag e.json) in the functions directory.
-- [`extension.yaml`](/extension.yaml).
-- [`version.ts`](/functions/src/version.ts).
-
-After which don't forget to rebuild the project.
-</br>
-The `version.sh` script will `add` and `commit` the modification but you till need to verify it and push it.
-```bash
-sh script/version.sh X.X.X
-```
-
-2. Test the extension by installing it in Firestore:
+1. Test the extension by installing it in a Firestore project:
 ```bash
 firebase ext:install . --project=[your_project_id]
 ```
 
-3. Publish the extension by running the following command in the root of the extension directory:
+2. To update the version package in all needed files you can run the `version.sh` script with the version number in argument: `"X.X.X"`. If you want to modify it by hand you have to update the version in the following files:
+- [`package.json`](/package.json).
+- [`package.json`](/functions/package.json) in the functions directory.
+- [`extension.yaml`](/extension.yaml).
+- [`version.ts`](/functions/src/version.ts).
+
+After which, don't forget to rebuild the project to check if any changes have been overlooked on the `js` files in the `functions/lib` directory.
+</br>
+The `version.sh` script will update the version in all necessary files but you still need to check them:
+```bash
+sh script/version.sh X.X.X
+```
+
+3. Commit and push the modifications:
+```bash
+git commit -m "Update version for the next release (vX.X.X)"
+```
+
+4. Once the changes are merged on `main`, you can publish the current draft release via the [GitHub interface](https://github.com/meilisearch/firestore-meilisearch/releases): on this page, click on `Edit` (related to the draft release) > update the description (be sure you apply [this recommandation](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md#writting-the-release-description)) > when you are ready, click on `Publish release`.
+
+GitHub Actions will be triggered and push the package to [npm](https://www.npmjs.com/package/firestore-meilisearch).
+
+5. Test the newly released package on npm by launching it with `npx`:
+```
+npx firestore-meilisearch
+```
+
+6. Publish the extension by running the following command in the root of the extension directory:
 ```bash
 firebase ext:dev:publish meilisearch/firestore-meilisearch
 ```
 **Note**: `meilisearch` is the `publisher id` for this extension.
-
-Once the changes are merged on `main`, you can publish the current draft release via the [GitHub interface](https://github.com/meilisearch/meilisearch-go/releases): on this page, click on `Edit` (related to the draft release) > update the description (be sure you apply [these recommandations](https://github.com/meilisearch/integration-guides/blob/main/resources/integration-release.md#writting-the-release-description)) > when you are ready, click on `Publish release`.
 
 <hr>
 
