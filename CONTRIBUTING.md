@@ -207,7 +207,7 @@ _[Read more about this](https://github.com/meilisearch/integration-guides/blob/m
 
 1. To update the version package in all needed files you can run the `version.sh` script with the version number in argument: `"X.X.X"`. If you want to modify it by hand you have to update the version in the following files:
 - [`package.json`](/package.json).
-- [`package.json`](/functions/packag e.json) in the functions directory.
+- [`package.json`](/functions/package.json) in the functions directory.
 - [`extension.yaml`](/extension.yaml).
 - [`version.ts`](/functions/src/version.ts).
 
