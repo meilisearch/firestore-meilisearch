@@ -21,8 +21,10 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "commander": "^9.1.0",
     "firebase-admin": "^9.8.0",
     "firebase-functions": "^3.16.0",
+    "inquirer": "^8.2.2",
     "meilisearch": "^0.25.0"
   },
   "devDependencies": {
@@ -30,7 +32,6 @@
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",
-    "commander": "^8.3.0",
     "eslint": "^7.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
@@ -38,7 +39,6 @@
     "eslint-plugin-jest": "^24.4.2",
     "eslint-plugin-prettier": "^4.0.0",
     "firebase-functions-test": "^0.3.2",
-    "inquirer": "^8.2.0",
     "jest": "^27.2.2",
     "jest-mock": "^27.1.1",
     "js-yaml": "^4.1.0",
