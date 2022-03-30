@@ -1,3 +1,7 @@
+## Version 0.1.3
+
+fixed - Fix dev-dependencies
+
 ## Version 0.1.2
 
 fixed - Modify the publication folder of the package
