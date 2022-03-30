@@ -119,6 +119,7 @@ dist
 
 # Misc
 functions/src/Firestore.code-workspace
+functions/README.md
 .vscode/
 .DS_Store
 package-lock.json
