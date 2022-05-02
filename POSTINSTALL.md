@@ -12,7 +12,7 @@ You can test out this extension right away!
 
     ```
     curl \
-      -X GET '`${param:MEILISEARCH_HOST}`/tasks'
+      -X GET '${param:MEILISEARCH_HOST}/tasks'
     ```
     You can read more on [tasks](https://docs.meilisearch.com/reference/api/tasks.html#tasks) in the documentation.
 
