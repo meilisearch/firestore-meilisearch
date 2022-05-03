@@ -1,3 +1,5 @@
+process.env.FIREBASE_CONFIG = '{}'
+
 module.exports = {
   rootDir: './',
   preset: 'ts-jest',
