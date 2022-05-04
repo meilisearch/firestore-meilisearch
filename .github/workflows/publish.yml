@@ -17,8 +17,7 @@ jobs:
       - name: Install dependencies
         run: yarn && yarn install:functions
       - name: Copy README in the functions directory
-        run:
-          cp README.md functions/
+        run: cp README.md functions/
       - name: Publish with latest tag
         if: "!github.event.release.prerelease"
         run: |
@@ -33,3 +32,22 @@ jobs:
           npm publish . --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+  publish-firestore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Check release validity
+        run: sh .github/scripts/check-release.sh
+      - name: Install dependencies
+        run: yarn && yarn install:functions
+      - name: Copy README in the functions directory
+        run: cp README.md functions/
+      # We only publish in firestore in non-beta mode.
+      - name: Publish to Firestore
+        if: "!github.event.release.prerelease"
+        uses: w9jds/firebase-action@master
+        with:
+          args: ext:dev:publish meilisearch/firestore-meilisearch
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
