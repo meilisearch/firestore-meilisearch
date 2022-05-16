@@ -1,3 +1,7 @@
+## Version 0.1.4
+
+Ensure compatibility with Meilisearch v0.27.0
+
 ## Version 0.1.3
 
 fixed - Fix dev-dependencies
