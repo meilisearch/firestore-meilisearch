@@ -1,5 +1,6 @@
 import { MeiliSearch, Index } from 'meilisearch'
 import { MeilisearchConfig } from '../types'
+import { constructClientAgents } from './agents'
 
 /**
  * initMeilisearchIndex
@@ -14,6 +15,7 @@ export function initMeilisearchIndex({
   const client = new MeiliSearch({
     host,
     apiKey,
+    clientAgents: constructClientAgents(),
   })
 
   return client.index(indexUid)

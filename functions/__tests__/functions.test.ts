@@ -5,6 +5,7 @@ import { mockConsoleLog, mockConsoleInfo } from './__mocks__/console'
 import { MeiliSearch } from 'meilisearch'
 import defaultEnvironment from './data/environment'
 import defaultDocument from './data/document'
+import { version } from '../src/version'
 
 jest.mock('meilisearch')
 
@@ -52,6 +53,7 @@ describe('extension', () => {
     expect(mockedMeilisearch).toHaveBeenCalledWith({
       apiKey: defaultEnvironment.MEILISEARCH_API_KEY,
       host: defaultEnvironment.MEILISEARCH_HOST,
+      clientAgents: [`Meilisearch Firebase (v${version})`],
     })
     expect(mockConsoleLog).toBeCalledWith(
       'Initializing extension with configuration',
