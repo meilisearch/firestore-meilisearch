@@ -1,7 +1,7 @@
 ## Version 0.1.5
 
 Ensure compatibility with Meilisearch v0.28.0
-Pass firestore client-agent to meilisearch
+Pass firestore client-agent to Meilisearch
 
 ## Version 0.1.4
 
