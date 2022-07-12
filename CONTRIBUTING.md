@@ -39,9 +39,9 @@ To run this project, you will need:
 - Node >= 14 && node <= 17
 - Npm >= v7
 - A google account
-- Latest version of `firebase-tools` the Firebase CLI:
+- Version `v10.9.2` of `firebase-tools` the Firebase CLI (latest does not provide the emulator):
   ``` bash
-  yarn global add firebase-tools
+  yarn global add firebase-tools@10.9.2
   ```
   Add the directory for the commands of the packages installed globally in yarn, to access of firebase binary:
   ``` bash
