@@ -1,5 +1,5 @@
 status = [
-  'linter',
+  'style-check',
   'integration-tests (14)',
   'integration-tests (16)',
   'integration-tests (18)'
