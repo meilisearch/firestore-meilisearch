@@ -10,28 +10,17 @@ on:
       - main
 
 jobs:
-  linter:
-    name: linter
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-      - name: Install dependencies
-        run: yarn install:functions
-      - name: Run style check
-        run: yarn lint
-
   integration-tests:
+    # Will not run if the event is a PR to bump-meilisearch-v* (so a pre-release PR)
+    # Will still run for each push to bump-meilisearch-v*
+    if: github.event_name != 'pull_request' || !startsWith(github.base_ref, 'bump-meilisearch-v')
     name: integration-tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ["14", "16", "17"]
+        node: ['14', '16', '18']
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup node
         uses: actions/setup-node@v1
         with:
@@ -40,3 +29,16 @@ jobs:
         run: yarn install:functions
       - name: Run tests with coverage
         run: yarn test:coverage
+  style_tests:
+    runs-on: ubuntu-latest
+    name: style-check
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Install dependencies
+        run: yarn install:functions
+      - name: Run style check
+        run: yarn lint
