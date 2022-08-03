@@ -36,7 +36,7 @@ First of all, thank you for contributing to Meilisearch! The goal of this docume
 
 To run this project, you will need:
 
-- Node >= 14 && node <= 17
+- Node >= 14 && node <= 18
 - Npm >= v7
 - A google account
 - Version `v10.9.2` of `firebase-tools` the Firebase CLI (latest does not provide the emulator):
@@ -233,18 +233,25 @@ firebase ext:dev:publish meilisearch/firestore-meilisearch
 
 #### Release a `beta` Version
 
-Here are the steps to release a beta version of this package **on `npm` not on the firebase store**:
+Here are the steps to release a beta version of this package:
 
-- Create a new branch originating the branch containing the "beta" changes. For example, if during the Meilisearch pre-release, create a branch originating `bump-meilisearch-v*.*.*`.<br>
-`vX.X.X` is the next version of the package, NOT the version of Meilisearch!
+- Create a new branch containing the "beta" changes with the following format `xxx-beta` where `xxx` explains the context.
 
-```bash
-git checkout bump-meilisearch-v*.*.*
-git pull origin bump-meilisearch-v*.*.*
-git checkout -b vX.X.X-beta.0
-```
+  For example:
+    - When implementing a beta feature, create a branch `my-feature-beta` where you implement the feature.
+      ```bash
+        git checkout -b my-feature-beta
+      ```
+    - During the Meilisearch pre-release, create a branch originating from `bump-meilisearch-v*.*.*` named `bump-meilisearch-v*.*.*-beta`. <br>
+    `v*.*.*` is the next version of the package, NOT the version of Meilisearch!
 
-- Update the versions following step 2 of the [`Publish the Release`](#publish-the-release) section. The version should be named: `vX.X.X-beta.0` and commit the files to the `vX.X.X-beta.0` branch.
+      ```bash
+      git checkout bump-meilisearch-v*.*.*
+      git pull origin bump-meilisearch-v*.*.*
+      git checkout -b bump-meilisearch-v*.*.*-beta
+      ```
+
+- Change the version in the relevant files (see how to publish the release section above) and commit it to the `beta` branch.
 
 - Go to the [GitHub interface for releasing](https://github.com/meilisearch/firestore-meilisearch/releases): on this page, click on `Draft a new release`.
 
@@ -256,17 +263,14 @@ git checkout -b vX.X.X-beta.0
   - ⚠️ Click on the "This is a pre-release" checkbox
   - Click on "Publish release"
 
-GitHub Actions will be triggered and push the beta version to [npm](https://www.npmjs.com/package/meilisearch).
+GitHub Actions will be triggered and push the beta version to [npm](https://www.npmjs.com/package/firestore-meilisearch).
 
 💡 If you need to release a new beta for the same version (i.e. `vX.X.X-beta.1`):
 - merge the change into `bump-meilisearch-v*.*.*`
 - rebase the `vX.X.X-beta.0` branch
-- change the version name in `package.json`
+- change the version name in the relevant files (see how to publish the release section above)
 - creata a pre-release via the GitHub interface
 
-<hr>
-
-Thank you again for reading this through, we can not wait to begin to work with you if you made your way through this contributing guide ❤️
 
 <hr>
 

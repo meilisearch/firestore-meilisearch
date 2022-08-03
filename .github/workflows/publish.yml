@@ -7,47 +7,30 @@ jobs:
   publish-npm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
       - name: Check release validity
         run: sh .github/scripts/check-release.sh
+      - name: Check tag format
+        run: sh .github/scripts/check-tag-format.sh "${{ github.event.release.prerelease }}"
       - name: Install dependencies
         run: yarn && yarn install:functions
       - name: Copy README in the functions directory
         run: cp README.md functions/
       - name: Publish with latest tag
-        if: "!github.event.release.prerelease"
+        if: "!github.event.release.prerelease && !contains(github.ref, 'beta')"
         run: |
           cd functions
           npm publish .
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Publish with beta tag
-        if: "github.event.release.prerelease"
+        if: "github.event.release.prerelease && contains(github.ref, 'beta')"
         run: |
           cd functions
           npm publish . --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-  publish-firestore:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: Check release validity
-        run: sh .github/scripts/check-release.sh
-      - name: Install dependencies
-        run: yarn && yarn install:functions
-      - name: Copy README in the functions directory
-        run: cp README.md functions/
-      # We only publish in firestore in non-beta mode.
-      - name: Publish to Firestore
-        if: "!github.event.release.prerelease"
-        uses: w9jds/firebase-action@master
-        with:
-          args: ext:dev:publish meilisearch/firestore-meilisearch
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

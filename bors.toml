@@ -1,8 +1,8 @@
 status = [
-  'linter',
+  'style-check',
   'integration-tests (14)',
   'integration-tests (16)',
-  'integration-tests (17)'
+  'integration-tests (18)'
 ]
 # 1 hour timeout
 timeout-sec = 3600
