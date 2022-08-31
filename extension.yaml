@@ -62,7 +62,7 @@ resources:
       # LOCATION is a user-configured parameter value specified by the user
       # during installation.
       location: ${LOCATION}
-      runtime: nodejs14
+      runtime: nodejs16
       eventTrigger:
         eventType: providers/cloud.firestore/eventTypes/document.write
         resource: projects/${PROJECT_ID}/databases/(default)/documents/${COLLECTION_PATH}/{documentID}
@@ -125,9 +125,9 @@ params:
     label: Collection path
     description: >-
       What is the path of the collection you would like to export into Meilisearch?
-    example: "example: my_collection"
+    example: 'example: my_collection'
     type: string
-    validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
+    validationRegex: '^[^/]+(/[^/]+/[^/]+)*$'
     validationErrorMessage: Must be a valid Cloud Firestore Collection.
     required: true
 
@@ -137,9 +137,9 @@ params:
       What fields do you want to index in Meilisearch?
       Create a comma-separated list of the field names, or leave it blank to include all fields.
       The id field is always indexed even when omitted from the list.
-    default: ""
-    example: "example: name,description,..."
-    validationRegex: "^[^,]?[a-zA-Z-_0-9,]*[^,]$"
+    default: ''
+    example: 'example: name,description,...'
+    validationRegex: '^[^,]?[a-zA-Z-_0-9,]*[^,]$'
     validationErrorMessage: Fields must be given through a comma-separated list.
     required: false
 
@@ -148,8 +148,8 @@ params:
     description: >-
       What Meilisearch index do you want to index your data in?
     type: string
-    example: "example: my_index"
-    validationRegex: "^[0-9A-Za-z_-]+$"
+    example: 'example: my_index'
+    validationRegex: '^[0-9A-Za-z_-]+$'
     validationErrorMessage: Must be a valid Index format.
       Index uid can be of type integer or string only composed of alphanumeric characters, hyphens (-) and underscores (_).
       Check out our guide on [index creation](https://docs.meilisearch.com/learn/core_concepts/indexes.html#index-creation).
@@ -161,7 +161,7 @@ params:
       What is the URL of the host of your Meilisearch database?
       Make sure your URL starts with `http://` or `https://`
     type: string
-    example: "example: my-meilisearch-host.com"
+    example: 'example: my-meilisearch-host.com'
     required: true
 
   - param: MEILISEARCH_API_KEY
@@ -171,5 +171,5 @@ params:
       Both the API keys and the master key are valid choices but we strongly recommend using an API key for security purposes.
       Check out our guide on [security](https://docs.meilisearch.com/learn/security/master_api_keys.html).
     type: string
-    example: "example: my_secret_api_key"
+    example: 'example: my_secret_api_key'
     required: false

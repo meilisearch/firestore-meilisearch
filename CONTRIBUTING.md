@@ -36,7 +36,7 @@ First of all, thank you for contributing to Meilisearch! The goal of this docume
 
 To run this project, you will need:
 
-- Node >= 14 && node <= 18
+- Node >= 15 && node <= 18
 - Npm >= v7
 - A google account
 - Version `v10.9.2` of `firebase-tools` the Firebase CLI (latest does not provide the emulator):
