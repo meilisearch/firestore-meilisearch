@@ -2,6 +2,9 @@
   "name": "firestore-meilisearch",
   "version": "0.1.5",
   "license": "MIT",
+  "engines": {
+    "node": ">=15.0.0"
+  },
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
