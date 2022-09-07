@@ -17,11 +17,13 @@ exports.indexingWorker = void 0;
  * limitations under the License.
  */
 const functions = require("firebase-functions");
+const firebase_functions_1 = require("firebase-functions");
 const create_index_1 = require("./meilisearch/create-index");
 const util_1 = require("./util");
 const logs = require("./logs");
 const adapter_1 = require("./adapter");
 const config_1 = require("./config");
+const validate_1 = require("./validate");
 const index = (0, create_index_1.initMeilisearchIndex)(config_1.config.meilisearch);
 logs.init();
 /**
@@ -52,9 +54,14 @@ exports.indexingWorker = functions.handler.firestore.document.onWrite(async (cha
  */
 async function handleAddDocument(documentId, snapshot) {
     try {
-        const document = (0, adapter_1.adaptDocument)(documentId, snapshot);
-        await index.addDocuments([document], { primaryKey: '_firestore_id' });
-        logs.addDocument(documentId, document);
+        if ((0, validate_1.validateDocumentId)(documentId)) {
+            const document = (0, adapter_1.adaptDocument)(documentId, snapshot);
+            await index.addDocuments([document], { primaryKey: '_firestore_id' });
+            logs.addDocument(documentId, document);
+        }
+        else {
+            firebase_functions_1.logger.error(`Could not create document with id: ${documentId}.\nThe document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
+        }
     }
     catch (e) {
         logs.error(e);
@@ -66,8 +73,13 @@ async function handleAddDocument(documentId, snapshot) {
  */
 async function handleDeleteDocument(documentId) {
     try {
-        await index.deleteDocument(documentId);
-        logs.deleteDocument(documentId);
+        if ((0, validate_1.validateDocumentId)(documentId)) {
+            await index.deleteDocument(documentId);
+            logs.deleteDocument(documentId);
+        }
+        else {
+            firebase_functions_1.logger.error(`Could not create document with id: ${documentId}.\nThe document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
+        }
     }
     catch (e) {
         logs.error(e);
@@ -80,9 +92,14 @@ async function handleDeleteDocument(documentId) {
  */
 async function handleUpdateDocument(documentId, after) {
     try {
-        const document = (0, adapter_1.adaptDocument)(documentId, after);
-        await index.updateDocuments([document]);
-        logs.updateDocument(documentId, document);
+        if ((0, validate_1.validateDocumentId)(documentId)) {
+            const document = (0, adapter_1.adaptDocument)(documentId, after);
+            await index.updateDocuments([document]);
+            logs.updateDocument(documentId, document);
+        }
+        else {
+            firebase_functions_1.logger.error(`Could not create document with id: ${documentId}.\nThe document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
+        }
     }
     catch (e) {
         logs.error(e);

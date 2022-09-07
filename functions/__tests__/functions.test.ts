@@ -1,7 +1,11 @@
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
 import { mocked } from 'ts-jest/utils'
-import { mockConsoleLog, mockConsoleInfo } from './__mocks__/console'
+import {
+  mockConsoleLog,
+  mockConsoleInfo,
+  mockConsoleError,
+} from './__mocks__/console'
 import { MeiliSearch } from 'meilisearch'
 import defaultEnvironment from './data/environment'
 import defaultDocument from './data/document'
@@ -78,7 +82,7 @@ describe('extension', () => {
       jest.clearAllMocks()
     })
 
-    test('function runs with created data', async () => {
+    test.only('function runs with created data', async () => {
       const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
         {},
         `collection/{}`
@@ -107,8 +111,7 @@ describe('extension', () => {
       expect(mockConsoleInfo).toBeCalledWith(
         `Creating new document ${
           afterSnapshot.id as string
-        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
-        { _firestore_id: defaultDocument.id, ...afterSnapshot.data() }
+        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockedAddDocuments).toHaveBeenCalledWith(
         [
@@ -150,8 +153,7 @@ describe('extension', () => {
       expect(mockConsoleInfo).toBeCalledWith(
         `Creating new document ${
           afterSnapshot.id as string
-        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`,
-        { _firestore_id: defaultDocument.id, ...afterSnapshot.data() }
+        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockedAddDocuments).toHaveBeenCalledWith(
         [
@@ -162,6 +164,37 @@ describe('extension', () => {
           },
         ],
         { primaryKey: '_firestore_id' }
+      )
+    })
+
+    test('function run on creating document with unauthorized chars in document id', async () => {
+      const badId = '@@ !#'
+      const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        {},
+        `collection/{}`
+      )
+      const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        { id: badId },
+        `collection/${badId}`
+      )
+      const documentChange = firebaseMock.makeChange(
+        beforeSnapshot,
+        afterSnapshot
+      )
+
+      await mockExport(documentChange, {
+        resource: {
+          name: 'test',
+        },
+      })
+
+      expect(mockConsoleInfo).toBeCalledWith(
+        `Creating new document ${
+          afterSnapshot.id as string
+        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
+      )
+      expect(mockConsoleError).toBeCalledWith(
+        `Could not create document with id: ${badId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
       )
     })
 
@@ -193,8 +226,7 @@ describe('extension', () => {
       expect(mockConsoleInfo).toBeCalledWith(
         `Updating document ${afterSnapshot.id as string} in Meilisearch index ${
           defaultEnvironment.MEILISEARCH_INDEX_NAME
-        }`,
-        { _firestore_id: defaultDocument.id, ...afterSnapshot.data() }
+        }`
       )
       expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
       expect(mockedUpdateDocuments).toHaveBeenCalledWith([
@@ -233,12 +265,7 @@ describe('extension', () => {
       expect(mockConsoleInfo).toBeCalledWith(
         `Updating document ${afterSnapshot.id as string} in Meilisearch index ${
           defaultEnvironment.MEILISEARCH_INDEX_NAME
-        }`,
-        {
-          _firestore_id: defaultDocument.id,
-          id: '12345',
-          ...afterSnapshot.data(),
-        }
+        }`
       )
       expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
       expect(mockedUpdateDocuments).toHaveBeenCalledWith([
@@ -248,6 +275,32 @@ describe('extension', () => {
           ...defaultDocument.document,
         },
       ])
+    })
+
+    test('function run on creating document with unauthorized chars in document id', async () => {
+      const badId = '@@ !#'
+      const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        {},
+        `collection/{}`
+      )
+      const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
+        { id: badId },
+        `collection/${badId}`
+      )
+      const documentChange = firebaseMock.makeChange(
+        beforeSnapshot,
+        afterSnapshot
+      )
+
+      await mockExport(documentChange, {
+        resource: {
+          name: 'test',
+        },
+      })
+
+      expect(mockConsoleError).toBeCalledWith(
+        `Could not create document with id: ${badId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
+      )
     })
 
     test('functions runs with deleted data', async () => {

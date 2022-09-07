@@ -16,13 +16,14 @@
  */
 
 import * as functions from 'firebase-functions'
-import { Change } from 'firebase-functions'
+import { Change, logger } from 'firebase-functions'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { initMeilisearchIndex } from './meilisearch/create-index'
 import { getChangeType, getChangedDocumentId, ChangeType } from './util'
 import * as logs from './logs'
 import { adaptDocument } from './adapter'
 import { config } from './config'
+import { validateDocumentId } from './validate'
 
 const index = initMeilisearchIndex(config.meilisearch)
 
@@ -62,10 +63,21 @@ async function handleAddDocument(
   documentId: string,
   snapshot: DocumentSnapshot
 ): Promise<void> {
+  console.log('handleAddDocument')
+
   try {
-    const document = adaptDocument(documentId, snapshot)
-    await index.addDocuments([document], { primaryKey: '_firestore_id' })
-    logs.addDocument(documentId, document)
+    console.log('handleAddDocument2')
+    logs.addDocument(documentId)
+    console.log('handleAddDocument3')
+
+    if (validateDocumentId(documentId)) {
+      const document = adaptDocument(documentId, snapshot)
+      await index.addDocuments([document], { primaryKey: '_firestore_id' })
+    } else {
+      logger.error(
+        `Could not create document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
+      )
+    }
   } catch (e) {
     logs.error(e as Error)
   }
@@ -76,9 +88,16 @@ async function handleAddDocument(
  * @param {string} documentId Document id to delete.
  */
 async function handleDeleteDocument(documentId: string): Promise<void> {
+  console.log('handleDeleteDocument')
   try {
-    await index.deleteDocument(documentId)
     logs.deleteDocument(documentId)
+    if (validateDocumentId(documentId)) {
+      await index.deleteDocument(documentId)
+    } else {
+      logger.error(
+        `Could not create document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
+      )
+    }
   } catch (e) {
     logs.error(e as Error)
   }
@@ -94,9 +113,17 @@ async function handleUpdateDocument(
   after: DocumentSnapshot
 ): Promise<void> {
   try {
-    const document = adaptDocument(documentId, after)
-    await index.updateDocuments([document])
-    logs.updateDocument(documentId, document)
+    console.log('handleUpdateDocument')
+
+    logs.updateDocument(documentId)
+    if (validateDocumentId(documentId)) {
+      const document = adaptDocument(documentId, after)
+      await index.updateDocuments([document])
+    } else {
+      logger.error(
+        `Could not create document with id: ${documentId}.The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
+      )
+    }
   } catch (e) {
     logs.error(e as Error)
   }
