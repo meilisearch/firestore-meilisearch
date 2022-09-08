@@ -82,7 +82,7 @@ describe('extension', () => {
       jest.clearAllMocks()
     })
 
-    test.only('function runs with created data', async () => {
+    test('function runs with created data', async () => {
       const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
         {},
         `collection/{}`

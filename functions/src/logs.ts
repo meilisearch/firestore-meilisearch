@@ -75,7 +75,7 @@ export function updateDocument(id: string) {
  */
 export function deleteDocument(id: string) {
   logger.info(
-    `Deleting document ${id} in Meilisearch index ${config.meilisearch.indexUid}`
+    `Deleting document ${id} in Meilisearch index: ${config.meilisearch.indexUid}`
   )
 }
 
