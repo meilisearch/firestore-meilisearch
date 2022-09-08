@@ -111,7 +111,7 @@ describe('extension', () => {
       expect(mockConsoleInfo).toBeCalledWith(
         `Creating new document ${
           afterSnapshot.id as string
-        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
+        } in Meilisearch index: ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockedAddDocuments).toHaveBeenCalledWith(
         [
@@ -153,7 +153,7 @@ describe('extension', () => {
       expect(mockConsoleInfo).toBeCalledWith(
         `Creating new document ${
           afterSnapshot.id as string
-        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
+        } in Meilisearch index: ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockedAddDocuments).toHaveBeenCalledWith(
         [
@@ -191,7 +191,7 @@ describe('extension', () => {
       expect(mockConsoleInfo).toBeCalledWith(
         `Creating new document ${
           afterSnapshot.id as string
-        } in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
+        } in Meilisearch index: ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockConsoleError).toBeCalledWith(
         `Could not create document with id: ${badId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
@@ -224,9 +224,9 @@ describe('extension', () => {
         config
       )
       expect(mockConsoleInfo).toBeCalledWith(
-        `Updating document ${afterSnapshot.id as string} in Meilisearch index ${
-          defaultEnvironment.MEILISEARCH_INDEX_NAME
-        }`
+        `Updating document ${
+          afterSnapshot.id as string
+        } in Meilisearch index: ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
       expect(mockedUpdateDocuments).toHaveBeenCalledWith([
@@ -263,9 +263,9 @@ describe('extension', () => {
         config
       )
       expect(mockConsoleInfo).toBeCalledWith(
-        `Updating document ${afterSnapshot.id as string} in Meilisearch index ${
-          defaultEnvironment.MEILISEARCH_INDEX_NAME
-        }`
+        `Updating document ${
+          afterSnapshot.id as string
+        } in Meilisearch index: ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
       expect(mockedUpdateDocuments).toHaveBeenCalledWith([
@@ -326,7 +326,7 @@ describe('extension', () => {
         config
       )
       expect(mockConsoleInfo).toBeCalledWith(
-        `Deleting document ${defaultDocument.id} in Meilisearch index ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
+        `Deleting document ${defaultDocument.id} in Meilisearch index: ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
       expect(mockedDeleteDocument).toHaveBeenCalledWith(defaultDocument.id)

@@ -63,12 +63,8 @@ async function handleAddDocument(
   documentId: string,
   snapshot: DocumentSnapshot
 ): Promise<void> {
-  console.log('handleAddDocument')
-
   try {
-    console.log('handleAddDocument2')
     logs.addDocument(documentId)
-    console.log('handleAddDocument3')
 
     if (validateDocumentId(documentId)) {
       const document = adaptDocument(documentId, snapshot)
@@ -88,7 +84,6 @@ async function handleAddDocument(
  * @param {string} documentId Document id to delete.
  */
 async function handleDeleteDocument(documentId: string): Promise<void> {
-  console.log('handleDeleteDocument')
   try {
     logs.deleteDocument(documentId)
     if (validateDocumentId(documentId)) {
@@ -113,8 +108,6 @@ async function handleUpdateDocument(
   after: DocumentSnapshot
 ): Promise<void> {
   try {
-    console.log('handleUpdateDocument')
-
     logs.updateDocument(documentId)
     if (validateDocumentId(documentId)) {
       const document = adaptDocument(documentId, after)
