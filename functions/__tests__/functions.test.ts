@@ -277,32 +277,6 @@ describe('extension', () => {
       ])
     })
 
-    test('function run on creating document with unauthorized chars in document id', async () => {
-      const badId = '@@ !#'
-      const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
-        {},
-        `collection/{}`
-      )
-      const afterSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
-        { id: badId },
-        `collection/${badId}`
-      )
-      const documentChange = firebaseMock.makeChange(
-        beforeSnapshot,
-        afterSnapshot
-      )
-
-      await mockExport(documentChange, {
-        resource: {
-          name: 'test',
-        },
-      })
-
-      expect(mockConsoleError).toBeCalledWith(
-        `Could not create document with id: ${badId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
-      )
-    })
-
     test('functions runs with deleted data', async () => {
       const beforeSnapshot = firebaseMock.firestore.makeDocumentSnapshot(
         { foo: 'bar' },
