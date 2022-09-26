@@ -90,7 +90,7 @@ async function handleDeleteDocument(documentId: string): Promise<void> {
       await index.deleteDocument(documentId)
     } else {
       logger.error(
-        `Could not create document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
+        `Could not delete document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
       )
     }
   } catch (e) {
@@ -114,7 +114,7 @@ async function handleUpdateDocument(
       await index.updateDocuments([document])
     } else {
       logger.error(
-        `Could not create document with id: ${documentId}.The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
+        `Could not update document with id: ${documentId}.The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
       )
     }
   } catch (e) {
