@@ -65,7 +65,6 @@ async function handleAddDocument(
 ): Promise<void> {
   try {
     logs.addDocument(documentId)
-
     if (validateDocumentId(documentId)) {
       const document = adaptDocument(documentId, snapshot)
       await index.addDocuments([document], { primaryKey: '_firestore_id' })
@@ -111,7 +110,7 @@ async function handleUpdateDocument(
     logs.updateDocument(documentId)
     if (validateDocumentId(documentId)) {
       const document = adaptDocument(documentId, after)
-      await index.updateDocuments([document])
+      await index.addDocuments([document])
     } else {
       logger.error(
         `Could not update document with id: ${documentId}.The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
