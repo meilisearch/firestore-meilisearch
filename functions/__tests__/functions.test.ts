@@ -23,11 +23,9 @@ describe('extension', () => {
   // Mocking of Meilisearch package
   const mockedMeilisearch = mocked(MeiliSearch, true)
   const mockedAddDocuments = jest.fn()
-  const mockedUpdateDocuments = jest.fn()
   const mockedDeleteDocument = jest.fn()
   const mockedIndex = jest.fn(() => ({
     addDocuments: mockedAddDocuments,
-    updateDocuments: mockedUpdateDocuments,
     deleteDocument: mockedDeleteDocument,
   }))
   mockedMeilisearch.mockReturnValue({
@@ -229,7 +227,7 @@ describe('extension', () => {
         } in Meilisearch index: ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
-      expect(mockedUpdateDocuments).toHaveBeenCalledWith([
+      expect(mockedAddDocuments).toHaveBeenCalledWith([
         {
           _firestore_id: defaultDocument.id,
           ...defaultDocument.document,
@@ -268,7 +266,7 @@ describe('extension', () => {
         } in Meilisearch index: ${defaultEnvironment.MEILISEARCH_INDEX_NAME}`
       )
       expect(mockConsoleLog).toBeCalledWith('Completed execution of extension')
-      expect(mockedUpdateDocuments).toHaveBeenCalledWith([
+      expect(mockedAddDocuments).toHaveBeenCalledWith([
         {
           _firestore_id: defaultDocument.id,
           id: '12345',

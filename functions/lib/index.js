@@ -55,7 +55,6 @@ exports.indexingWorker = functions.handler.firestore.document.onWrite(async (cha
 async function handleAddDocument(documentId, snapshot) {
     try {
         logs.addDocument(documentId);
-        console.log('CREATE');
         if ((0, validate_1.validateDocumentId)(documentId)) {
             const document = (0, adapter_1.adaptDocument)(documentId, snapshot);
             await index.addDocuments([document], { primaryKey: '_firestore_id' });
@@ -75,7 +74,6 @@ async function handleAddDocument(documentId, snapshot) {
 async function handleDeleteDocument(documentId) {
     try {
         logs.deleteDocument(documentId);
-        console.log('DELERE');
         if ((0, validate_1.validateDocumentId)(documentId)) {
             await index.deleteDocument(documentId);
         }
