@@ -52,10 +52,9 @@ export function complete() {
  * @param {string} id Document id added.
  * @param {object} data Data contained in the document.
  */
-export function addDocument(id: string, data: Record<string, any>) {
+export function addDocument(id: string) {
   logger.info(
-    `Creating new document ${id} in Meilisearch index ${config.meilisearch.indexUid}`,
-    data
+    `Creating new document ${id} in Meilisearch index: ${config.meilisearch.indexUid}`
   )
 }
 
@@ -64,10 +63,9 @@ export function addDocument(id: string, data: Record<string, any>) {
  * @param {string} id Document id updated.
  * @param {object} data Data contained in the document.
  */
-export function updateDocument(id: string, data: Record<string, any>) {
+export function updateDocument(id: string) {
   logger.info(
-    `Updating document ${id} in Meilisearch index ${config.meilisearch.indexUid}`,
-    data
+    `Updating document ${id} in Meilisearch index: ${config.meilisearch.indexUid}`
   )
 }
 
@@ -77,7 +75,7 @@ export function updateDocument(id: string, data: Record<string, any>) {
  */
 export function deleteDocument(id: string) {
   logger.info(
-    `Deleting document ${id} in Meilisearch index ${config.meilisearch.indexUid}`
+    `Deleting document ${id} in Meilisearch index: ${config.meilisearch.indexUid}`
   )
 }
 
