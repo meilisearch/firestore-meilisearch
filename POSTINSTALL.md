@@ -38,3 +38,5 @@ Learn more about using the import script to [backfill your existing collection](
 ### Monitoring
 
 As a best practice, you can [monitor the activity](https://firebase.google.com/docs/extensions/manage-installed-extensions#monitor) of your installed extension, including checks on its health, usage, and logs.
+
+Nonetheless, Most of Meilisearch tasks are [asynchronous](https://docs.meilisearch.com/learn/advanced/asynchronous_operations.html#which-operations-are-async), meaning for example that errors on documents addition/deletion/... are not logged in your extensions logs. To access these logs, use the [tasks API](https://docs.meilisearch.com/reference/api/tasks.html).
