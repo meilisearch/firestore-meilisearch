@@ -50,7 +50,6 @@ export function complete() {
 /**
  * Log an addition of a document.
  * @param {string} id Document id added.
- * @param {object} data Data contained in the document.
  */
 export function addDocument(id: string) {
   logger.info(
@@ -61,7 +60,6 @@ export function addDocument(id: string) {
 /**
  * Log an update of a document.
  * @param {string} id Document id updated.
- * @param {object} data Data contained in the document.
  */
 export function updateDocument(id: string) {
   logger.info(
