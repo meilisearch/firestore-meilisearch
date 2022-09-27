@@ -95,7 +95,7 @@ async function handleUpdateDocument(documentId, after) {
         logs.updateDocument(documentId);
         if ((0, validate_1.validateDocumentId)(documentId)) {
             const document = (0, adapter_1.adaptDocument)(documentId, after);
-            await index.updateDocuments([document]);
+            await index.addDocuments([document]);
         }
         else {
             firebase_functions_1.logger.error(`Could not update document with id: ${documentId}.The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
