@@ -7,7 +7,7 @@ exports.validateDocumentId = void 0;
  *
  * @param  {string} documentId Document id.
  *
- * @return {boolean} - Wether the document id is well formated (true) or not.
+ * @return {boolean} - Wether the document id is properly formatted (true) or not.
  */
 function validateDocumentId(documentId) {
     const wrongChars = documentId.search(/([^a-zA-Z0-9-_]+)/);

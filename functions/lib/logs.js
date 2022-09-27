@@ -50,7 +50,6 @@ exports.complete = complete;
 /**
  * Log an addition of a document.
  * @param {string} id Document id added.
- * @param {object} data Data contained in the document.
  */
 function addDocument(id) {
     firebase_functions_1.logger.info(`Creating new document ${id} in Meilisearch index: ${config_1.config.meilisearch.indexUid}`);
@@ -59,7 +58,6 @@ exports.addDocument = addDocument;
 /**
  * Log an update of a document.
  * @param {string} id Document id updated.
- * @param {object} data Data contained in the document.
  */
 function updateDocument(id) {
     firebase_functions_1.logger.info(`Updating document ${id} in Meilisearch index: ${config_1.config.meilisearch.indexUid}`);
