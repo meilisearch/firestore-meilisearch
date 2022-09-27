@@ -50,19 +50,17 @@ exports.complete = complete;
 /**
  * Log an addition of a document.
  * @param {string} id Document id added.
- * @param {object} data Data contained in the document.
  */
-function addDocument(id, data) {
-    firebase_functions_1.logger.info(`Creating new document ${id} in Meilisearch index ${config_1.config.meilisearch.indexUid}`, data);
+function addDocument(id) {
+    firebase_functions_1.logger.info(`Creating new document ${id} in Meilisearch index: ${config_1.config.meilisearch.indexUid}`);
 }
 exports.addDocument = addDocument;
 /**
  * Log an update of a document.
  * @param {string} id Document id updated.
- * @param {object} data Data contained in the document.
  */
-function updateDocument(id, data) {
-    firebase_functions_1.logger.info(`Updating document ${id} in Meilisearch index ${config_1.config.meilisearch.indexUid}`, data);
+function updateDocument(id) {
+    firebase_functions_1.logger.info(`Updating document ${id} in Meilisearch index: ${config_1.config.meilisearch.indexUid}`);
 }
 exports.updateDocument = updateDocument;
 /**
@@ -70,7 +68,7 @@ exports.updateDocument = updateDocument;
  * @param {string} id Document id deleted.
  */
 function deleteDocument(id) {
-    firebase_functions_1.logger.info(`Deleting document ${id} in Meilisearch index ${config_1.config.meilisearch.indexUid}`);
+    firebase_functions_1.logger.info(`Deleting document ${id} in Meilisearch index: ${config_1.config.meilisearch.indexUid}`);
 }
 exports.deleteDocument = deleteDocument;
 /**
