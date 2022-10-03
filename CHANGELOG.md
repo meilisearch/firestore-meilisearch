@@ -1,9 +1,12 @@
+## Version 0.1.7
+
+Ensure compatibility with Meilisearch v0.29.0
+
 ## Version 0.1.6
 
 Convert Meilisearch API key param to secret type (#111)
 Validate document id formating (#110)
 Fix issue where deleting fields in documents are not updated in Meiliseaech (#116)
-Ensure compatibility with Meilisearch v0.29.0
 
 ## Version 0.1.5
 
