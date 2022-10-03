@@ -25,7 +25,7 @@
     "firebase-admin": "^9.8.0",
     "firebase-functions": "^3.16.0",
     "inquirer": "^8.2.2",
-    "meilisearch": "^0.27.0"
+    "meilisearch": "^0.28.0"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
