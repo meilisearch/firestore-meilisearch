@@ -67,7 +67,13 @@ async function handleAddDocument(
     logs.addDocument(documentId)
     if (validateDocumentId(documentId)) {
       const document = adaptDocument(documentId, snapshot)
-      await index.addDocuments([document], { primaryKey: '_firestore_id' })
+      const { taskUid } = await index.addDocuments([document], {
+        primaryKey: '_firestore_id',
+      })
+
+      logger.info(
+        `Document addition request for document with ID ${documentId} added to task list (task ID ${taskUid}).`
+      )
     } else {
       logger.error(
         `Could not create document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
@@ -86,7 +92,11 @@ async function handleDeleteDocument(documentId: string): Promise<void> {
   try {
     logs.deleteDocument(documentId)
     if (validateDocumentId(documentId)) {
-      await index.deleteDocument(documentId)
+      const { taskUid } = await index.deleteDocument(documentId)
+
+      logger.info(
+        `Document deletion request for document with ID ${documentId} added to task list (task ID ${taskUid}).`
+      )
     } else {
       logger.error(
         `Could not delete document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
@@ -110,7 +120,11 @@ async function handleUpdateDocument(
     logs.updateDocument(documentId)
     if (validateDocumentId(documentId)) {
       const document = adaptDocument(documentId, after)
-      await index.addDocuments([document])
+      const { taskUid } = await index.addDocuments([document])
+
+      logger.info(
+        `Document update request for document with ID ${documentId} added to task list (task ID ${taskUid}).`
+      )
     } else {
       logger.error(
         `Could not update document with id: ${documentId}.The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`
