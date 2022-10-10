@@ -95,7 +95,7 @@ async function handleDeleteDocument(documentId: string): Promise<void> {
       const { taskUid } = await index.deleteDocument(documentId)
 
       logger.info(
-        `Document deletion request for ${documentId} added to task list (task ID ${taskUid}).`
+        `Document deletion request for document with ID ${documentId} added to task list (task ID ${taskUid}).`
       )
     } else {
       logger.error(
