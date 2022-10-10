@@ -1,3 +1,7 @@
+## Version 0.1.9
+
+Ensure build of project before publishing to npm #127
+
 ## Version 0.1.8
 
 Update README and PREINSTALL documentation #125
