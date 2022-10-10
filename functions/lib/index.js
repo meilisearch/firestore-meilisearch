@@ -57,7 +57,10 @@ async function handleAddDocument(documentId, snapshot) {
         logs.addDocument(documentId);
         if ((0, validate_1.validateDocumentId)(documentId)) {
             const document = (0, adapter_1.adaptDocument)(documentId, snapshot);
-            await index.addDocuments([document], { primaryKey: '_firestore_id' });
+            const { taskUid } = await index.addDocuments([document], {
+                primaryKey: '_firestore_id',
+            });
+            firebase_functions_1.logger.info(`Document addition request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
         }
         else {
             firebase_functions_1.logger.error(`Could not create document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
@@ -75,7 +78,8 @@ async function handleDeleteDocument(documentId) {
     try {
         logs.deleteDocument(documentId);
         if ((0, validate_1.validateDocumentId)(documentId)) {
-            await index.deleteDocument(documentId);
+            const { taskUid } = await index.deleteDocument(documentId);
+            firebase_functions_1.logger.info(`Document deletion request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
         }
         else {
             firebase_functions_1.logger.error(`Could not delete document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
@@ -95,7 +99,8 @@ async function handleUpdateDocument(documentId, after) {
         logs.updateDocument(documentId);
         if ((0, validate_1.validateDocumentId)(documentId)) {
             const document = (0, adapter_1.adaptDocument)(documentId, after);
-            await index.addDocuments([document]);
+            const { taskUid } = await index.addDocuments([document]);
+            firebase_functions_1.logger.info(`Document update request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
         }
         else {
             firebase_functions_1.logger.error(`Could not update document with id: ${documentId}.The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
