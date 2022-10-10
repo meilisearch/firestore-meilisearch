@@ -44,12 +44,11 @@ Before installing this extension, you'll need to:
 
 #### Data import format
 
-Documents indexed in Meilisearch must have a [unique id](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field). The extension will use Firestore's default field: `Document ID` for this purpose. `Document ID` will be renamed  to`_firestore_id` to be used as the [document id](https://docs.meilisearch.com/learn/core_concepts/documents.html#document-id). If your documents  have another field containing the string `id`, it will not be set as the primary key.
+Documents indexed in Meilisearch must have an [unique id](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field). Meilisearch uses Firestore's default field: `Document ID` for this purpose, and renames it to`_firestore_id`.
 
 **Important:**  If your documents contain a field called `_firestore_id`, it will be ignored.
 
-[Geosearch](https://docs.meilisearch.com/reference/features/geosearch.html#geosearch) has a specific format in Meilisearch, your documents must have a valid `_geo` field with an object composed of `lat` and `lng`. If a `GeoPoint` from Firestore with the name `_geo` is found, the field `latitude` is renamed to `lat` and `longitude` to `lng`.
-If a `GeoPoint` is found without the name `_geo`, it is added as an array.
+If you are using `GeoPoint`, the field should be named `_geo` to be recognized by Meilisearch for [geosearch]((https://docs.meilisearch.com/reference/features/geosearch.html#geosearch)).
 
 #### Backfill your Meilisearch data
 
