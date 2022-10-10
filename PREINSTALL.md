@@ -13,13 +13,15 @@ Before installing this extension, you'll need to:
 
 #### Data import format
 
-Documents indexed in Meilisearch must have a [unique id](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field). The extension will use Firestore's default field: `Document ID` for this purpose. `Document ID` will be renamed  to`_firestore_id` to be used as the [document id](https://docs.meilisearch.com/learn/core_concepts/documents.html#document-id). If your documents  have another field containing the string `id`, it will not be set as the primary key.
+Documents indexed in Meilisearch must have a [unique id](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field). The extension will use Firestore's default field: `Document ID` for this purpose. `Document ID` will be renamed  to`_firestore_id` to be used as the [document id](https://docs.meilisearch.com/learn/core_concepts/documents.html#document-id). If your documents have another field containing the string `id`, it will not be set as the primary key.
 
 **Important:**  If your documents contain a field called `_firestore_id`, it will be ignored.
 
+If you are using `GeoPoint`, the field should be named `_geo` to be recognized by Meilisearch for [geosearch]((https://docs.meilisearch.com/reference/features/geosearch.html#geosearch)).
+
 #### Backfill your Meilisearch data
 
-This extension does not export all existing documents icpnto Meilisearch unless they have been modified or created after its installation. You can run the [import script](https://github.com/meilisearch/firestore-meilisearch/) provided by this extension to retrieve your Meilisearch dataset with all the documents present in your Firestore collection
+This extension does not export all existing documents into Meilisearch unless they have been modified or created after its installation. You can run the [import script](https://github.com/meilisearch/firestore-meilisearch/) provided by this extension to retrieve your Meilisearch dataset with all the documents present in your Firestore collection
 
 #### Billing
 
