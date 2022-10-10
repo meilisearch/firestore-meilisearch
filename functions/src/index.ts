@@ -72,7 +72,7 @@ async function handleAddDocument(
       })
 
       logger.info(
-        `Document with id: ${documentId} is added with the task number: ${taskUid}.`
+        `Document addition request for ${documentId} added to task list (task ID ${taskUid}).`
       )
     } else {
       logger.error(
