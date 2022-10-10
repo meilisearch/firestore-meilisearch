@@ -123,7 +123,7 @@ async function handleUpdateDocument(
       const { taskUid } = await index.addDocuments([document])
 
       logger.info(
-        `Document with id: ${documentId} is updated with the task number: ${taskUid}.`
+        `Document update request for ${documentId} added to task list (task ID ${taskUid}).
       )
     } else {
       logger.error(
