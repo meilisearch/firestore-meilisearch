@@ -17,7 +17,7 @@ jobs:
       - name: Check tag format
         run: sh .github/scripts/check-tag-format.sh "${{ github.event.release.prerelease }}"
       - name: Install dependencies
-        run: yarn && yarn install:functions
+        run: yarn && yarn install:functions && yarn build
       - name: Copy README in the functions directory
         run: cp README.md functions/
       - name: Publish with latest tag
