@@ -13,7 +13,7 @@ Before installing this extension, you'll need to:
 
 #### Data import format
 
-Documents indexed in Meilisearch must have a [unique id](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field). Meilisearch uses Firestore's default field: `Document ID` for this purpose, and renames it to`_firestore_id`.
+Documents indexed in Meilisearch must have an [unique id](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field). Meilisearch uses Firestore's default field: `Document ID` for this purpose, and renames it to`_firestore_id`.
 
 **Important:**  If your documents contain a field called `_firestore_id`, it will be ignored.
 
