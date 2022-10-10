@@ -1,3 +1,8 @@
+## Version 0.1.8
+
+Update README and PREINSTALL documentation #125
+Add tasks uids in the logs #124
+
 ## Version 0.1.7
 
 Ensure compatibility with Meilisearch v0.29.0
