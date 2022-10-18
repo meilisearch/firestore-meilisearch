@@ -15,7 +15,7 @@ Before installing this extension, you'll need to:
 
 Documents indexed in Meilisearch must have an [unique id](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field). Meilisearch uses Firestore's default field: `Document ID` for this purpose, and renames it to`_firestore_id`.
 
-**Important:**  If your documents contain a field called `_firestore_id`, it will be ignored.
+**Important:** If your documents contain a field called `_firestore_id`, it will be ignored.
 
 If you are using `GeoPoint`, the field should be named `_geo` to be recognized by Meilisearch for [geosearch]((https://docs.meilisearch.com/reference/features/geosearch.html#geosearch)).
 

@@ -102,7 +102,7 @@ All Firebase services offer a free tier of usage.
 
 [![Install this extension in your Firebase project](https://www.gstatic.com/mobilesdk/210513_mobilesdk/install-extension.png "Install this extension in your Firebase project")][install-link]
 
-[install-link]: https://console.firebase.google.com/project/_/extensions/install?ref=meilisearch/firestore-meilisearch
+[install-link]: https://extensions.dev/extensions/meilisearch/firestore-meilisearch
 
 ### Firebase CLI
 
