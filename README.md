@@ -48,7 +48,7 @@ Documents indexed in Meilisearch must have an [unique id](https://docs.meilisear
 
 **Important:**  If your documents contain a field called `_firestore_id`, it will be ignored.
 
-If you are using `GeoPoint`, the field should be named `_geo` to be recognized by Meilisearch for [geosearch]((https://docs.meilisearch.com/reference/features/geosearch.html#geosearch)).
+If you are using `GeoPoint`, the field should be named `_geo` to be recognized by Meilisearch for [geosearch](https://docs.meilisearch.com/reference/features/geosearch.html#geosearch).
 
 #### Backfill your Meilisearch data
 
