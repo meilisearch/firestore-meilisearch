@@ -46,9 +46,9 @@ Before installing this extension, you'll need to:
 
 Documents indexed in Meilisearch must have an [unique id](https://docs.meilisearch.com/learn/core_concepts/documents.html#primary-field). Meilisearch uses Firestore's default field: `Document ID` for this purpose, and renames it to`_firestore_id`.
 
-**Important:** If your documents contain a field called `_firestore_id`, it will be ignored.
+**Important:**  If your documents contain a field called `_firestore_id`, it will be ignored.
 
-If you are using `GeoPoint`, the field should be named `_geo` to be recognized by Meilisearch for [geosearch](<(https://docs.meilisearch.com/reference/features/geosearch.html#geosearch)>).
+If you are using `GeoPoint`, the field should be named `_geo` to be recognized by Meilisearch for [geosearch]((https://docs.meilisearch.com/reference/features/geosearch.html#geosearch)).
 
 #### Backfill your Meilisearch data
 
@@ -58,11 +58,11 @@ This extension does not export all existing documents into Meilisearch unless th
 
 To install an extension, your project must be on the [Blaze (pay as you go) plan](https://firebase.google.com/pricing)
 
-- You will be charged a small amount (typically around $0.01/month) for the Firebase resources required by this extension, even if it is not used.
-- This extension uses other Firebase or Google Cloud services which may have
+* You will be charged a small amount (typically around $0.01/month) for the Firebase resources required by this extension, even if it is not used.
+* This extension uses other Firebase or Google Cloud services which may have
   associated charges if you exceed the service’s free tier:
-  - Cloud Firestore
-  - Cloud Functions (Node.js 10+ runtime. [See FAQs](https://firebase.google.com/support/faq#extensions-pricing))
+  *   Cloud Firestore
+  *   Cloud Functions (Node.js 10+ runtime. [See FAQs](https://firebase.google.com/support/faq#extensions-pricing))
 
 When you use Firebase extensions, you're only charged for the underlying
 resources that you use. A paid-tier billing plan is only required if the
@@ -71,23 +71,28 @@ a Google Cloud API or making outbound network requests to non-Google services.
 All Firebase services offer a free tier of usage.
 [Learn more about Firebase billing.](https://firebase.google.com/pricing)
 
+
+
+
 **Configuration Parameters:**
 
-- Cloud Functions location: Where do you want to deploy the functions created for this extension? If you need help selecting a location, refer to the [location selection guide](https://firebase.google.com/docs/functions/locations).
+* Cloud Functions location: Where do you want to deploy the functions created for this extension? If you need help selecting a location, refer to the [location selection guide](https://firebase.google.com/docs/functions/locations).
 
-- Collection path: What is the path of the collection you would like to export into Meilisearch?
+* Collection path: What is the path of the collection you would like to export into Meilisearch?
 
-- Fields to index in Meilisearch: What fields do you want to index in Meilisearch? Create a comma-separated list of the field names, or leave it blank to include all fields. The id field is always indexed even when omitted from the list.
+* Fields to index in Meilisearch: What fields do you want to index in Meilisearch? Create a comma-separated list of the field names, or leave it blank to include all fields. The id field is always indexed even when omitted from the list.
 
-- Meilisearch Index Name: What Meilisearch index do you want to index your data in?
+* Meilisearch Index Name: What Meilisearch index do you want to index your data in?
 
-- Meilisearch host: What is the URL of the host of your Meilisearch database? Make sure your URL starts with `http://` or `https://`
+* Meilisearch host: What is the URL of the host of your Meilisearch database? Make sure your URL starts with `http://` or `https://`
 
-- Meilisearch API key: What is your Meilisearch API key with permission to perform actions on indexes? Both the API keys and the master key are valid choices but we strongly recommend using an API key for security purposes. Check out our guide on [security](https://docs.meilisearch.com/learn/security/master_api_keys.html).
+* Meilisearch API key: What is your Meilisearch API key with permission to perform actions on indexes? Both the API keys and the master key are valid choices but we strongly recommend using an API key for security purposes. Check out our guide on [security](https://docs.meilisearch.com/learn/security/master_api_keys.html).
+
+
 
 **Cloud Functions:**
 
-- **indexingWorker:** Cloud function triggered by document modification in Firestore to import changes into Meilisearch.
+* **indexingWorker:** Cloud function triggered by document modification in Firestore to import changes into Meilisearch.
 
 ---
 
@@ -95,7 +100,7 @@ All Firebase services offer a free tier of usage.
 
 ### Console
 
-[![Install this extension in your Firebase project](https://www.gstatic.com/mobilesdk/210513_mobilesdk/install-extension.png 'Install this extension in your Firebase project')][install-link]
+[![Install this extension in your Firebase project](https://www.gstatic.com/mobilesdk/210513_mobilesdk/install-extension.png "Install this extension in your Firebase project")][install-link]
 
 [install-link]: https://extensions.dev/extensions/meilisearch/firestore-meilisearch
 
