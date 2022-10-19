@@ -54,7 +54,7 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
       --api-key <api_key> \
       --non-interactive
     ```
-    **Note**: The `--batch-size` and `--query-collection-group` arguments are optional. To see its usage, run the above command with `--help`.
+    **Note**: The `--batch-size` and `--query-collection-group` arguments are optional. To see its usage, run the above command with `--help`. Additionally, if you need to limit the fields indexed instead of indexing them all, set the `MEILISEARCH_FIELDS_TO_INDEX` environment variable with a comma-separated list of those field names.
 
 4. Check if the index and Document are imported in Meilisearch:
 
