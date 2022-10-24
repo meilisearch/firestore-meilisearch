@@ -141,6 +141,13 @@ const questions = [
     name: 'apiKey',
     type: 'input',
   },
+  {
+    message:
+      ' What fields do you want to index in Meilisearch? Create a comma-separated list of the field names, or leave it blank to include all fields. The id field is always indexed even when omitted from the list.',
+    name: 'fieldsToIndex',
+    default: '*',
+    type: 'input',
+  },
 ]
 
 export interface CLIConfig {
@@ -180,6 +187,7 @@ export async function parseConfig(): Promise<CLIConfig> {
         indexUid: options.index,
         host: options.host,
         apiKey: options.apiKey,
+        fieldsToIndex: options.fieldsToIndex,
       },
     }
   }
@@ -191,6 +199,7 @@ export async function parseConfig(): Promise<CLIConfig> {
     batchSize,
     host,
     apiKey,
+    fieldsToIndex,
   } = await inquirer.prompt(questions)
 
   return {
@@ -202,6 +211,7 @@ export async function parseConfig(): Promise<CLIConfig> {
       indexUid: index,
       host: host,
       apiKey: apiKey,
+      fieldsToIndex: fieldsToIndex,
     },
   }
 }

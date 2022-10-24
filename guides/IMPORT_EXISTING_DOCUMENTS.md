@@ -1,4 +1,6 @@
-The `firestore-meilisearch` script is for use with the official Firebase Extension [**Meilisearch**](https://github.com/firebase/extensions/tree/main/firestore-meilisearch).
+The `firestore-meilisearch` script is for use with the official Firebase
+// TODO: does not exists
+Extension [**Meilisearch**](https://github.com/firebase/extensions/tree/main/firestore-meilisearch).
 
 ### Overview
 
