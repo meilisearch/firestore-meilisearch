@@ -69,7 +69,7 @@ async function handleAddDocument(
       const document = adaptDocument(
         documentId,
         snapshot,
-        config.meilisearch.fieldsToIndex
+        config.meilisearch.fieldsToIndex || ''
       )
       const { taskUid } = await index.addDocuments([document], {
         primaryKey: '_firestore_id',
@@ -126,7 +126,7 @@ async function handleUpdateDocument(
       const document = adaptDocument(
         documentId,
         after,
-        config.meilisearch.fieldsToIndex
+        config.meilisearch.fieldsToIndex || ''
       )
       const { taskUid } = await index.addDocuments([document])
 

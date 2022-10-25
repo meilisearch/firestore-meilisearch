@@ -47,7 +47,7 @@ type FirestoreRow =
 export function adaptDocument(
   documentId: string,
   snapshot: DocumentSnapshot,
-  fieldsToIndex
+  fieldsToIndex: string
 ): Record<string, any> {
   const fields = parseFieldsToIndex(fieldsToIndex)
 
