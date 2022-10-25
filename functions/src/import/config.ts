@@ -48,6 +48,7 @@ program
     '-a, --api-key <api-key>',
     'The Meilisearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.'
   )
+  .option('-f, --fields-to-index <fields-to-index>', 'test')
 
 const validateInput = (
   value: string,

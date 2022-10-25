@@ -8,25 +8,17 @@ const logs = require("./logs");
  * Adapts documents from the Firestore database to Meilisearch compatible documents.
  * @param {string} documentId Document id.
  * @param {DocumentSnapshot} snapshot Snapshot of the data contained in the document read from your Firestore database.
+ * @param {string} fieldsToIndex list of fields added in the document send to Meilisearch.
  * @return {Record<string, any>} A properly formatted document to be added or updated in Meilisearch.
  */
-function adaptDocument(documentId, snapshot) {
-    const fields = (0, util_1.getFieldsToIndex)();
+function adaptDocument(documentId, snapshot, fieldsToIndex) {
+    const fields = (0, util_1.parseFieldsToIndex)(fieldsToIndex);
     const data = snapshot.data() || {};
     if ('_firestore_id' in data) {
         delete data.id;
     }
-    if (fields.length === 0) {
-        return { _firestore_id: documentId, ...data };
-    }
-    const document = Object.keys(data).reduce((acc, key) => {
-        if (fields.includes(key)) {
-            const [field, value] = adaptValues(key, data[key]);
-            return { ...acc, [field]: value };
-        }
-        return acc;
-    }, { _firestore_id: documentId });
-    return document;
+    const document = (0, util_1.sanitizeDocuments)(fields, data);
+    return { _firestore_id: documentId, ...document };
 }
 exports.adaptDocument = adaptDocument;
 /**
