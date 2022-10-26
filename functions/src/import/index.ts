@@ -96,7 +96,7 @@ async function retrieveCollectionFromFirestore(
 
 /**
  * Adapts documents and indexes them in Meilisearch.
- * @param {any} docs
+ * @param {Change<DocumentSnapshot>} docs
  * @param {Index} index
  * @param {string} fieldsToIndex list of fields added in the document send to Meilisearch.
  */
