@@ -20,7 +20,7 @@ program
     .option('-b, --batch-size [batch-size]', 'Number of documents to stream into Meilisearch at once.', value => parseInt(value, 10), 1000)
     .option('-H, --host <host>', 'The Host of your Meilisearch database. Example: http://localhost:7700.')
     .option('-a, --api-key <api-key>', 'The Meilisearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.')
-    .option('-f, --fields-to-index <fields-to-index>', 'test');
+    .option('-f, --fields-to-index <fields-to-index>', 'list of fields added in the document send to Meilisearch. Default contains all fields.');
 const validateInput = (value, name, regex, sizeLimit) => {
     if (!value || typeof value !== 'string' || value.trim() === '') {
         return `Please supply a ${name}`;

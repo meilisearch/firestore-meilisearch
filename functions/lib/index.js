@@ -24,9 +24,7 @@ const logs = require("./logs");
 const adapter_1 = require("./adapter");
 const config_1 = require("./config");
 const validate_1 = require("./validate");
-console.log('awqwe');
 const index = (0, create_index_1.initMeilisearchIndex)(config_1.config.meilisearch);
-console.log(index);
 logs.init();
 /**
  * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
