@@ -134,7 +134,7 @@ describe('getChangedDocumentId', () => {
 describe('getFieldsToIndex', () => {
   let util
   let restoreEnv
-  let mockGetFieldsToIndex
+  let mockParseFieldsToIndex
   const config = global.config
 
   beforeEach(() => {
@@ -150,48 +150,32 @@ describe('getFieldsToIndex', () => {
 
   test('return empty list', () => {
     util = require('../src/util')
-    mockGetFieldsToIndex = util.getFieldsToIndex()
-    expect(mockGetFieldsToIndex).toMatchObject([])
+    mockParseFieldsToIndex = util.parseFieldsToIndex()
+    expect(mockParseFieldsToIndex).toMatchObject([])
   })
 
   test('return list with one field', () => {
-    restoreEnv = mockedEnv({
-      ...defaultEnvironment,
-      MEILISEARCH_FIELDS_TO_INDEX: 'field',
-    })
     util = require('../src/util')
-    mockGetFieldsToIndex = util.getFieldsToIndex()
-    expect(mockGetFieldsToIndex).toMatchObject(['field'])
+    mockParseFieldsToIndex = util.parseFieldsToIndex('field')
+    expect(mockParseFieldsToIndex).toMatchObject(['field'])
   })
 
   test('return list with multiple fields', () => {
-    restoreEnv = mockedEnv({
-      ...defaultEnvironment,
-      MEILISEARCH_FIELDS_TO_INDEX: 'field1,field2,field3',
-    })
     util = require('../src/util')
-    mockGetFieldsToIndex = util.getFieldsToIndex()
-    expect(mockGetFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
+    mockParseFieldsToIndex = util.parseFieldsToIndex('field1,field2,field3')
+    expect(mockParseFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
   })
 
   test('return list with multiple fields and spaces', () => {
-    restoreEnv = mockedEnv({
-      ...defaultEnvironment,
-      MEILISEARCH_FIELDS_TO_INDEX: 'field1, field2,  field3',
-    })
     util = require('../src/util')
-    mockGetFieldsToIndex = util.getFieldsToIndex()
-    expect(mockGetFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
+    mockParseFieldsToIndex = util.parseFieldsToIndex('field1, field2,  field3')
+    expect(mockParseFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
   })
 
   test('return list of fiels with underscore', () => {
-    restoreEnv = mockedEnv({
-      ...defaultEnvironment,
-      MEILISEARCH_FIELDS_TO_INDEX: 'field_1,field_2,field_3',
-    })
     util = require('../src/util')
-    mockGetFieldsToIndex = util.getFieldsToIndex()
-    expect(mockGetFieldsToIndex).toMatchObject([
+    mockParseFieldsToIndex = util.parseFieldsToIndex('field_1,field_2,field_3')
+    expect(mockParseFieldsToIndex).toMatchObject([
       'field_1',
       'field_2',
       'field_3',

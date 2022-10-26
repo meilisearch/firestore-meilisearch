@@ -41,6 +41,7 @@ const run = async () => {
  * @param {Index} index
  */
 async function retrieveCollectionFromFirestore(database, config, index) {
+    var _a;
     const batch = parseInt(config.batchSize);
     let query;
     let total = 0;
@@ -62,7 +63,7 @@ async function retrieveCollectionFromFirestore(database, config, index) {
         const docs = snapshot.docs;
         if (docs.length === 0)
             break;
-        total += await sendDocumentsToMeilisearch(docs, index);
+        total += await sendDocumentsToMeilisearch(docs, index, ((_a = config.meilisearch) === null || _a === void 0 ? void 0 : _a.fieldsToIndex) || '');
         if (docs.length) {
             lastDocument = docs[docs.length - 1];
         }
@@ -75,11 +76,11 @@ async function retrieveCollectionFromFirestore(database, config, index) {
  * Adapts documents and indexes them in Meilisearch.
  * @param {any} docs
  * @param {Index} index
- * @param {Change<DocumentSnapshot>} change
+ * @param {string} fieldsToIndex list of fields added in the document send to Meilisearch.
  */
-async function sendDocumentsToMeilisearch(docs, index) {
+async function sendDocumentsToMeilisearch(docs, index, fieldsToIndex) {
     const document = docs.map(snapshot => {
-        return (0, adapter_1.adaptDocument)(snapshot.id, snapshot);
+        return (0, adapter_1.adaptDocument)(snapshot.id, snapshot, fieldsToIndex);
     });
     try {
         await index.addDocuments(document, { primaryKey: '_firestore_id' });

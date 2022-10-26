@@ -78,7 +78,11 @@ async function retrieveCollectionFromFirestore(
     const docs = snapshot.docs
 
     if (docs.length === 0) break
-    total += await sendDocumentsToMeilisearch(docs, index)
+    total += await sendDocumentsToMeilisearch(
+      docs,
+      index,
+      config.meilisearch?.fieldsToIndex || ''
+    )
 
     if (docs.length) {
       lastDocument = docs[docs.length - 1]
@@ -92,16 +96,17 @@ async function retrieveCollectionFromFirestore(
 
 /**
  * Adapts documents and indexes them in Meilisearch.
- * @param {any} docs
+ * @param {Change<DocumentSnapshot>} docs
  * @param {Index} index
- * @param {Change<DocumentSnapshot>} change
+ * @param {string} fieldsToIndex list of fields added in the document send to Meilisearch.
  */
 async function sendDocumentsToMeilisearch(
   docs: DocumentSnapshot[],
-  index: Index
+  index: Index,
+  fieldsToIndex: string
 ): Promise<number> {
   const document = docs.map(snapshot => {
-    return adaptDocument(snapshot.id, snapshot)
+    return adaptDocument(snapshot.id, snapshot, fieldsToIndex)
   })
   try {
     await index.addDocuments(document, { primaryKey: '_firestore_id' })

@@ -1,4 +1,5 @@
-The `firestore-meilisearch` script is for use with the official Firebase Extension [**Meilisearch**](https://github.com/firebase/extensions/tree/main/firestore-meilisearch).
+The `firestore-meilisearch` script is for use with the official Firebase
+Extension [**Meilisearch**](https://github.com/meilisearch/firestore-meilisearch).
 
 ### Overview
 
@@ -25,6 +26,7 @@ The import script uses several values from the configuration provided when you i
 - `${BATCHSIZE}`: the number of documents you want to import into Meilisearch at once
 - `${MEILISEARCH_HOST}`: the URL of the host of the Meilisearch database that you specified during extension installation
 - `${MEILISEARCH_API_KEY}`: the Meilisearch API key with permission to perform actions on indexes you specified during extension installation
+- `${MEILISEARCH_FIELDS_TO_INDEX}`: the list of fields added in the document send to Meilisearch, default to all.
 
 Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.com/package/npx).
 
@@ -52,6 +54,7 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
       --batch-size <100/default=300> \
       --host <host_address> \
       --api-key <api_key> \
+      --fields-to-index <fields_to_index> \
       --non-interactive
     ```
     **Note**: The `--batch-size` and `--query-collection-group` arguments are optional. To see its usage, run the above command with `--help`.

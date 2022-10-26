@@ -17,7 +17,7 @@
 
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { firestore } from 'firebase-admin/lib/firestore'
-import { getFieldsToIndex } from './util'
+import { parseFieldsToIndex, sanitizeDocuments } from './util'
 import * as logs from './logs'
 
 type MeilisearchGeoPoint = {
@@ -41,31 +41,24 @@ type FirestoreRow =
  * Adapts documents from the Firestore database to Meilisearch compatible documents.
  * @param {string} documentId Document id.
  * @param {DocumentSnapshot} snapshot Snapshot of the data contained in the document read from your Firestore database.
+ * @param {string} fieldsToIndex list of fields added in the document send to Meilisearch.
  * @return {Record<string, any>} A properly formatted document to be added or updated in Meilisearch.
  */
 export function adaptDocument(
   documentId: string,
-  snapshot: DocumentSnapshot
+  snapshot: DocumentSnapshot,
+  fieldsToIndex: string
 ): Record<string, any> {
-  const fields = getFieldsToIndex()
+  const fields = parseFieldsToIndex(fieldsToIndex)
+
   const data = snapshot.data() || {}
   if ('_firestore_id' in data) {
     delete data.id
   }
-  if (fields.length === 0) {
-    return { _firestore_id: documentId, ...data }
-  }
-  const document = Object.keys(data).reduce(
-    (acc, key) => {
-      if (fields.includes(key)) {
-        const [field, value] = adaptValues(key, data[key])
-        return { ...acc, [field]: value }
-      }
-      return acc
-    },
-    { _firestore_id: documentId }
-  )
-  return document
+
+  const document = sanitizeDocuments(fields, data)
+
+  return { _firestore_id: documentId, ...document }
 }
 
 /**

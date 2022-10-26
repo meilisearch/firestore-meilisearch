@@ -146,6 +146,7 @@ yarn build
       --batch-size <100/default=300> \
       --host <host_address> \
       --api-key <api_key> \
+      --fields-to-index <fields_to_index> \
       --non-interactive
     ```
     **Note**: The `--batch-size` and `--query-collection-group` arguments are optional. To see its usage, run the above command with `--help`.

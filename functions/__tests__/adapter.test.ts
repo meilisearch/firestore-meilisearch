@@ -1,41 +1,33 @@
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
-import { mocked } from 'ts-jest/utils'
 import { mockConsoleInfo } from './__mocks__/console'
 import { firestore } from 'firebase-admin/lib/firestore'
 import { adaptDocument, adaptValues } from '../src/adapter'
-import { getFieldsToIndex } from '../src/util'
 import defaultDocument from './data/document'
-
-jest.mock('../src/util')
 
 // Mocking of Firebase functions
 const firebaseMock = firebaseFunctionsTestInit()
 
 describe('extensions process', () => {
   describe('adaptDocument', () => {
-    const mockedGetFieldsToIndex = mocked(getFieldsToIndex, true)
-
     test('adaptDocument with fields not set', () => {
-      mockedGetFieldsToIndex.mockReturnValueOnce([])
       const snapshot = firebaseMock.firestore.makeDocumentSnapshot(
         defaultDocument.document,
         `docs/${defaultDocument.id}`
       )
 
-      expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
+      expect(adaptDocument(defaultDocument.id, snapshot, '')).toStrictEqual({
         _firestore_id: defaultDocument.id,
         ...defaultDocument.document,
       })
     })
 
     test('adaptDocument with fields not set and with id field in document', () => {
-      mockedGetFieldsToIndex.mockReturnValueOnce([])
       const snapshot = firebaseMock.firestore.makeDocumentSnapshot(
         { id: '12345', ...defaultDocument.document },
         `docs/${defaultDocument.id}`
       )
 
-      expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
+      expect(adaptDocument(defaultDocument.id, snapshot, '')).toStrictEqual({
         _firestore_id: defaultDocument.id,
         id: '12345',
         ...defaultDocument.document,
@@ -43,17 +35,18 @@ describe('extensions process', () => {
     })
 
     test('adaptDocument with fields set', () => {
-      mockedGetFieldsToIndex.mockReturnValueOnce([
-        'title',
-        'overview',
-        'release_date',
-      ])
       const snapshot = firebaseMock.firestore.makeDocumentSnapshot(
         defaultDocument.document,
         `docs/${defaultDocument.id}`
       )
 
-      expect(adaptDocument(defaultDocument.id, snapshot)).toStrictEqual({
+      expect(
+        adaptDocument(
+          defaultDocument.id,
+          snapshot,
+          'title,overview,release_date'
+        )
+      ).toStrictEqual({
         _firestore_id: defaultDocument.id,
         title: defaultDocument.document.title,
         overview: defaultDocument.document.overview,

@@ -19,7 +19,8 @@ program
     .option('-i, --index <index>', "The Uid of the index in Meilisearch to import to. (An index will be created if it doesn't already exist.)")
     .option('-b, --batch-size [batch-size]', 'Number of documents to stream into Meilisearch at once.', value => parseInt(value, 10), 1000)
     .option('-H, --host <host>', 'The Host of your Meilisearch database. Example: http://localhost:7700.')
-    .option('-a, --api-key <api-key>', 'The Meilisearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.');
+    .option('-a, --api-key <api-key>', 'The Meilisearch API key with permission to perform actions on indexes. Both the private key and the master key are valid choices but we strongly recommend using the private key for security purposes.')
+    .option('-f, --fields-to-index <fields-to-index>', 'test');
 const validateInput = (value, name, regex, sizeLimit) => {
     if (!value || typeof value !== 'string' || value.trim() === '') {
         return `Please supply a ${name}`;
@@ -82,6 +83,12 @@ const questions = [
         name: 'apiKey',
         type: 'input',
     },
+    {
+        message: ' What fields do you want to index in Meilisearch? Create a comma-separated list of the field names, or leave it blank to include all fields. The id field is always indexed even when omitted from the list.',
+        name: 'fieldsToIndex',
+        default: '*',
+        type: 'input',
+    },
 ];
 /**
  * Parse the argument from the interactive or non-interactive command line.
@@ -108,10 +115,11 @@ async function parseConfig() {
                 indexUid: options.index,
                 host: options.host,
                 apiKey: options.apiKey,
+                fieldsToIndex: options.fieldsToIndex,
             },
         };
     }
-    const { project, sourceCollectionPath, queryCollectionGroup, index, batchSize, host, apiKey, } = await inquirer.prompt(questions);
+    const { project, sourceCollectionPath, queryCollectionGroup, index, batchSize, host, apiKey, fieldsToIndex, } = await inquirer.prompt(questions);
     return {
         projectId: project,
         sourceCollectionPath: sourceCollectionPath,
@@ -121,6 +129,7 @@ async function parseConfig() {
             indexUid: index,
             host: host,
             apiKey: apiKey,
+            fieldsToIndex: fieldsToIndex,
         },
     };
 }
