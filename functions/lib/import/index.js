@@ -19,7 +19,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const admin = require("firebase-admin");
 const config_1 = require("./config");
 const logs = require("../logs");
-const adapter_1 = require("../adapter");
+const meilisearch_adapter_1 = require("../meilisearch-adapter");
 const create_index_1 = require("../meilisearch/create-index");
 const run = async () => {
     // Retrieve all arguments from the commande line.
@@ -80,7 +80,7 @@ async function retrieveCollectionFromFirestore(database, config, index) {
  */
 async function sendDocumentsToMeilisearch(docs, index, fieldsToIndex) {
     const document = docs.map(snapshot => {
-        return (0, adapter_1.adaptDocument)(snapshot.id, snapshot, fieldsToIndex);
+        return (0, meilisearch_adapter_1.adaptDocumentForMeilisearch)(snapshot.id, snapshot, fieldsToIndex);
     });
     try {
         await index.addDocuments(document, { primaryKey: '_firestore_id' });

@@ -21,7 +21,7 @@ const firebase_functions_1 = require("firebase-functions");
 const create_index_1 = require("./meilisearch/create-index");
 const util_1 = require("./util");
 const logs = require("./logs");
-const adapter_1 = require("./adapter");
+const meilisearch_adapter_1 = require("./meilisearch-adapter");
 const config_1 = require("./config");
 const validate_1 = require("./validate");
 const index = (0, create_index_1.initMeilisearchIndex)(config_1.config.meilisearch);
@@ -30,19 +30,19 @@ logs.init();
  * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
  * It is controlled by a Firestore handler.
  */
-exports.indexingWorker = functions.handler.firestore.document.onWrite(async (change) => {
+exports.indexingWorker = functions.handler.firestore.document.onWrite(async (snapshot) => {
     logs.start();
-    const changeType = (0, util_1.getChangeType)(change);
-    const documentId = (0, util_1.getChangedDocumentId)(change);
-    switch (changeType) {
+    const actionType = (0, util_1.getActionType)(snapshot);
+    const documentId = (0, util_1.getChangedDocumentId)(snapshot);
+    switch (actionType) {
         case util_1.ChangeType.CREATE:
-            await handleAddDocument(documentId, change.after);
+            await handleAddDocument(documentId, snapshot.after);
             break;
         case util_1.ChangeType.DELETE:
             await handleDeleteDocument(documentId);
             break;
         case util_1.ChangeType.UPDATE:
-            await handleUpdateDocument(documentId, change.after);
+            await handleUpdateDocument(documentId, snapshot.after);
             break;
     }
     logs.complete();
@@ -56,7 +56,7 @@ async function handleAddDocument(documentId, snapshot) {
     try {
         logs.addDocument(documentId);
         if ((0, validate_1.validateDocumentId)(documentId)) {
-            const document = (0, adapter_1.adaptDocument)(documentId, snapshot, config_1.config.meilisearch.fieldsToIndex || '');
+            const document = (0, meilisearch_adapter_1.adaptDocumentForMeilisearch)(documentId, snapshot, config_1.config.meilisearch.fieldsToIndex || '');
             const { taskUid } = await index.addDocuments([document], {
                 primaryKey: '_firestore_id',
             });
@@ -98,7 +98,7 @@ async function handleUpdateDocument(documentId, after) {
     try {
         logs.updateDocument(documentId);
         if ((0, validate_1.validateDocumentId)(documentId)) {
-            const document = (0, adapter_1.adaptDocument)(documentId, after, config_1.config.meilisearch.fieldsToIndex || '');
+            const document = (0, meilisearch_adapter_1.adaptDocumentForMeilisearch)(documentId, after, config_1.config.meilisearch.fieldsToIndex || '');
             const { taskUid } = await index.addDocuments([document]);
             firebase_functions_1.logger.info(`Document update request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
         }

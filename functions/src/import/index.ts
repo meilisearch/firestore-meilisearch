@@ -20,7 +20,7 @@ import * as admin from 'firebase-admin'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { CLIConfig, parseConfig } from './config'
 import * as logs from '../logs'
-import { adaptDocument } from '../adapter'
+import { adaptDocumentForMeilisearch } from '../meilisearch-adapter'
 import { initMeilisearchIndex } from '../meilisearch/create-index'
 import { Index } from '../types'
 
@@ -106,7 +106,7 @@ async function sendDocumentsToMeilisearch(
   fieldsToIndex: string
 ): Promise<number> {
   const document = docs.map(snapshot => {
-    return adaptDocument(snapshot.id, snapshot, fieldsToIndex)
+    return adaptDocumentForMeilisearch(snapshot.id, snapshot, fieldsToIndex)
   })
   try {
     await index.addDocuments(document, { primaryKey: '_firestore_id' })
