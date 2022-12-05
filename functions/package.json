@@ -22,7 +22,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "commander": "^9.1.0",
-    "firebase-admin": "^9.8.0",
+    "firebase-admin": "^11.3.0",
     "firebase-functions": "^3.16.0",
     "inquirer": "^8.2.2",
     "meilisearch": "^0.30.0"

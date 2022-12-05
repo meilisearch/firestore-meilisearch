@@ -1,0 +1,112 @@
+'use strict'
+/*
+ * Copyright 2022 Meilisearch
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
+import * as firestore from 'firebase-admin/firestore'
+
+type MeilisearchGeoPoint = {
+  lat: number
+  lng: number
+}
+
+/**
+ * Adapts GeoPoint Firestore instance to fit with Meilisearch geo point.
+ * @param {firestore.GeoPoint} geoPoint GeoPoint Firestore object.
+ * @return {MeilisearchGeoPoint} A properly formatted geo point for Meilisearch.
+ */
+function adaptGeoPoint(geoPoint: firestore.GeoPoint): MeilisearchGeoPoint {
+  return {
+    lat: geoPoint.latitude,
+    lng: geoPoint.longitude,
+  }
+}
+
+/**
+ * Check if the field is added to the document send to Meilisearch.
+ *
+ * @param  {string[]} fieldsToIndex
+ * @param  {string} key
+ * @return {boolean} true if it is a field that should be indexed in Meilisearch
+ *
+ */
+export function isAFieldToIndex(fieldsToIndex: string[], key: string): boolean {
+  if (
+    fieldsToIndex.length === 0 ||
+    fieldsToIndex.includes('*') ||
+    fieldsToIndex.includes(key)
+  ) {
+    return true
+  }
+  return false
+}
+
+/**
+ * Parse the fieldsToIndex string into an array.
+ *
+ * @param  {string} fieldsToIndex
+ * @return {string[]} An array of fields.
+ */
+export function parseFieldsToIndex(fieldsToIndex: string): string[] {
+  return fieldsToIndex ? fieldsToIndex.split(/[ ,]+/) : []
+}
+
+/**
+ * Update special fields to Meilisearch compatible format
+ * @param {firestore.DocumentData} document
+ * @param {string[]} fieldsToIndexSetting
+ * @return {firestore.DocumentData} A properly formatted array of field and value.
+ */
+function adaptFields(
+  document: firestore.DocumentData,
+  fieldsToIndexSetting: string
+): firestore.DocumentData {
+  const fieldsToIndex = parseFieldsToIndex(fieldsToIndexSetting)
+
+  return Object.keys(document).reduce((doc, currentField) => {
+    const value = document[currentField]
+
+    if (!isAFieldToIndex(fieldsToIndex, currentField))
+      if (currentField === '_geo' && value instanceof firestore.GeoPoint) {
+        return {
+          ...doc,
+          _geo: adaptGeoPoint(value),
+        }
+      }
+    return { ...doc, [currentField]: value }
+  }, {})
+}
+
+/**
+ * Adapts documents from the Firestore database to Meilisearch compatible documents.
+ * @param {string} documentId Document id.
+ * @param {DocumentSnapshot} snapshot Snapshot of the data contained in the document read from your Firestore database.
+ * @param {string} fieldsToIndexSetting Value of the setting `FIELDS_TO_INDEX`
+ * @return {Record<string, any>} A properly formatted document to be added or updated in Meilisearch.
+ */
+export function adaptDocumentForMeilisearch(
+  documentId: string,
+  snapshot: DocumentSnapshot,
+  fieldsToIndexSetting: string
+): Record<string, any> {
+  const data = snapshot.data() || {}
+  if ('_firestore_id' in data) {
+    delete data.id
+  }
+  const adaptedDoc = adaptFields(document, fieldsToIndexSetting)
+
+  return { _firestore_id: documentId, ...adaptedDoc }
+}

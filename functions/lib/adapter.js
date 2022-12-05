@@ -1,9 +1,10 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adaptValues = exports.adaptDocument = void 0;
-const firestore_1 = require("firebase-admin/lib/firestore");
+exports.adaptDocumentForMeilisearch = exports.adaptDocument = void 0;
+const functions = require("firebase-functions");
+// import { logger } from 'firebase-functions'
+const firestore = require("firebase-admin/firestore");
 const util_1 = require("./util");
-const logs = require("./logs");
 /**
  * Adapts documents from the Firestore database to Meilisearch compatible documents.
  * @param {string} documentId Document id.
@@ -18,28 +19,32 @@ function adaptDocument(documentId, snapshot, fieldsToIndex) {
         delete data.id;
     }
     const document = (0, util_1.sanitizeDocuments)(fields, data);
+    console.log({ document });
+    const adaptedDoc = adaptDocumentForMeilisearch(document);
+    console.log({ adaptedDoc });
     return { _firestore_id: documentId, ...document };
 }
 exports.adaptDocument = adaptDocument;
 /**
- * Checks and adapts each values to be compatible with Meilisearch documents.
- * @param {string} field
- * @param {FirestoreRow} value
- * @return {[string,FirestoreRow]} A properly formatted array of field and value.
+ * Update special fields to Meilisearch compatible format
+ * @param {firestore.DocumentData} document
+ * @return {firestore.DocumentData} A properly formatted array of field and value.
  */
-function adaptValues(field, value) {
-    if (value instanceof firestore_1.firestore.GeoPoint) {
-        if (field === '_geo') {
-            logs.infoGeoPoint(true);
-            return [field, adaptGeoPoint(value)];
+function adaptDocumentForMeilisearch(document) {
+    functions.logger.info(`ADAPT VALUES`);
+    return Object.keys(document).reduce((doc, currentField) => {
+        const value = document[currentField];
+        console.log({ currentField });
+        if (currentField === '_geo' && value instanceof firestore.GeoPoint) {
+            return {
+                ...doc,
+                _geo: adaptGeoPoint(value),
+            };
         }
-        else {
-            logs.infoGeoPoint(false);
-        }
-    }
-    return [field, value];
+        return { ...doc, [currentField]: value };
+    }, {});
 }
-exports.adaptValues = adaptValues;
+exports.adaptDocumentForMeilisearch = adaptDocumentForMeilisearch;
 /**
  * Adapts GeoPoint Firestore instance to fit with Meilisearch geo point.
  * @param {firestore.GeoPoint} geoPoint GeoPoint Firestore object.

@@ -19,9 +19,9 @@ import * as functions from 'firebase-functions'
 import { Change, logger } from 'firebase-functions'
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 import { initMeilisearchIndex } from './meilisearch/create-index'
-import { getChangeType, getChangedDocumentId, ChangeType } from './util'
+import { getActionType, getChangedDocumentId, ChangeType } from './util'
 import * as logs from './logs'
-import { adaptDocument } from './adapter'
+import { adaptDocumentForMeilisearch } from './meilisearch-adapter'
 import { config } from './config'
 import { validateDocumentId } from './validate'
 
@@ -34,20 +34,20 @@ logs.init()
  * It is controlled by a Firestore handler.
  */
 export const indexingWorker = functions.handler.firestore.document.onWrite(
-  async (change: Change<DocumentSnapshot>): Promise<void> => {
+  async (snapshot: Change<DocumentSnapshot>): Promise<void> => {
     logs.start()
-    const changeType = getChangeType(change)
-    const documentId = getChangedDocumentId(change)
+    const actionType = getActionType(snapshot)
+    const documentId = getChangedDocumentId(snapshot)
 
-    switch (changeType) {
+    switch (actionType) {
       case ChangeType.CREATE:
-        await handleAddDocument(documentId, change.after)
+        await handleAddDocument(documentId, snapshot.after)
         break
       case ChangeType.DELETE:
         await handleDeleteDocument(documentId)
         break
       case ChangeType.UPDATE:
-        await handleUpdateDocument(documentId, change.after)
+        await handleUpdateDocument(documentId, snapshot.after)
         break
     }
     logs.complete()
@@ -66,7 +66,7 @@ async function handleAddDocument(
   try {
     logs.addDocument(documentId)
     if (validateDocumentId(documentId)) {
-      const document = adaptDocument(
+      const document = adaptDocumentForMeilisearch(
         documentId,
         snapshot,
         config.meilisearch.fieldsToIndex || ''
@@ -123,7 +123,7 @@ async function handleUpdateDocument(
   try {
     logs.updateDocument(documentId)
     if (validateDocumentId(documentId)) {
-      const document = adaptDocument(
+      const document = adaptDocumentForMeilisearch(
         documentId,
         after,
         config.meilisearch.fieldsToIndex || ''
