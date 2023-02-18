@@ -30,7 +30,9 @@ logs.init();
  * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
  * It is controlled by a Firestore handler.
  */
-exports.indexingWorker = functions.handler.firestore.document.onWrite(async (snapshot) => {
+exports.indexingWorker = functions.firestore
+    .document(config_1.config.collectionPath + '/{documentId}')
+    .onWrite(async (snapshot) => {
     logs.start();
     const actionType = (0, util_1.getActionType)(snapshot);
     const documentId = (0, util_1.getChangedDocumentId)(snapshot);
