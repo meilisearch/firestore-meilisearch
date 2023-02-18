@@ -1,6 +1,6 @@
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
-import { mocked } from 'ts-jest/utils'
+import { mocked } from 'jest-mock'
 import {
   mockConsoleLog,
   mockConsoleInfo,
@@ -21,7 +21,7 @@ describe('extension', () => {
   let restoreEnv
 
   // Mocking of Meilisearch package
-  const mockedMeilisearch = mocked(MeiliSearch, true)
+  const mockedMeilisearch = mocked(MeiliSearch)
   const mockedAddDocuments = jest.fn()
   const mockedDeleteDocument = jest.fn()
   const mockedIndex = jest.fn(() => ({
@@ -42,6 +42,7 @@ describe('extension', () => {
   beforeEach(() => {
     restoreEnv = mockedEnv(defaultEnvironment)
     config = require('../src/config').config
+    config.collectionPath = 'collection'
   })
   afterEach(() => restoreEnv())
 
