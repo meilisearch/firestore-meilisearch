@@ -1,7 +1,8 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adaptDocumentForMeilisearch = exports.parseFieldsToIndex = exports.isAFieldToIndex = void 0;
+exports.adaptDocumentForMeilisearch = exports.adaptFields = exports.parseFieldsToIndex = exports.isAFieldToIndex = void 0;
 const firestore = require("firebase-admin/firestore");
+const logs_1 = require("./logs");
 /**
  * Adapts GeoPoint Firestore instance to fit with Meilisearch geo point.
  * @param {firestore.GeoPoint} geoPoint GeoPoint Firestore object.
@@ -51,15 +52,23 @@ function adaptFields(document, fieldsToIndexSetting) {
     return Object.keys(document).reduce((doc, currentField) => {
         const value = document[currentField];
         if (!isAFieldToIndex(fieldsToIndex, currentField))
-            if (currentField === '_geo' && value instanceof firestore.GeoPoint) {
+            return doc;
+        if (value instanceof firestore.GeoPoint) {
+            if (currentField === '_geo') {
+                (0, logs_1.infoGeoPoint)(true);
                 return {
                     ...doc,
                     _geo: adaptGeoPoint(value),
                 };
             }
+            else {
+                (0, logs_1.infoGeoPoint)(false);
+            }
+        }
         return { ...doc, [currentField]: value };
     }, {});
 }
+exports.adaptFields = adaptFields;
 /**
  * Adapts documents from the Firestore database to Meilisearch compatible documents.
  * @param {string} documentId Document id.
@@ -72,7 +81,7 @@ function adaptDocumentForMeilisearch(documentId, snapshot, fieldsToIndexSetting)
     if ('_firestore_id' in data) {
         delete data.id;
     }
-    const adaptedDoc = adaptFields(document, fieldsToIndexSetting);
+    const adaptedDoc = adaptFields(data, fieldsToIndexSetting);
     return { _firestore_id: documentId, ...adaptedDoc };
 }
 exports.adaptDocumentForMeilisearch = adaptDocumentForMeilisearch;
