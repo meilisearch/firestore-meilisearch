@@ -17,7 +17,7 @@
 
 import * as functions from 'firebase-functions'
 import { Change, logger } from 'firebase-functions'
-import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
+import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
 import { initMeilisearchIndex } from './meilisearch/create-index'
 import { getActionType, getChangedDocumentId, ChangeType } from './util'
 import * as logs from './logs'
@@ -33,8 +33,9 @@ logs.init()
  * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
  * It is controlled by a Firestore handler.
  */
-export const indexingWorker = functions.handler.firestore.document.onWrite(
-  async (snapshot: Change<DocumentSnapshot>): Promise<void> => {
+export const indexingWorker = functions.firestore
+  .document(config.collectionPath + '/{documentId}')
+  .onWrite(async (snapshot: Change<DocumentSnapshot>): Promise<void> => {
     logs.start()
     const actionType = getActionType(snapshot)
     const documentId = getChangedDocumentId(snapshot)
@@ -51,8 +52,7 @@ export const indexingWorker = functions.handler.firestore.document.onWrite(
         break
     }
     logs.complete()
-  }
-)
+  })
 
 /**
  * Handle addition of a document in the Meilisearch index.

@@ -17,7 +17,7 @@
  */
 
 import * as admin from 'firebase-admin'
-import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
+import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
 import { CLIConfig, parseConfig } from './config'
 import * as logs from '../logs'
 import { adaptDocumentForMeilisearch } from '../meilisearch-adapter'
