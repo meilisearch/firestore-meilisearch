@@ -15,8 +15,9 @@
  * limitations under the License.
  */
 
-import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
+import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
 import * as firestore from 'firebase-admin/firestore'
+import { infoGeoPoint } from './logs'
 
 type MeilisearchGeoPoint = {
   lat: number
@@ -70,7 +71,7 @@ export function parseFieldsToIndex(fieldsToIndex: string): string[] {
  * @param {string[]} fieldsToIndexSetting
  * @return {firestore.DocumentData} A properly formatted array of field and value.
  */
-function adaptFields(
+export function adaptFields(
   document: firestore.DocumentData,
   fieldsToIndexSetting: string
 ): firestore.DocumentData {
@@ -79,13 +80,18 @@ function adaptFields(
   return Object.keys(document).reduce((doc, currentField) => {
     const value = document[currentField]
 
-    if (!isAFieldToIndex(fieldsToIndex, currentField))
-      if (currentField === '_geo' && value instanceof firestore.GeoPoint) {
+    if (!isAFieldToIndex(fieldsToIndex, currentField)) return doc
+    if (value instanceof firestore.GeoPoint) {
+      if (currentField === '_geo') {
+        infoGeoPoint(true)
         return {
           ...doc,
           _geo: adaptGeoPoint(value),
         }
+      } else {
+        infoGeoPoint(false)
       }
+    }
     return { ...doc, [currentField]: value }
   }, {})
 }
@@ -106,7 +112,7 @@ export function adaptDocumentForMeilisearch(
   if ('_firestore_id' in data) {
     delete data.id
   }
-  const adaptedDoc = adaptFields(document, fieldsToIndexSetting)
+  const adaptedDoc = adaptFields(data, fieldsToIndexSetting)
 
   return { _firestore_id: documentId, ...adaptedDoc }
 }
