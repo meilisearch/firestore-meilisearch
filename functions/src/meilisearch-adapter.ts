@@ -71,7 +71,7 @@ export function parseFieldsToIndex(fieldsToIndex: string): string[] {
  * @param {string[]} rawFieldsToIndex
  * @return {firestore.DocumentData} A properly formatted array of field and value.
  */
-export function adaptFields(
+export function adaptFieldsForMeilisearch(
   document: firestore.DocumentData,
   rawFieldsToIndex: string
 ): firestore.DocumentData {
@@ -112,7 +112,7 @@ export function adaptDocumentForMeilisearch(
   if ('_firestore_id' in data) {
     delete data.id
   }
-  const adaptedDoc = adaptFields(data, rawFieldsToIndex)
+  const adaptedDoc = adaptFieldsForMeilisearch(data, rawFieldsToIndex)
 
   return { _firestore_id: documentId, ...adaptedDoc }
 }

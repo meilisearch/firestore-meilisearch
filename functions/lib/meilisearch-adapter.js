@@ -1,6 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adaptDocumentForMeilisearch = exports.adaptFields = exports.parseFieldsToIndex = exports.isAFieldToIndex = void 0;
+exports.adaptDocumentForMeilisearch = exports.adaptFieldsForMeilisearch = exports.parseFieldsToIndex = exports.isAFieldToIndex = void 0;
 const firestore = require("firebase-admin/firestore");
 const logs_1 = require("./logs");
 /**
@@ -47,7 +47,7 @@ exports.parseFieldsToIndex = parseFieldsToIndex;
  * @param {string[]} rawFieldsToIndex
  * @return {firestore.DocumentData} A properly formatted array of field and value.
  */
-function adaptFields(document, rawFieldsToIndex) {
+function adaptFieldsForMeilisearch(document, rawFieldsToIndex) {
     const fieldsToIndex = parseFieldsToIndex(rawFieldsToIndex);
     return Object.keys(document).reduce((doc, currentField) => {
         const value = document[currentField];
@@ -68,7 +68,7 @@ function adaptFields(document, rawFieldsToIndex) {
         return { ...doc, [currentField]: value };
     }, {});
 }
-exports.adaptFields = adaptFields;
+exports.adaptFieldsForMeilisearch = adaptFieldsForMeilisearch;
 /**
  * Adapts documents from the Firestore database to Meilisearch compatible documents.
  * @param {string} documentId Document id.
@@ -81,7 +81,7 @@ function adaptDocumentForMeilisearch(documentId, snapshot, rawFieldsToIndex) {
     if ('_firestore_id' in data) {
         delete data.id;
     }
-    const adaptedDoc = adaptFields(data, rawFieldsToIndex);
+    const adaptedDoc = adaptFieldsForMeilisearch(data, rawFieldsToIndex);
     return { _firestore_id: documentId, ...adaptedDoc };
 }
 exports.adaptDocumentForMeilisearch = adaptDocumentForMeilisearch;

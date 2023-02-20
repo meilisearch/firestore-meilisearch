@@ -3,7 +3,7 @@ import { mockConsoleInfo } from './__mocks__/console'
 import * as firestore from 'firebase-admin/firestore'
 import {
   adaptDocumentForMeilisearch,
-  adaptFields,
+  adaptFieldsForMeilisearch,
 } from '../src/meilisearch-adapter'
 import defaultDocument from './data/document'
 
@@ -65,14 +65,20 @@ describe('extensions process', () => {
   describe('adaptValues', () => {
     test('adaptValues an id value', () => {
       expect(
-        adaptFields({ id: defaultDocument.id } as firestore.DocumentData, 'id')
+        adaptFieldsForMeilisearch(
+          { id: defaultDocument.id } as firestore.DocumentData,
+          'id'
+        )
       ).toStrictEqual({ id: defaultDocument.id })
     })
     test('adaptValues a geo point value', () => {
       const geoPoint = new firestore.GeoPoint(48.866667, 2.333333)
 
       expect(
-        adaptFields({ _geo: geoPoint } as firestore.DocumentData, '_geo')
+        adaptFieldsForMeilisearch(
+          { _geo: geoPoint } as firestore.DocumentData,
+          '_geo'
+        )
       ).toStrictEqual({
         _geo: {
           lat: 48.866667,
@@ -87,7 +93,7 @@ describe('extensions process', () => {
       const geoPoint = new firestore.GeoPoint(48.866667, 2.333333)
 
       expect(
-        adaptFields(
+        adaptFieldsForMeilisearch(
           { wrong_geo: geoPoint } as firestore.DocumentData,
           'wrong_geo'
         )
