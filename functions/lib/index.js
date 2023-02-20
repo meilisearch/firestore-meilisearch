@@ -34,9 +34,9 @@ exports.indexingWorker = functions.firestore
     .document(config_1.config.collectionPath + '/{documentId}')
     .onWrite(async (snapshot) => {
     logs.start();
-    const actionType = (0, util_1.getActionType)(snapshot);
+    const changeType = (0, util_1.getChangeType)(snapshot);
     const documentId = (0, util_1.getChangedDocumentId)(snapshot);
-    switch (actionType) {
+    switch (changeType) {
         case util_1.ChangeType.CREATE:
             await handleAddDocument(documentId, snapshot.after);
             break;

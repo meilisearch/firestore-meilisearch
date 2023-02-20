@@ -29,7 +29,7 @@ export enum ChangeType {
  * @param {Change<T>} change The Functions interface for events that change state.
  * @return {ChangeType} Final type of the event.
  */
-export function getActionType(change: Change<DocumentSnapshot>): ChangeType {
+export function getChangeType(change: Change<DocumentSnapshot>): ChangeType {
   if (!change.after.exists) {
     return ChangeType.DELETE
   }

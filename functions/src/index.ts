@@ -19,7 +19,7 @@ import * as functions from 'firebase-functions'
 import { Change, logger } from 'firebase-functions'
 import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
 import { initMeilisearchIndex } from './meilisearch/create-index'
-import { getActionType, getChangedDocumentId, ChangeType } from './util'
+import { getChangeType, getChangedDocumentId, ChangeType } from './util'
 import * as logs from './logs'
 import { adaptDocumentForMeilisearch } from './meilisearch-adapter'
 import { config } from './config'
@@ -37,10 +37,10 @@ export const indexingWorker = functions.firestore
   .document(config.collectionPath + '/{documentId}')
   .onWrite(async (snapshot: Change<DocumentSnapshot>): Promise<void> => {
     logs.start()
-    const actionType = getActionType(snapshot)
+    const changeType = getChangeType(snapshot)
     const documentId = getChangedDocumentId(snapshot)
 
-    switch (actionType) {
+    switch (changeType) {
       case ChangeType.CREATE:
         await handleAddDocument(documentId, snapshot.after)
         break

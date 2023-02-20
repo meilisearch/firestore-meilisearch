@@ -1,6 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getChangedDocumentId = exports.getActionType = exports.ChangeType = void 0;
+exports.getChangedDocumentId = exports.getChangeType = exports.ChangeType = void 0;
 var ChangeType;
 (function (ChangeType) {
     ChangeType[ChangeType["CREATE"] = 0] = "CREATE";
@@ -12,7 +12,7 @@ var ChangeType;
  * @param {Change<T>} change The Functions interface for events that change state.
  * @return {ChangeType} Final type of the event.
  */
-function getActionType(change) {
+function getChangeType(change) {
     if (!change.after.exists) {
         return ChangeType.DELETE;
     }
@@ -21,7 +21,7 @@ function getActionType(change) {
     }
     return ChangeType.UPDATE;
 }
-exports.getActionType = getActionType;
+exports.getChangeType = getChangeType;
 /**
  * Get final id of a document after modification.
  * @param {Change<T>} change The Functions interface for events that change state.

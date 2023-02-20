@@ -1,6 +1,6 @@
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
-import { ChangeType, getChangedDocumentId, getActionType } from '../src/util'
+import { ChangeType, getChangedDocumentId, getChangeType } from '../src/util'
 import defaultEnvironment from './data/environment'
 
 describe('getChangeType', () => {
@@ -21,7 +21,7 @@ describe('getChangeType', () => {
       afterSnapshot
     )
 
-    const changeType: ChangeType = getActionType(documentChange)
+    const changeType: ChangeType = getChangeType(documentChange)
 
     expect(changeType).toEqual(ChangeType.CREATE)
   })
@@ -41,7 +41,7 @@ describe('getChangeType', () => {
       afterSnapshot
     )
 
-    const changeType: ChangeType = getActionType(documentChange)
+    const changeType: ChangeType = getChangeType(documentChange)
 
     expect(changeType).toEqual(ChangeType.UPDATE)
   })
@@ -61,7 +61,7 @@ describe('getChangeType', () => {
       afterSnapshot
     )
 
-    const changeType: ChangeType = getActionType(documentChange)
+    const changeType: ChangeType = getChangeType(documentChange)
 
     expect(changeType).toEqual(ChangeType.DELETE)
   })
