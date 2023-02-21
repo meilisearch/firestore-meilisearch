@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
+import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
 import { Change } from 'firebase-functions'
 
 export enum ChangeType {
@@ -49,41 +49,4 @@ export function getChangedDocumentId(change: Change<DocumentSnapshot>): string {
     return change.after.id
   }
   return change.before.id
-}
-
-/**
- * Parse the fieldsToIndex string into an array.
- *
- * @param  {string} fieldsToIndex
- * @return {string[]} An array of fields.
- */
-export function parseFieldsToIndex(fieldsToIndex: string): string[] {
-  return fieldsToIndex ? fieldsToIndex.split(/[ ,]+/) : []
-}
-
-/**
- * Remove unwanted fields from the document before it is send to Meilisearch.
- *
- * @param  {string[]} fieldsToIndex
- * @param  {Record<string, any>} document
- * @return {Record<string, any>} sanitized document
- *
- */
-export function sanitizeDocuments(
-  fieldsToIndex: string[],
-  document: Record<string, any>
-): Record<string, any> {
-  if (fieldsToIndex.length === 0) {
-    return document
-  }
-  if (fieldsToIndex.includes('*')) {
-    return document
-  }
-
-  for (const key in document) {
-    if (!fieldsToIndex.includes(key)) {
-      delete document[key]
-    }
-  }
-  return document
 }

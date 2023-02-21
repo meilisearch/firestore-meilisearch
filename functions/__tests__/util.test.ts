@@ -1,6 +1,6 @@
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
-import { getChangeType, ChangeType, getChangedDocumentId } from '../src/util'
+import { ChangeType, getChangedDocumentId, getChangeType } from '../src/util'
 import defaultEnvironment from './data/environment'
 
 describe('getChangeType', () => {
@@ -132,7 +132,7 @@ describe('getChangedDocumentId', () => {
 })
 
 describe('getFieldsToIndex', () => {
-  let util
+  let adapter
   let restoreEnv
   let mockParseFieldsToIndex
   const config = global.config
@@ -149,32 +149,36 @@ describe('getFieldsToIndex', () => {
   })
 
   test('return empty list', () => {
-    util = require('../src/util')
-    mockParseFieldsToIndex = util.parseFieldsToIndex()
+    adapter = require('../src/meilisearch-adapter')
+    mockParseFieldsToIndex = adapter.parseFieldsToIndex()
     expect(mockParseFieldsToIndex).toMatchObject([])
   })
 
   test('return list with one field', () => {
-    util = require('../src/util')
-    mockParseFieldsToIndex = util.parseFieldsToIndex('field')
+    adapter = require('../src/meilisearch-adapter')
+    mockParseFieldsToIndex = adapter.parseFieldsToIndex('field')
     expect(mockParseFieldsToIndex).toMatchObject(['field'])
   })
 
   test('return list with multiple fields', () => {
-    util = require('../src/util')
-    mockParseFieldsToIndex = util.parseFieldsToIndex('field1,field2,field3')
+    adapter = require('../src/meilisearch-adapter')
+    mockParseFieldsToIndex = adapter.parseFieldsToIndex('field1,field2,field3')
     expect(mockParseFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
   })
 
   test('return list with multiple fields and spaces', () => {
-    util = require('../src/util')
-    mockParseFieldsToIndex = util.parseFieldsToIndex('field1, field2,  field3')
+    adapter = require('../src/meilisearch-adapter')
+    mockParseFieldsToIndex = adapter.parseFieldsToIndex(
+      'field1, field2,  field3'
+    )
     expect(mockParseFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
   })
 
   test('return list of fiels with underscore', () => {
-    util = require('../src/util')
-    mockParseFieldsToIndex = util.parseFieldsToIndex('field_1,field_2,field_3')
+    adapter = require('../src/meilisearch-adapter')
+    mockParseFieldsToIndex = adapter.parseFieldsToIndex(
+      'field_1,field_2,field_3'
+    )
     expect(mockParseFieldsToIndex).toMatchObject([
       'field_1',
       'field_2',

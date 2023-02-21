@@ -1,6 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sanitizeDocuments = exports.parseFieldsToIndex = exports.getChangedDocumentId = exports.getChangeType = exports.ChangeType = void 0;
+exports.getChangedDocumentId = exports.getChangeType = exports.ChangeType = void 0;
 var ChangeType;
 (function (ChangeType) {
     ChangeType[ChangeType["CREATE"] = 0] = "CREATE";
@@ -34,36 +34,3 @@ function getChangedDocumentId(change) {
     return change.before.id;
 }
 exports.getChangedDocumentId = getChangedDocumentId;
-/**
- * Parse the fieldsToIndex string into an array.
- *
- * @param  {string} fieldsToIndex
- * @return {string[]} An array of fields.
- */
-function parseFieldsToIndex(fieldsToIndex) {
-    return fieldsToIndex ? fieldsToIndex.split(/[ ,]+/) : [];
-}
-exports.parseFieldsToIndex = parseFieldsToIndex;
-/**
- * Remove unwanted fields from the document before it is send to Meilisearch.
- *
- * @param  {string[]} fieldsToIndex
- * @param  {Record<string, any>} document
- * @return {Record<string, any>} sanitized document
- *
- */
-function sanitizeDocuments(fieldsToIndex, document) {
-    if (fieldsToIndex.length === 0) {
-        return document;
-    }
-    if (fieldsToIndex.includes('*')) {
-        return document;
-    }
-    for (const key in document) {
-        if (!fieldsToIndex.includes(key)) {
-            delete document[key];
-        }
-    }
-    return document;
-}
-exports.sanitizeDocuments = sanitizeDocuments;

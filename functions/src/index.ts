@@ -17,11 +17,11 @@
 
 import * as functions from 'firebase-functions'
 import { Change, logger } from 'firebase-functions'
-import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
+import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
 import { initMeilisearchIndex } from './meilisearch/create-index'
 import { getChangeType, getChangedDocumentId, ChangeType } from './util'
 import * as logs from './logs'
-import { adaptDocument } from './adapter'
+import { adaptDocumentForMeilisearch } from './meilisearch-adapter'
 import { config } from './config'
 import { validateDocumentId } from './validate'
 
@@ -33,26 +33,26 @@ logs.init()
  * IndexingWorker is responsible for aggregating a defined field from a Firestore collection into a Meilisearch index.
  * It is controlled by a Firestore handler.
  */
-export const indexingWorker = functions.handler.firestore.document.onWrite(
-  async (change: Change<DocumentSnapshot>): Promise<void> => {
+export const indexingWorker = functions.firestore
+  .document(config.collectionPath + '/{documentId}')
+  .onWrite(async (snapshot: Change<DocumentSnapshot>): Promise<void> => {
     logs.start()
-    const changeType = getChangeType(change)
-    const documentId = getChangedDocumentId(change)
+    const changeType = getChangeType(snapshot)
+    const documentId = getChangedDocumentId(snapshot)
 
     switch (changeType) {
       case ChangeType.CREATE:
-        await handleAddDocument(documentId, change.after)
+        await handleAddDocument(documentId, snapshot.after)
         break
       case ChangeType.DELETE:
         await handleDeleteDocument(documentId)
         break
       case ChangeType.UPDATE:
-        await handleUpdateDocument(documentId, change.after)
+        await handleUpdateDocument(documentId, snapshot.after)
         break
     }
     logs.complete()
-  }
-)
+  })
 
 /**
  * Handle addition of a document in the Meilisearch index.
@@ -66,7 +66,7 @@ async function handleAddDocument(
   try {
     logs.addDocument(documentId)
     if (validateDocumentId(documentId)) {
-      const document = adaptDocument(
+      const document = adaptDocumentForMeilisearch(
         documentId,
         snapshot,
         config.meilisearch.fieldsToIndex || ''
@@ -123,7 +123,7 @@ async function handleUpdateDocument(
   try {
     logs.updateDocument(documentId)
     if (validateDocumentId(documentId)) {
-      const document = adaptDocument(
+      const document = adaptDocumentForMeilisearch(
         documentId,
         after,
         config.meilisearch.fieldsToIndex || ''

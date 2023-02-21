@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extensions config Test MeilisearchIndex parameters param exists 1`] = `
+{
+  "description": "What Meilisearch index do you want to index your data in?",
+  "example": "example: my_index",
+  "label": "Meilisearch Index Name",
+  "param": "MEILISEARCH_INDEX_NAME",
+  "required": true,
+  "type": "string",
+  "validationErrorMessage": "Must be a valid Index format. Index uid can be of type integer or string only composed of alphanumeric characters, hyphens (-) and underscores (_). Check out our guide on [index creation](https://docs.meilisearch.com/learn/core_concepts/indexes.html#index-creation).",
+  "validationRegex": "^[0-9A-Za-z_-]+$",
+}
+`;
+
+exports[`extensions config Test fieldsToIndex parameter param exists 1`] = `
+{
+  "default": "",
+  "description": "What fields do you want to index in Meilisearch? Create a comma-separated list of the field names, or leave it blank to include all fields. The id field is always indexed even when omitted from the list.",
+  "example": "example: name,description,...",
+  "label": "Fields to index in Meilisearch",
+  "param": "MEILISEARCH_FIELDS_TO_INDEX",
+  "required": false,
+  "validationErrorMessage": "Fields must be given through a comma-separated list.",
+  "validationRegex": "^[^,]?[a-zA-Z-_0-9,]*[^,]$",
+}
+`;
