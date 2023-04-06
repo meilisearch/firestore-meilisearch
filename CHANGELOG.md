@@ -1,3 +1,7 @@
+## Version 0.1.12
+
+Fix `_geo` point not being correctly parsed (#147) @bidoubiwa
+
 ## Version 0.1.10
 
 Add fieldsToIndex as option in backfill script #139
