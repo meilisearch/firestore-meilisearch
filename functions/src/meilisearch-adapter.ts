@@ -91,6 +91,8 @@ export function adaptFieldsForMeilisearch(
       } else {
         infoGeoPoint(false)
       }
+    } else if (currentField === '_geo') {
+      return doc
     }
     return { ...doc, [currentField]: value }
   }, {})

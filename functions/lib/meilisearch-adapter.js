@@ -65,6 +65,9 @@ function adaptFieldsForMeilisearch(document, rawFieldsToIndex) {
                 (0, logs_1.infoGeoPoint)(false);
             }
         }
+        else if (currentField === '_geo') {
+            return doc;
+        }
         return { ...doc, [currentField]: value };
     }, {});
 }

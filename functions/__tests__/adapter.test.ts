@@ -102,5 +102,13 @@ describe('extensions process', () => {
         `A GeoPoint was found without the field name '_geo' if you want to use the geoSearch with Meilisearch rename it to '_geo'`
       )
     })
+    test('adaptValues with a _geo field at null', () => {
+      expect(
+        adaptFieldsForMeilisearch(
+          { _geo: null } as firestore.DocumentData,
+          '_geo'
+        )
+      ).toStrictEqual({})
+    })
   })
 })
