@@ -1,6 +1,11 @@
 ## Version 0.1.12
 
+This version makes this package compatible with Meilisearch v1.X
 Fix `_geo` point not being correctly parsed (#147) @bidoubiwa
+
+## Version 0.1.11
+
+This version makes this package compatible with Meilisearch v0.30.0
 
 ## Version 0.1.10
 
