@@ -1,6 +1,6 @@
 {
   "name": "firestore-meilisearch",
-  "version": "0.1.12",
+  "version": "0.2.0",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
