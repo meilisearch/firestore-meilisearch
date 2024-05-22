@@ -1,8 +1,3 @@
-status = [
-  'style-check',
-  'integration-tests (14)',
-  'integration-tests (16)',
-  'integration-tests (18)'
-]
+status = ['style-check', 'integration-tests (20)']
 # 1 hour timeout
 timeout-sec = 3600
