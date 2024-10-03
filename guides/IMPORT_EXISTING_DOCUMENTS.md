@@ -35,7 +35,7 @@ Run the import script using [`npx` (the Node Package Runner)](https://www.npmjs.
     - To access the `npm` command tools, you need to install [Node.js](https://www.nodejs.org/).
     - If you use `npm` v5.1 or earlier, you need to explicitly install `npx`. Run `npm install --global npx`.
 
-2.  Set up credentials. The import script uses Application Default Credentials to communicate with Firebase. Please follow the instructions to [create and use a service account](https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually).
+2.  Set up credentials. The import script uses Application Default Credentials to communicate with Firebase. Using an existing service account or create a new one in the IAM section. Give this service account 'Cloud Datastore User' role. In the Service Accounts section, generate a service key for this service account and proceed to download the json file. In Mac and Linux, run the command export GOOGLE_APP_CREDENTIALS="/pathto/file.json" where /pathto/file.json is the location of your json file. This will set up the credentials locally. 
 
 3.  Run the import script interactively via `npx` by running the following command:
 
