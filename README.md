@@ -36,16 +36,16 @@ This extension listens to each creation, update, or deletion of your documents t
 
 Note that this extension only listens for changes to _documents_ in a specific collection, but not changes in any _subcollection_. However, you can install additional instances of this extension to listen to other collections in your Firestore database.
 
-## ⚡ Supercharge your Meilisearch experience
-
-Say goodbye to server deployment and manual updates with [Meilisearch Cloud](https://www.meilisearch.com/cloud?utm_campaign=oss&utm_source=github&utm_medium=firestore-meilisearch). Get started with a 14-day free trial! No credit card required.
+## 🚀 Getting started
 
 #### Additional setup
 
 Before installing this extension, you'll need to:
 
 - [Set up Cloud Firestore in your Firebase project](https://firebase.google.com/docs/firestore/quickstart)
-- Run a Meilisearch instance. [Learn more about Meilisearch cloud](https://www.meilisearch.com/pricing). Alternatively there are many other easy ways [to download and run a Meilisearch instance](https://docs.meilisearch.com/learn/getting_started/installation.html#download-and-launch)
+- Run a Meilisearch instance:
+  - ⚡ **Launch, scale, and streamline in minutes with Meilisearch Cloud**—no maintenance, no commitment, cancel anytime. [Try it free now](https://cloud.meilisearch.com/login?utm_campaign=oss&utm_source=github&utm_medium=firestore-meilisearch).
+  - 🪨 Prefer to self-host? [Download and deploy](https://www.meilisearch.com/docs/learn/self_hosted/getting_started_with_self_hosted_meilisearch?utm_campaign=oss&utm_source=github&utm_medium=firestore-meilisearch) our fast, open-source search engine on your own infrastructure.
 
 #### Data import format
 
@@ -75,9 +75,6 @@ extension uses a service that requires a paid-tier plan, for example calling
 a Google Cloud API or making outbound network requests to non-Google services.
 All Firebase services offer a free tier of usage.
 [Learn more about Firebase billing.](https://firebase.google.com/pricing)
-
-
-
 
 **Configuration Parameters:**
 
