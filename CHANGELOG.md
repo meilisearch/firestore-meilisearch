@@ -1,3 +1,7 @@
+## Version 0.3.0
+
+**Breaking**: Update nodejs runtime to node20 (#179) @brunoocasali
+
 ## Version 0.1.12
 
 This version makes this package compatible with Meilisearch v1.X
