@@ -7,15 +7,15 @@
   "license": "Apache-2.0",
   "scripts": {
     "emulator": "firebase ext:dev:emulators:start --test-params=test-params-example.env --import=dataset --project=meilisearch --config=./firebase.json",
-    "lint": "yarn --cwd functions lint",
-    "lint:fix": "yarn --cwd functions lint:fix",
-    "build": "yarn --cwd functions build",
-    "watch": "yarn --cwd functions watch",
-    "playground": "yarn --cwd functions playground",
-    "install:functions": "yarn --cwd functions",
-    "test": "yarn --cwd functions test",
-    "test:watch": "yarn --cwd functions test:watch",
-    "test:coverage": "yarn --cwd functions test:coverage",
+    "lint": "cd functions && npm run lint",
+    "lint:fix": "cd functions && npm run lint:fix",
+    "build": "cd functions && npm run build",
+    "watch": "cd functions && npm run watch",
+    "playground": "cd functions && npm run playground",
+    "install:functions": "cd functions && npm install",
+    "test": "cd functions && npm run test",
+    "test:watch": "cd functions && npm run test:watch",
+    "test:coverage": "cd functions && npm run test:coverage",
     "run-cli": "./functions/lib/import/index.js"
   }
 }
