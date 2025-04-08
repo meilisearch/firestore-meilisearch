@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const admin = require("firebase-admin");
+const firebase_admin_1 = require("firebase-admin");
 const config_1 = require("./config");
 const logs = require("../logs");
 const meilisearch_adapter_1 = require("../meilisearch-adapter");
@@ -25,11 +25,11 @@ const run = async () => {
     // Retrieve all arguments from the commande line.
     const config = await (0, config_1.parseConfig)();
     // Initialize Firebase using the Google Credentials in the GOOGLE_APPLICATION_CREDENTIALS environment variable.
-    admin.initializeApp({
-        credential: admin.credential.applicationDefault(),
+    (0, firebase_admin_1.initializeApp)({
+        credential: firebase_admin_1.credential.applicationDefault(),
         databaseURL: `https://${config.projectId}.firebaseio.com`,
     });
-    const database = admin.firestore();
+    const database = (0, firebase_admin_1.firestore)();
     // Initialize Meilisearch index.
     const index = (0, create_index_1.initMeilisearchIndex)(config.meilisearch);
     await retrieveCollectionFromFirestore(database, config, index);
