@@ -57,6 +57,7 @@ describe('extension', () => {
   test('functions are exported', () => {
     const exportedFunctions = jest.requireActual('../src')
 
+    // @ts-ignore: We're asserting the export is a function
     expect(exportedFunctions.indexingWorker).toBeInstanceOf(Function)
   })
 
