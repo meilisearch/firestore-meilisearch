@@ -1,3 +1,11 @@
+import {
+  describe,
+  test,
+  expect,
+  beforeEach,
+  afterEach,
+  jest,
+} from '@jest/globals'
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
 import { ChangeType, getChangedDocumentId, getChangeType } from '../src/util'
@@ -151,19 +159,19 @@ describe('getFieldsToIndex', () => {
   test('return empty list', () => {
     adapter = require('../src/meilisearch-adapter')
     mockParseFieldsToIndex = adapter.parseFieldsToIndex()
-    expect(mockParseFieldsToIndex).toMatchObject([])
+    expect(mockParseFieldsToIndex).toEqual([])
   })
 
   test('return list with one field', () => {
     adapter = require('../src/meilisearch-adapter')
     mockParseFieldsToIndex = adapter.parseFieldsToIndex('field')
-    expect(mockParseFieldsToIndex).toMatchObject(['field'])
+    expect(mockParseFieldsToIndex).toEqual(['field'])
   })
 
   test('return list with multiple fields', () => {
     adapter = require('../src/meilisearch-adapter')
     mockParseFieldsToIndex = adapter.parseFieldsToIndex('field1,field2,field3')
-    expect(mockParseFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
+    expect(mockParseFieldsToIndex).toEqual(['field1', 'field2', 'field3'])
   })
 
   test('return list with multiple fields and spaces', () => {
@@ -171,7 +179,7 @@ describe('getFieldsToIndex', () => {
     mockParseFieldsToIndex = adapter.parseFieldsToIndex(
       'field1, field2,  field3'
     )
-    expect(mockParseFieldsToIndex).toMatchObject(['field1', 'field2', 'field3'])
+    expect(mockParseFieldsToIndex).toEqual(['field1', 'field2', 'field3'])
   })
 
   test('return list of fiels with underscore', () => {
@@ -179,10 +187,6 @@ describe('getFieldsToIndex', () => {
     mockParseFieldsToIndex = adapter.parseFieldsToIndex(
       'field_1,field_2,field_3'
     )
-    expect(mockParseFieldsToIndex).toMatchObject([
-      'field_1',
-      'field_2',
-      'field_3',
-    ])
+    expect(mockParseFieldsToIndex).toEqual(['field_1', 'field_2', 'field_3'])
   })
 })

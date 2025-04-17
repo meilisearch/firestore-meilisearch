@@ -1,3 +1,11 @@
+import {
+  describe,
+  test,
+  expect,
+  beforeEach,
+  afterEach,
+  jest,
+} from '@jest/globals'
 import { readFileSync } from 'fs'
 import { resolve as pathResolve } from 'path'
 import * as yaml from 'js-yaml'

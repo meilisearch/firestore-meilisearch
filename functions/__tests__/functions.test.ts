@@ -1,3 +1,11 @@
+import {
+  describe,
+  test,
+  expect,
+  beforeEach,
+  afterEach,
+  jest,
+} from '@jest/globals'
 import * as firebaseFunctionsTestInit from 'firebase-functions-test'
 import mockedEnv from 'mocked-env'
 import { mocked } from 'jest-mock'
@@ -49,6 +57,7 @@ describe('extension', () => {
   test('functions are exported', () => {
     const exportedFunctions = jest.requireActual('../src')
 
+    // @ts-ignore: We're asserting the export is a function
     expect(exportedFunctions.indexingWorker).toBeInstanceOf(Function)
   })
 
