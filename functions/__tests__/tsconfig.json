@@ -1,5 +1,15 @@
 {
   "extends": "../tsconfig.json",
-  "files": ["test.types.d.ts"],
-  "include": ["**/*"]
+  "compilerOptions": {
+    "types": [
+      "jest",
+      "node"
+    ]
+  },
+  "files": [
+    "test.types.d.ts"
+  ],
+  "include": [
+    "**/*"
+  ]
 }
