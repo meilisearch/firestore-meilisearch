@@ -26,7 +26,7 @@ displayName: Search with Meilisearch
 
 # Brief description of the task your extension performs (~1 sentence)
 description: >-
-  Full-text search on your Firestore collections with Meilisearch
+  Full-text search & Hybrid search enhanced by AI on your Firestore collections with Meilisearch
 
 icon: extension-icon.png
 
