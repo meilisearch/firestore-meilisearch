@@ -16,7 +16,7 @@
 name: firestore-meilisearch
 
 # Follow semver versioning
-version: 0.3.0
+version: 0.3.1
 
 # Version of the Firebase Extensions specification
 specVersion: v1beta
