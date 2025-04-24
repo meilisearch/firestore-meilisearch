@@ -1,3 +1,7 @@
+## Version 0.3.1
+
+Update extension icon and list external APIs
+
 ## Version 0.3.0
 
 **Breaking**: Update nodejs runtime to node20 (#179) @brunoocasali
