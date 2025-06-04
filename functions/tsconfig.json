@@ -10,7 +10,8 @@
     "target": "es2018",
     "types": [
       "node",
-    ]
+    ],
+    "esModuleInterop": true,
   },
   "compileOnSave": true,
   "include": [

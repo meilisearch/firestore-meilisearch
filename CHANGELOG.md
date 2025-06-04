@@ -1,3 +1,7 @@
+## Version 0.3.2
+
+Fix type error issue when running firestore-meilisearch script #208
+
 ## Version 0.3.1
 
 Update extension icon and list external APIs

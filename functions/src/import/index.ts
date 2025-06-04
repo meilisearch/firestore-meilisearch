@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { initializeApp, credential, firestore } from 'firebase-admin'
+import admin, { credential, firestore } from 'firebase-admin'
 import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
 import { CLIConfig, parseConfig } from './config'
 import * as logs from '../logs'
@@ -29,7 +29,7 @@ const run = async () => {
   const config: CLIConfig = await parseConfig()
 
   // Initialize Firebase using the Google Credentials in the GOOGLE_APPLICATION_CREDENTIALS environment variable.
-  initializeApp({
+  admin.initializeApp({
     credential: credential.applicationDefault(),
     databaseURL: `https://${config.projectId}.firebaseio.com`,
   })
