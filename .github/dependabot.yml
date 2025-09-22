@@ -6,7 +6,6 @@ updates:
       interval: 'monthly'
       time: '04:00'
     labels:
-      - skip-changelog
       - dependencies
     allow:
       - dependency-name: 'firebase-admin'
