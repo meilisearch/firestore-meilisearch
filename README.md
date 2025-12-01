@@ -19,7 +19,6 @@
 <p align="center">
   <a href="https://github.com/meilisearch/firestore-meilisearch/actions"><img src="https://github.com/meilisearch/firestore-meilisearch/workflows/Tests/badge.svg" alt="Test"></a>
   <a href="https://github.com/meilisearch/firestore-meilisearch/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational" alt="License"></a>
-  <a href="https://ms-bors.herokuapp.com/repositories/8"><img src="https://bors.tech/images/badge_small.svg" alt="Bors enabled"></a>
 </p>
 
 <p align="center">⚡ The Meilisearch API extension written for Firebase</p>
