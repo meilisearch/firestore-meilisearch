@@ -29,12 +29,8 @@ jobs:
         run: |
           cd functions
           npm publish .
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Publish with beta tag
         if: "github.event.release.prerelease && contains(github.ref, 'beta')"
         run: |
           cd functions
           npm publish . --tag beta
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
