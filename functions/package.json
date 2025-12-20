@@ -50,5 +50,7 @@
     "ts-jest": "^29.0.5",
     "ts-node": "^10.2.1"
   },
-  "bin": "lib/import/index.js"
+  "bin": {
+    "firestore-meilisearch": "lib/import/index.js"
+  }
 }
