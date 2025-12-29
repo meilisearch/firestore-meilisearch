@@ -1,6 +1,10 @@
 {
   "name": "firestore-meilisearch",
   "version": "0.3.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meilisearch/firestore-meilisearch"
+  },
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

@@ -30,9 +30,9 @@ jobs:
         if: "!github.event.release.prerelease && !contains(github.ref, 'beta')"
         run: |
           cd functions
-          npm publish .
+          npm publish
       - name: Publish with beta tag
         if: "github.event.release.prerelease && contains(github.ref, 'beta')"
         run: |
           cd functions
-          npm publish . --tag beta
+          npm publish --tag beta
