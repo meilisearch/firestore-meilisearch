@@ -2,7 +2,10 @@
   "name": "firestore-meilisearch",
   "version": "0.3.3",
   "description": "Search in your Firestore content with Meilisearch",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meilisearch/firestore-meilisearch.git"
+  },
   "author": "Meilisearch (https://meilisearch.com/)",
   "license": "Apache-2.0",
   "scripts": {
