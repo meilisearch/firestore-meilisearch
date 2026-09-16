@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 
-import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
-import { Change } from 'firebase-functions'
+import { DocumentSnapshot } from 'firebase-admin/firestore'
+import { Change } from 'firebase-functions/v1'
 
 export enum ChangeType {
   CREATE,

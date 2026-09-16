@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-import * as functions from 'firebase-functions'
-import { Change, logger } from 'firebase-functions'
-import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
+import * as functions from 'firebase-functions/v1'
+import { Change, logger } from 'firebase-functions/v1'
+import { DocumentSnapshot } from 'firebase-admin/firestore'
 import { initMeilisearchIndex } from './meilisearch/create-index'
 import { getChangeType, getChangedDocumentId, ChangeType } from './util'
 import * as logs from './logs'

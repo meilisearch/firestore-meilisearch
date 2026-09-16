@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { DocumentSnapshot } from 'firebase-functions/lib/v1/providers/firestore'
+import { DocumentSnapshot } from 'firebase-admin/firestore'
 import * as firestore from 'firebase-admin/firestore'
 import { infoGeoPoint } from './logs'
 

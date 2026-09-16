@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['20']
+        node: ['22']
     name: integration-tests (Node.js ${{ matrix.node }})
     steps:
       - uses: actions/checkout@v4

@@ -1,3 +1,7 @@
+## Unreleased
+
+**Breaking**: Update nodejs runtime to node22. Keep Gen1 Firestore triggers via `firebase-functions/v1`. Upgrade `firebase-functions` to 6.x for `firebase-admin` 13 compatibility, and bump `js-yaml` for security.
+
 ## Version 0.3.2
 
 Fix type error issue when running firestore-meilisearch script #208
