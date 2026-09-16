@@ -1,6 +1,8 @@
-## Unreleased
+## Version 0.4.0
 
-**Breaking**: Update nodejs runtime to node22. Keep Gen1 Firestore triggers via `firebase-functions/v1`. Upgrade `firebase-functions` to 6.x for `firebase-admin` 13 compatibility, and bump `js-yaml` for security.
+**Breaking**: This extension now runs on Node.js 22. Update and redeploy it; Node.js 20 is no longer supported.
+
+This release also upgrades Firebase dependencies and applies security fixes.
 
 ## Version 0.3.2
 
