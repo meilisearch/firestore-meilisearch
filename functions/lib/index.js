@@ -39,8 +39,8 @@ exports.indexingWorker = void 0;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const functions = __importStar(require("firebase-functions"));
-const firebase_functions_1 = require("firebase-functions");
+const functions = __importStar(require("firebase-functions/v1"));
+const v1_1 = require("firebase-functions/v1");
 const create_index_1 = require("./meilisearch/create-index");
 const util_1 = require("./util");
 const logs = __importStar(require("./logs"));
@@ -85,10 +85,10 @@ async function handleAddDocument(documentId, snapshot) {
             const { taskUid } = await index.addDocuments([document], {
                 primaryKey: '_firestore_id',
             });
-            firebase_functions_1.logger.info(`Document addition request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
+            v1_1.logger.info(`Document addition request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
         }
         else {
-            firebase_functions_1.logger.error(`Could not create document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
+            v1_1.logger.error(`Could not create document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
         }
     }
     catch (e) {
@@ -104,10 +104,10 @@ async function handleDeleteDocument(documentId) {
         logs.deleteDocument(documentId);
         if ((0, validate_1.validateDocumentId)(documentId)) {
             const { taskUid } = await index.deleteDocument(documentId);
-            firebase_functions_1.logger.info(`Document deletion request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
+            v1_1.logger.info(`Document deletion request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
         }
         else {
-            firebase_functions_1.logger.error(`Could not delete document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
+            v1_1.logger.error(`Could not delete document with id: ${documentId}. The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
         }
     }
     catch (e) {
@@ -125,10 +125,10 @@ async function handleUpdateDocument(documentId, after) {
         if ((0, validate_1.validateDocumentId)(documentId)) {
             const document = (0, meilisearch_adapter_1.adaptDocumentForMeilisearch)(documentId, after, config_1.config.meilisearch.fieldsToIndex || '');
             const { taskUid } = await index.addDocuments([document]);
-            firebase_functions_1.logger.info(`Document update request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
+            v1_1.logger.info(`Document update request for document with ID ${documentId} added to task list (task ID ${taskUid}).`);
         }
         else {
-            firebase_functions_1.logger.error(`Could not update document with id: ${documentId}.The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
+            v1_1.logger.error(`Could not update document with id: ${documentId}.The document id can only contain case-insensitive alphanumeric characters (abcDEF), hyphens (-) or underscores(_).`);
         }
     }
     catch (e) {

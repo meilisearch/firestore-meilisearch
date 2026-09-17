@@ -48,7 +48,7 @@ What we expect:
 
 To run this project, you will need:
 
-- Node >= 20
+- Node >= 22
 - Npm >= v7
 - A google account
 - Version `v10.9.2` of `firebase-tools` the Firebase CLI (latest does not provide the emulator):
